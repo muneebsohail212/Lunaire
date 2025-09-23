@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUNAIRE - Luxury Fashion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    .font-lunaire {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+    }
+    .dropdown-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .dropdown-menu.open {
+      transform: translateX(0);
+    }
+    .overlay {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="relative bg-white border-b border-gray-200 z-50">
+    <div class="flex items-center px-6 py-4">
+      <!-- Hamburger Menu -->
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
+        <span class="w-7 h-0.5 bg-black"></span>
+        <span class="w-7 h-0.5 bg-black"></span>
+        <span class="w-7 h-0.5 bg-black"></span>
+      </button>
+
+      <!-- Brand -->
+      <h1 class="font-lunaire text-[32px] text-black tracking-wide flex-1">LUNAIRE</h1>
+
+      <!-- Icons -->
+      <div class="flex items-center space-x-4">
+        <button class="p-2 hover:bg-gray-100 rounded-full"><i class="fas fa-search text-black text-xl"></i></button>
+        <button class="p-2 hover:bg-gray-100 rounded-full"><i class="fas fa-user text-black text-xl"></i></button>
+        <button class="p-2 hover:bg-gray-100 rounded-full relative">
+          <i class="fas fa-shopping-bag text-black text-xl"></i>
+          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-6">
+      <h2 class="font-lunaire text-xl mb-8 text-black tracking-wide">LUNAIRE</h2>
+      <ul class="space-y-4">
+        <li><a href="#" class="block text-gray-700 hover:text-black font-medium">Home</a></li>
+        <li>
+          <a href="#" class="block text-gray-700 hover:text-black font-medium">Shop</a>
+          <ul class="ml-4 mt-2 space-y-2">
+            <li><a href="#" class="block text-gray-500 hover:text-black">Collection Name</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Expandable Sections -->
+      <div class="mt-8 space-y-4">
+        <details class="group">
+          <summary class="flex justify-between cursor-pointer text-gray-700 hover:text-black font-medium">
+            <span>My Account</span>
+            <i class="fas fa-chevron-right group-open:rotate-90 transition-transform"></i>
+          </summary>
+          <div class="mt-2 ml-4 space-y-2">
+            <a href="#" class="block text-gray-500 hover:text-black">Login</a>
+            <a href="#" class="block text-gray-500 hover:text-black">Sign-up</a>
+            <a href="#" class="block text-gray-500 hover:text-black">Orders</a>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary class="flex justify-between cursor-pointer text-gray-700 hover:text-black font-medium">
+            <span>About Us</span>
+            <i class="fas fa-chevron-right group-open:rotate-90 transition-transform"></i>
+          </summary>
+          <div class="mt-2 ml-4">
+            <a href="#" class="block text-gray-500 hover:text-black">Our Story</a>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary class="flex justify-between cursor-pointer text-gray-700 hover:text-black font-medium">
+            <span>Catalogue</span>
+            <i class="fas fa-chevron-right group-open:rotate-90 transition-transform"></i>
+          </summary>
+          <div class="mt-2 ml-4">
+            <a href="#" class="block text-gray-500 hover:text-black">Collections</a>
+          </div>
+        </details>
+
+        <details class="group">
+          <summary class="flex justify-between cursor-pointer text-gray-700 hover:text-black font-medium">
+            <span>FAQs</span>
+            <i class="fas fa-chevron-right group-open:rotate-90 transition-transform"></i>
+          </summary>
+          <div class="mt-2 ml-4 space-y-2">
+            <a href="#" class="block text-gray-500 hover:text-black">Shipping</a>
+            <a href="#" class="block text-gray-500 hover:text-black">Returns</a>
+            <a href="#" class="block text-gray-500 hover:text-black">Size Guide</a>
+          </div>
+        </details>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="relative">
+    <!-- Hero Section -->
+    <section class="relative h-[600px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0">
+        <img src="your-image.jpg" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+      </div>
+      <div class="relative z-10 text-center text-white px-6">
+        <h2 class="text-[48px] font-bold mb-4">Latest Collection</h2>
+        <p class="text-[20px] mb-8">Timeless Black & White Elegance</p>
+        <button class="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-md font-semibold">Shop Now</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12">
+    <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+
+      <!-- Need Help -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-300">NEED HELP?</h3>
+        <p>Phone: +92 314 4891611</p>
+        <p>Email: muneebsohail243@gmail.com</p>
+      </div>
+
+      <!-- Catalogue -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-300">CATALOGUE</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-gray-300">New Arrivals</a></li>
+          <li><a href="#" class="hover:text-gray-300">Best Sellers</a></li>
+          <li><a href="#" class="hover:text-gray-300">Sale Items</a></li>
+          <li><a href="#" class="hover:text-gray-300">Collections</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Service -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-300">CUSTOMER SERVICE</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-gray-300">Contact Us</a></li>
+          <li><a href="#" class="hover:text-gray-300">Delivery & Orders</a></li>
+          <li><a href="#" class="hover:text-gray-300">Returns & Exchanges</a></li>
+          <li><a href="#" class="hover:text-gray-300">Size Guide & Alterations</a></li>
+          <li><a href="#" class="hover:text-gray-300">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-300">COMPANY</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-gray-300">About Us</a></li>
+          <li><a href="#" class="hover:text-gray-300">Careers</a></li>
+          <li><a href="#" class="hover:text-gray-300">Store Addresses</a></li>
+          <li><a href="#" class="hover:text-gray-300">Corporate</a></li>
+        </ul>
+      </div>
+
+      <!-- Follow Us -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 text-gray-300">FOLLOW US</h3>
+        <div class="flex space-x-4">
+          <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook-f text-xl"></i></a>
+          <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram text-xl"></i></a>
+          <a href="#" class="hover:text-gray-300"><i class="fab fa-linkedin text-xl"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const overlay = document.getElementById('overlay');
+
+    function toggleMenu() {
+      dropdownMenu.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.classList.toggle('overflow-hidden');
+    }
+
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && dropdownMenu.classList.contains('open')) {
+        toggleMenu();
+      }
+    });
+  </script>
+</body>
+</html>

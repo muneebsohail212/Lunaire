@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUNAIRE - Shine in every phase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'playfair': ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .loading-bar {
+      animation: load 1.5s linear forwards;
+    }
+    @keyframes load {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+  </style>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "Homepage.html";
+    }, 2000);
+  </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-100 to-white flex flex-col items-center justify-center font-playfair relative">
+
+  <!-- Top Loading Bar -->
+  <div class="absolute top-0 left-0 w-full h-1 bg-gray-300">
+    <div class="h-1 bg-black loading-bar"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="text-center px-8">
+    <h1 class="text-7xl font-normal text-black mb-6 tracking-wide">
+      LUNAIRE
+    </h1>
+
+    <p class="text-2xl text-gray-700 italic mb-12 font-light">
+      Shine in every phase
+    </p>
+  </div>
+
+</body>
+</html>
