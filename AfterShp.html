@@ -12,10 +12,27 @@
         .font-inter { font-family: 'Inter', sans-serif; }
         .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .dropdown-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
-        .dropdown-menu.open { transform: translateX(0); }
-        .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-        .overlay.open { opacity: 1; visibility: visible; }
+        
+        /* Fixed dropdown menu styles */
+        .dropdown-menu { 
+            transform: translateX(-100%); 
+            transition: transform 0.3s ease-in-out; 
+        }
+        .dropdown-menu.open { 
+            transform: translateX(0); 
+        }
+        
+        /* Fixed overlay styles */
+        .overlay { 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
+        }
+        .overlay.open { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+        
         .product-card {
             transition: all 0.3s ease;
             overflow: hidden;
@@ -30,11 +47,22 @@
         .product-card:hover .product-image {
             transform: scale(1.05);
         }
+
+        /* Hamburger menu animation */
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-inter">
      <!-- Header -->
-  <header class="relative bg-white border-b border-gray-200 z-50">
+   <header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center px-6 py-4">
       <!-- Menu Toggle -->
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
@@ -76,55 +104,59 @@
       <div class="mb-8">
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
-      <ul class="space-y-4">
-       
-         <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+    <ul class="space-y-4">
+  <li>
+    <a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a>
+  </li>
 
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Shop <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            My Account <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
-            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            About Us <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Catalogue <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
-          </ul>
-        </li>
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            FAQs <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Returns</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Size Guide</a></li>
-          </ul>
-        </li>
-      </ul>
+  <li>
+    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+      Shop <span class="transform transition-transform">▾</span>
+    </button>
+    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+      <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+    </ul>
+  </li>
+
+  <li>
+    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+      My Account <span class="transform transition-transform">▾</span>
+    </button>
+    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+      <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+      <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+      <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
+    </ul>
+  </li>
+
+  <li>
+    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+      About Us <span class="transform transition-transform">▾</span>
+    </button>
+    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+      <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+    </ul>
+  </li>
+
+  <li>
+    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+      Catalogue <span class="transform transition-transform">▾</span>
+    </button>
+    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+      <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+    </ul>
+  </li>
+
+  <li>
+    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+      FAQs <span class="transform transition-transform">▾</span>
+    </button>
+    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+      <li><a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a></li>
+    </ul>
+  </li>
+</ul>
+
     </div>
   </nav>
 
@@ -147,7 +179,7 @@
                          class="product-image w-full h-96 object-cover">
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2"></h3>
+                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2">Gulab</h3>
                     <p class="text-2xl font-bold text-gray-900">Rs.8,000.00 PKR</p>
                     <button class="mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Add to Cart
@@ -163,7 +195,7 @@
                          class="product-image w-full h-96 object-cover">
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2"></h3>
+                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2">Sitara</h3>
                     <p class="text-2xl font-bold text-gray-900">Rs.3,500.00 PKR</p>
                     <button class="mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Add to Cart
@@ -179,7 +211,7 @@
                          class="product-image w-full h-96 object-cover">
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2"></h3>
+                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2">Rabab</h3>
                     <p class="text-2xl font-bold text-gray-900">Rs.4,000.00 PKR</p>
                     <button class="mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Add to Cart
@@ -196,7 +228,7 @@
                          class="product-image w-full h-96 object-cover">
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2"></h3>
+                    <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2">Mushq</h3>
                     <p class="text-2xl font-bold text-gray-900">Rs.4,000.00 PKR</p>
                     <button class="mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
                         Add to Cart
@@ -249,6 +281,41 @@
 
         <!-- Call to Action Section -->
     </main>
+
+<!-- Cart Modal Popup -->
+<div id="cartPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+  <div class="absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="cartPanel">
+    <!-- Header -->
+    <div class="flex justify-between items-center border-b p-4">
+      <h2 class="text-xl font-semibold">ADDED TO YOUR BASKET</h2>
+      <button id="closeCartPopup" class="text-gray-500 hover:text-black text-2xl">&times;</button>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cartItemsPopup" class="p-4 space-y-6">
+      <p class="text-gray-500 text-center">Your basket is empty.</p>
+    </div>
+
+    <!-- Total Section -->
+    <div class="border-t p-4">
+      <div class="flex justify-between text-lg font-semibold mb-4">
+        <span>TOTAL:</span>
+        <span id="cartTotal">PKR 0</span>
+      </div>
+      <p class="text-xs text-gray-500 mb-4">
+        *ALL ORDERS MAY TAKE UPTO 7 WORKING DAYS TO BE DELIVERED TO YOUR DOORSTEP
+      </p>
+
+      <!-- Buttons -->
+      <div class="space-y-3">
+        <button class="w-full bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">CHECK OUT</button>
+        <button class="w-full border border-black text-black py-3 rounded font-semibold hover:bg-gray-100 transition">VIEW SHOPPING BASKET</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
    <!-- Footer  -->
   <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
@@ -308,40 +375,244 @@
       <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
     </div>
   </footer>
-    <!--  Script -->
+
     <script>
+        // Get elements
         const menuToggle = document.getElementById("menuToggle");
         const dropdownMenu = document.getElementById("dropdownMenu");
         const overlay = document.getElementById("overlay");
         const searchToggle = document.getElementById("searchToggle");
         const searchBar = document.getElementById("searchBar");
 
-        // Menu toggle
-        menuToggle.addEventListener("click", () => {
+        // Debug logging
+        console.log("Menu elements:", { menuToggle, dropdownMenu, overlay });
+
+        // Menu toggle functionality
+        menuToggle.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log("Menu toggle clicked!");
+            
+            // Toggle menu
             dropdownMenu.classList.toggle("open");
             overlay.classList.toggle("open");
+            
+            // Toggle hamburger animation
+            menuToggle.classList.toggle("active");
+            
+            console.log("Menu classes after toggle:", dropdownMenu.className);
+            console.log("Overlay classes after toggle:", overlay.className);
         });
 
-        overlay.addEventListener("click", () => {
+        // Close menu when overlay is clicked
+        overlay.addEventListener("click", function() {
+            console.log("Overlay clicked!");
             dropdownMenu.classList.remove("open");
             overlay.classList.remove("open");
+            menuToggle.classList.remove("active");
         });
 
-        // Submenu toggle
+        // Submenu toggle functionality
         document.querySelectorAll(".submenu-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                console.log("Submenu button clicked!");
+                
                 const submenu = btn.nextElementSibling;
-                submenu.classList.toggle("hidden");
-
                 const arrow = btn.querySelector("span");
+                
+                submenu.classList.toggle("hidden");
                 arrow.classList.toggle("rotate-180");
             });
         });
 
         // Search bar toggle
-        searchToggle.addEventListener("click", () => {
+        searchToggle.addEventListener("click", function() {
             searchBar.classList.toggle("hidden");
         });
+
+        // === Cart Popup Logic ===
+        const cartPopup = document.getElementById("cartPopup");
+        const closeCartPopup = document.getElementById("closeCartPopup");
+        const cartItemsContainer = document.getElementById("cartItemsPopup");
+        const cartTotal = document.getElementById("cartTotal");
+        const cartCount = document.querySelector(".fa-shopping-bag + span");
+
+        let cartItems = [];
+
+        const cartPanel = document.getElementById("cartPanel");
+
+        function openCartPopup() {
+          cartPopup.classList.remove("hidden");
+          setTimeout(() => {
+            cartPanel.classList.remove("translate-x-full");
+          }, 10);
+        }
+
+        function closeCartFn() {
+          cartPanel.classList.add("translate-x-full");
+          setTimeout(() => {
+            cartPopup.classList.add("hidden");
+          }, 300);
+        }
+
+        closeCartPopup.addEventListener("click", closeCartFn);
+        cartPopup.addEventListener("click", (e) => {
+          if (e.target === cartPopup) closeCartFn();
+        });
+
+        // Add to Cart
+        document.querySelectorAll(".product-card button").forEach((button) => {
+          button.addEventListener("click", () => {
+            
+            const productCard = button.closest(".product-card");
+            const productName = productCard.querySelector("h3").innerText || "Unnamed Product";
+            const productPriceText = productCard.querySelector("p").innerText;
+            const productImg = productCard.querySelector("img").src;
+
+            console.log("Original price text:", productPriceText);
+            
+            const cleanPrice = productPriceText
+              .replace(/Rs\./g, '')
+              .replace(/PKR/g, '')
+              .replace(/[^\d.,]/g, '')
+              .replace(/,/g, '');
+            
+            const priceValue = parseFloat(cleanPrice) || 0;
+            
+            console.log("Final price value:", priceValue);
+
+            cartItems.push({
+              name: productName,
+              price: priceValue,
+              img: productImg,
+              size: "WS-25",
+              quantity: 1
+            });
+
+            renderCartPopup();
+            openCartPopup();
+            addCartButtonListeners(); 
+          });
+        });
+
+        // Render popup items
+        function renderCartPopup() {
+          if (cartItems.length === 0) {
+            cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center">Your basket is empty.</p>`;
+            cartTotal.textContent = "PKR 0";
+            cartCount.innerText = 0;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            return;
+          }
+
+          let total = 0;
+
+          cartItemsContainer.innerHTML = cartItems.map((item, index) => {
+            total += item.price * item.quantity;
+            return `
+              <div class="flex space-x-4 items-center">
+                <img src="${item.img}" alt="${item.name}" class="w-20 h-24 object-cover rounded">
+                <div class="flex-1">
+                  <h3 class="font-semibold text-sm">${item.name}</h3>
+                  <p class="text-gray-500 text-xs">${item.size}</p>
+                  <p class="text-sm mt-1">${item.quantity}X</p>
+                </div>
+                <div class="text-right">
+                  <p class="font-semibold">PKR ${item.price.toLocaleString()}</p>
+                  <button onclick="removeItem(${index})" class="text-gray-500 hover:text-black text-lg mt-1"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          cartTotal.textContent = "PKR " + total.toLocaleString();
+          cartCount.innerText = cartItems.length;
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+
+        // Remove item
+        function removeItem(index) {
+          cartItems.splice(index, 1);
+          renderCartPopup();
+          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+
+        function addCartButtonListeners() {
+            const buttons = document.querySelectorAll('#cartPopup button');
+            
+            buttons.forEach(button => {
+                if (button.textContent.includes('CHECK OUT') && !button.hasAttribute('data-checkout-added')) {
+                    button.setAttribute('data-checkout-added', 'true');
+                    button.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        console.log("Checkout button clicked!");
+                        
+                        if (cartItems.length === 0) {
+                            alert("Your cart is empty. Please add some items before checkout.");
+                            return;
+                        }
+                        
+                        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                        window.location.href = "checkout.html";
+                    });
+                }
+                
+                if (button.textContent.includes('VIEW SHOPPING BASKET') && !button.hasAttribute('data-basket-added')) {
+                    button.setAttribute('data-basket-added', 'true');
+                    button.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        console.log("View basket button clicked!");
+                        
+                        if (cartItems.length === 0) {
+                            alert("Your cart is empty. Please add some items before viewing basket.");
+                            return;
+                        }
+                        
+                        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                        window.location.href = "basket.html";
+                    });
+                }
+            });
+        }
+
+        // Initialize cart count
+        if (cartCount) {
+            cartCount.textContent = 0;
+        }
+
+        // Load cart from localStorage on page load
+        window.addEventListener("DOMContentLoaded", () => {
+          const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+          cartItems = savedCart;
+          renderCartPopup();
+        });
+
+        // Make removeItem function globally accessible
+        window.removeItem = removeItem;
+        // Get elements
+const cartIcon = document.querySelector(".fa-shopping-bag").parentElement;
+const accountIcon = document.querySelector(".fa-user").parentElement;
+
+// Redirect to basket page on cart icon click
+cartIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (cartItems.length === 0) {
+        alert("Your cart is empty. Please add some items first.");
+        return;
+    }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    window.location.href = "basket.html"; // go to basket page
+});
+
+// Redirect to login page on account icon click
+accountIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "login.html"; // go to login page
+});
+
     </script>
+    
+     <script src="about.js"></script>
+
 </body>
 </html>
