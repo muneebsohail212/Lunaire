@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout - LUNAIRE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .font-playfair { font-family: 'Playfair Display', serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
+    .dropdown-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+    .dropdown-menu.open { transform: translateX(0); }
+    .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+    .overlay.open { opacity: 1; visibility: visible; }
+    /* small styles for qty controls */
+    .qty-btn { width: 32px; height: 32px; display:inline-flex; align-items:center; justify-content:center; border-radius:6px; border:1px solid #e5e7eb; cursor:pointer; }
+    .qty-input { width: 56px; text-align:center; border:1px solid #e5e7eb; border-radius:6px; padding:6px; }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-inter">
+
+  <!-- Header (unchanged) -->
+   <header class="relative bg-white border-b border-gray-200 z-50">
+    <div class="flex items-center px-6 py-4">
+      <!-- Menu Toggle -->
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+      </button>
+
+      <!-- Logo -->
+      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+
+      <!-- Search Bar (Hidden by default) -->
+      <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
+        <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+      </div>
+
+      <!-- Icons -->
+      <div class="flex items-center space-x-4">
+        <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-search text-black text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-user text-black text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+          <i class="fas fa-shopping-bag text-black text-xl"></i>
+          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-8">
+        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
+      </div>
+      <ul class="space-y-4">
+        <li><a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+       <li>
+  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+    Shop <span class="transform transition-transform">▾</span>
+  </button>
+  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+    <li>
+      <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+        Collection Name
+      </a>
+    </li>
+  </ul>
+</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            My Account <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            About Us <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+<li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+          </ul>
+        </li>
+        <li>
+          <li>
+  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+    Catalogue <span class="transform transition-transform">▾</span>
+  </button>
+  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+    <li>
+      <a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">
+        Collections
+      </a>
+    </li>
+  </ul>
+</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            FAQs <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+<a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Checkout (two-column) -->
+  <main class="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <!-- Left: Checkout Form -->
+    <section>
+      <h2 class="text-3xl font-playfair font-bold mb-6">Contact</h2>
+
+      <form id="checkoutForm" class="space-y-6" novalidate>
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium mb-2">Email</label>
+          <input id="email" name="email" required type="email" placeholder="your@email.com"
+            class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+          <div class="flex items-center mt-2">
+            <input type="checkbox" id="news" class="mr-2">
+            <label for="news" class="text-sm text-gray-700">Email me with news and offers</label>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-playfair font-bold mt-10 mb-6">Delivery</h2>
+
+        <!-- City (primary, validated like screenshot) -->
+        <div>
+          <label class="block text-sm font-medium mb-2">City</label>
+          <select id="primaryCity" required
+            class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+            <option value="">Select city from dropdown</option>
+            <option>Karachi</option>
+            <option>Lahore</option>
+            <option>Islamabad</option>
+            <option>Rawalpindi</option>
+            <option>Faisalabad</option>
+            <option>Multan</option>
+            <option>Hyderabad</option>
+          </select>
+          <p id="cityError" class="text-red-500 text-sm mt-1 hidden">Please select city from dropdown</p>
+        </div>
+
+        <!-- Country (read-only) -->
+        <div>
+          <label class="block text-sm font-medium mb-2">Country/Region</label>
+          <input type="text" readonly value="Pakistan"
+            class="w-full border border-gray-300 rounded-md px-4 py-3 bg-gray-100 text-gray-600">
+        </div>
+
+        <!-- Name -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">First name</label>
+            <input id="firstName" name="firstName" required type="text" placeholder="First name"
+              class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Last name</label>
+            <input id="lastName" name="lastName" required type="text" placeholder="Last name"
+              class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div>
+          <label class="block text-sm font-medium mb-2">Address</label>
+          <input id="address" name="address" required type="text" placeholder="Address"
+            class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+        </div>
+
+        <!-- City + Postal (secondary city dropdown kept for UI parity) -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">City</label>
+            <select id="secondaryCity" required
+              class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+              <option value="">Select city from city dropdown</option>
+              <option>Karachi</option>
+              <option>Lahore</option>
+              <option>Islamabad</option>
+              <option>Multan</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Postal code (optional)</label>
+            <input id="postal" type="text" placeholder="Postal code"
+              class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label class="block text-sm font-medium mb-2">Phone</label>
+          <input id="phone" name="phone" required type="tel" placeholder="+92 XXX XXXXXXX"
+            class="w-full border border-gray-300 rounded-md px-4 py-3 focus:ring-2 focus:ring-black focus:outline-none">
+        </div>
+
+        <!-- Save info -->
+        <div class="flex items-center">
+          <input type="checkbox" id="saveInfo" class="mr-2">
+          <label for="saveInfo" class="text-sm">Save this information for next time</label>
+        </div>
+
+        <!-- Place order button -->
+        <div class="flex gap-4">
+          <button id="placeOrderBtn" type="submit" class="flex-1 bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
+            Place Order
+          </button>
+
+          <button type="button" id="clearCartBtn" class="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition">
+            Clear Cart
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Right: Order Summary -->
+    <aside class="bg-white rounded-lg shadow-md p-6 h-fit">
+      <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+
+      <div id="cartItemsContainer" class="space-y-4 mb-4">
+        <!-- Items will be rendered here from localStorage -->
+      </div>
+
+      <!-- Discount code -->
+      <div class="flex space-x-2 mb-4">
+        <input id="discountCodeInput" type="text" placeholder="Discount code or gift card"
+          class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none">
+        <button id="applyDiscountBtn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md font-semibold">Apply</button>
+      </div>
+      <p id="discountMsg" class="text-sm text-green-600 mb-2 hidden"></p>
+
+      <!-- Totals -->
+      <div class="border-t pt-4 space-y-2 text-gray-700">
+        <div class="flex justify-between"><span>Subtotal (<span id="countItems">0</span> items)</span><span id="subtotalEl">Rs 0</span></div>
+        <div class="flex justify-between"><span>Shipping</span><span id="shippingEl">Rs 0</span></div>
+        <div id="discountRow" class="flex justify-between text-green-700 hidden"><span>Discount</span><span id="discountEl">-Rs 0</span></div>
+      </div>
+
+      <div class="border-t mt-4 pt-4 flex justify-between text-lg font-bold">
+        <span>Total</span>
+        <span id="totalEl">PKR Rs 0</span>
+      </div>
+
+      <div class="mt-4 text-sm text-gray-500">
+        <p>*All orders may take up to 7 working days to be delivered to your doorstep</p>
+      </div>
+
+      <div id="emptyCartCTAs" class="mt-6 text-center hidden">
+        <p class="text-gray-500 mb-4">Your cart is empty.</p>
+        <a href="index.html" class="inline-block bg-black text-white px-6 py-2 rounded">Continue shopping</a>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer (unchanged) -->
+  <footer class="bg-gray-900 text-gray-100 py-8 mt-12">
+     <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
+      <div>
+        <h3 class="font-bold mb-4">NEED HELP?</h3>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-phone"></i><span>+92 314 4891611</span></p>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-envelope"></i><span>amnasalam@gmail.com</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CATALOGUE</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">New Arrivals</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">Contact Us</a></li>
+          <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
+          <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
+          <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">COMPANY</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">About Us</a></li>
+          <li><a href="#" class="hover:text-black">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">FOLLOW US</h3>
+        <div class="flex space-x-4 text-lg">
+          <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black text-white text-center text-xs py-4">
+      <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // --- Utility / cart handling ---
+    const parsePrice = (p) => {
+      if (typeof p === 'number') return p;
+      if (!p) return 0;
+      // Accept strings like "Rs 5,490.00" or "5,490" etc.
+      const num = String(p).replace(/[^\d.]/g, '');
+      return parseFloat(num) || 0;
+    };
+
+    const formatPKR = (n) => {
+      return 'Rs ' + Number(n).toLocaleString('en-PK', { maximumFractionDigits: 2 });
+    };
+
+    // Get cart from localStorage (robust)
+    let cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+    // Discount state
+    let discount = { code: null, amount: 0 };
+
+    // DOM references
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const subtotalEl = document.getElementById('subtotalEl');
+    const shippingEl = document.getElementById('shippingEl');
+    const totalEl = document.getElementById('totalEl');
+    const countItemsEl = document.getElementById('countItems');
+    const headerCartCount = document.getElementById('headerCartCount');
+    const emptyCartCTAs = document.getElementById('emptyCartCTAs');
+    const discountMsg = document.getElementById('discountMsg');
+    const discountRow = document.getElementById('discountRow');
+    const discountEl = document.getElementById('discountEl');
+
+    // Save cart to localStorage
+    function saveCart() {
+      localStorage.setItem('cartItems', JSON.stringify(cart));
+    }
+
+    // Remove item
+    function removeItem(index) {
+      if (index < 0 || index >= cart.length) return;
+      cart.splice(index, 1);
+      saveCart();
+      renderOrderSummary();
+    }
+
+    // Update quantity
+    function updateQty(index, newQty) {
+      const qty = Number(newQty) || 1;
+      if (qty < 1) return;
+      if (!cart[index]) return;
+      cart[index].quantity = qty;
+      saveCart();
+      renderOrderSummary();
+    }
+
+    // Increase / decrease handlers
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].quantity = Math.max(1, Number(cart[index].quantity || 1) + delta);
+      saveCart();
+      renderOrderSummary();
+    }
+
+    // Apply discount (simple example: SAVE10 => 10% off)
+    function applyDiscount(code) {
+      code = (code || '').trim().toUpperCase();
+      discount = { code: null, amount: 0 };
+      if (!code) {
+        discountMsg.classList.add('hidden');
+        discountRow.classList.add('hidden');
+        renderOrderSummary();
+        return;
+      }
+      if (code === 'SAVE10') {
+        discount.code = 'SAVE10';
+        // discount amount will be computed during render
+        discountMsg.textContent = 'Code applied: SAVE10 (10% off)';
+        discountMsg.classList.remove('hidden');
+      } else {
+        discountMsg.textContent = 'Invalid code';
+        discountMsg.classList.remove('hidden');
+      }
+      renderOrderSummary();
+    }
+
+    // Compute totals and render
+    function renderOrderSummary() {
+      cartItemsContainer.innerHTML = '';
+      let subtotal = 0;
+      let itemsCount = 0;
+
+      if (!cart || cart.length === 0) {
+        emptyCartCTAs.classList.remove('hidden');
+        cartItemsContainer.innerHTML = '<p class="text-gray-500">No items in cart.</p>';
+        subtotalEl.textContent = formatPKR(0);
+        shippingEl.textContent = formatPKR(0);
+        totalEl.textContent = 'PKR ' + formatPKR(0);
+        countItemsEl.textContent = '0';
+        headerCartCount.textContent = '0';
+        discountRow.classList.add('hidden');
+        return;
+      }
+      emptyCartCTAs.classList.add('hidden');
+
+      cart.forEach((item, idx) => {
+        const price = parsePrice(item.price);
+        const qty = Number(item.quantity || 1);
+        const lineTotal = price * qty;
+        subtotal += lineTotal;
+        itemsCount += qty;
+
+        // build item row
+        const itemHtml = document.createElement('div');
+        itemHtml.className = 'flex justify-between items-center';
+        itemHtml.innerHTML = `
+          <div class="flex items-center space-x-4">
+            <img src="${item.img || 'https://via.placeholder.com/60'}" class="w-16 h-16 rounded-md object-cover" alt="">
+            <div>
+              <p class="font-medium">${item.name || 'Product'}</p>
+              <p class="text-sm text-gray-500">${item.size ? item.size : ''}</p>
+              <div class="mt-2 flex items-center space-x-2">
+                <button class="qty-btn" data-idx="${idx}" data-action="dec">−</button>
+                <input class="qty-input" data-idx="${idx}" type="number" min="1" value="${qty}">
+                <button class="qty-btn" data-idx="${idx}" data-action="inc">+</button>
+                <button class="text-sm text-red-600 ml-3" data-idx="${idx}" data-action="remove">Remove</button>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <p class="font-semibold text-gray-900">${formatPKR(lineTotal)}</p>
+            <p class="text-sm text-gray-500">${formatPKR(price)} each</p>
+          </div>
+        `;
+        cartItemsContainer.appendChild(itemHtml);
+      });
+
+      // attach event listeners for qty and remove
+      cartItemsContainer.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = Number(btn.getAttribute('data-idx'));
+          const action = btn.getAttribute('data-action');
+          if (action === 'dec') changeQty(idx, -1);
+          else if (action === 'inc') changeQty(idx, +1);
+          else if (action === 'remove') {
+            if (confirm('Remove this item from cart?')) removeItem(idx);
+          }
+        });
+      });
+
+      // attach change handler for numeric inputs
+      cartItemsContainer.querySelectorAll('.qty-input').forEach(inp => {
+        inp.addEventListener('change', (e) => {
+          const idx = Number(inp.getAttribute('data-idx'));
+          const val = Number(inp.value || 1);
+          updateQty(idx, Math.max(1, Math.floor(val)));
+        });
+      });
+
+      // Shipping logic (flat Rs 250 if subtotal > 0)
+      const shipping = subtotal > 0 ? 250 : 0;
+
+      // Discount calculation
+      let discountAmount = 0;
+      if (discount.code === 'SAVE10') {
+        discountAmount = subtotal * 0.10; // 10%
+      }
+
+      const total = subtotal - discountAmount + shipping;
+
+      // Update DOM
+      subtotalEl.textContent = formatPKR(subtotal);
+      shippingEl.textContent = formatPKR(shipping);
+      countItemsEl.textContent = String(itemsCount);
+      headerCartCount.textContent = String(itemsCount);
+
+      if (discountAmount > 0) {
+        discountEl.textContent = '- ' + formatPKR(discountAmount);
+        discountRow.classList.remove('hidden');
+        discountMsg.classList.remove('hidden');
+      } else {
+        discountRow.classList.add('hidden');
+      }
+
+      totalEl.textContent = 'PKR ' + formatPKR(total);
+    }
+
+    // Initial render
+    renderOrderSummary();
+
+    // --- Discount button ---
+    document.getElementById('applyDiscountBtn').addEventListener('click', () => {
+      const code = document.getElementById('discountCodeInput').value;
+      applyDiscount(code);
+    });
+
+    // --- Clear cart ---
+    document.getElementById('clearCartBtn').addEventListener('click', () => {
+      if (!cart || cart.length === 0) {
+        alert('Cart is already empty.');
+        return;
+      }
+      if (confirm('Are you sure you want to clear your cart?')) {
+        cart = [];
+        saveCart();
+        renderOrderSummary();
+        alert('Cart cleared successfully.');
+      }
+    });
+
+    // --- Place order (validate city & non-empty cart) ---
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Validate cart
+      if (!cart || cart.length === 0) {
+        alert('Your cart is empty. Please add some items before placing an order.');
+        return;
+      }
+
+      // Validate primary city selection like screenshot behavior
+      const primaryCity = document.getElementById('primaryCity');
+      const cityError = document.getElementById('cityError');
+      if (!primaryCity.value) {
+        cityError.classList.remove('hidden');
+        primaryCity.classList.add('border-red-500', 'ring-0');
+        primaryCity.focus();
+        return;
+      } else {
+        cityError.classList.add('hidden');
+        primaryCity.classList.remove('border-red-500');
+      }
+
+      // collect form data
+      const orderData = {
+        name: (document.getElementById('firstName').value || '') + ' ' + (document.getElementById('lastName').value || ''),
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        address: document.getElementById('address').value,
+        city: primaryCity.value,
+        postal: document.getElementById('postal').value,
+        country: 'Pakistan',
+        payment: 'COD', // placeholder (you can add payment selection)
+        items: cart,
+        discountCode: discount.code || null,
+        totals: {
+          subtotal: parsePrice(subtotalEl.textContent),
+          shipping: parsePrice(shippingEl.textContent),
+          discount: discount.code ? parsePrice(discountEl.textContent) : 0,
+          totalText: totalEl.textContent
+        }
+      };
+
+      console.log('Order Data:', orderData);
+
+      // Simulate order processing
+      alert('Order placed successfully!\n\n' + JSON.stringify({
+        name: orderData.name,
+        total: orderData.totals.totalText,
+        items: orderData.items.length
+      }, null, 2));
+
+      // Clear cart and redirect (or you can keep cart)
+      localStorage.removeItem('cartItems');
+      cart = [];
+      renderOrderSummary();
+
+      // redirect to home (optional)
+      window.location.href = 'index.html';
+    });
+
+    // --- Mobile menu toggle (unchanged) ---
+    const menuToggle = document.getElementById("menuToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const overlay = document.getElementById("overlay");
+
+    menuToggle.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("open");
+      overlay.classList.toggle("open");
+    });
+
+    overlay.addEventListener("click", () => {
+      dropdownMenu.classList.remove("open");
+      overlay.classList.remove("open");
+    });
+    // --- Dropdown submenu toggle ---
+document.querySelectorAll(".submenu-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const submenu = btn.nextElementSibling;
+    const arrow = btn.querySelector("span");
+
+    submenu.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+  });
+});
+
+
+    // If some other code on your site uses a different cart key,
+    // adjust `localStorage.getItem('cartItems')` to match that key.
+    //
+    // Example cart item shape expected:
+    // { id: 1, name: "Jeans", price: 5490, quantity: 2, img: "https://...", size: "26" }
+  </script>
+   <script src="about.js"></script>
+
+</body>
+</html>  

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUNAIRE - FAQs</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+    #dropdownMenu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .rotate-180 {
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+    #overlay {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- HEADER START -->
+  <header class="relative bg-white border-b border-gray-200 z-50">
+    <div class="flex items-center px-6 py-4">
+      <!-- Menu Toggle -->
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+      </button>
+
+      <!-- Logo -->
+      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+
+      <!-- Search Bar (Hidden by default) -->
+      <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
+        <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+      </div>
+
+      <!-- Icons -->
+      <div class="flex items-center space-x-4">
+        <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-search text-black text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-user text-black text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+          <i class="fas fa-shopping-bag text-black text-xl"></i>
+          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-8">
+        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
+      </div>
+      <ul class="space-y-4">
+        <li><a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+       <li>
+  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+    Shop <span class="transform transition-transform">▾</span>
+  </button>
+  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+    <li>
+      <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+        Collection Name
+      </a>
+    </li>
+  </ul>
+</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            My Account <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            About Us <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+<li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+          </ul>
+        </li>
+        <li>
+          <li>
+  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+    Catalogue <span class="transform transition-transform">▾</span>
+  </button>
+  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+    <li>
+      <a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">
+        Collections
+      </a>
+    </li>
+  </ul>
+</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            FAQs <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+<a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-8">
+        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
+      </div>
+
+      <ul class="space-y-4">
+        <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium">Home</a></li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
+            Shop <span class="transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black">Collection Name</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
+            My Account <span class="transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="login.html" class="block text-gray-500 hover:text-black">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black">Sign Up</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black">Orders</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
+            About Us <span class="transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" class="block text-gray-500 hover:text-black">Our Story</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
+            Catalogue <span class="transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="catalogue.html" class="block text-gray-500 hover:text-black">Collections</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
+            FAQs <span class="transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="faqs.html" class="block text-gray-500 hover:text-black">Shipping</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black">Returns</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black">Size Guide</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- FAQ SECTION -->
+  <section class="max-w-4xl mx-auto py-16 px-6">
+    <h2 class="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+
+    <div class="space-y-4">
+      <!-- Q1 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          What is LUNAIRE known for?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">LUNAIRE is known for its elegant, handcrafted fashion pieces that blend modern design with timeless sophistication.</p>
+      </div>
+
+      <!-- Q2 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          What is your return policy?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">We accept returns within 7 days of delivery, provided items are unused, with tags intact. Custom items are non-refundable.</p>
+      </div>
+
+      <!-- Q3 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          How long does delivery take?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">Domestic orders usually arrive in 3–5 business days. International orders may take 7–10 days depending on your region.</p>
+      </div>
+
+      <!-- Q4 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          Can I customize my size or color?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">Yes! We offer custom tailoring options for select pieces. Please check product details or contact support before ordering.</p>
+      </div>
+
+      <!-- Q5 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          What materials are your products made of?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">We use premium fabrics such as silk, linen, cotton, and eco-friendly blends sourced from sustainable suppliers.</p>
+      </div>
+
+      <!-- Q6 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          Do you offer gift wrapping?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">Yes, every LUNAIRE order can be beautifully wrapped with a custom message upon request.</p>
+      </div>
+
+      <!-- Q7 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          How do I care for my LUNAIRE garments?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">Please follow the care label inside each item. Most products require gentle hand washing or dry cleaning for longevity.</p>
+      </div>
+
+      <!-- Q8 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          Can I track my order?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">Yes, once your order ships, you’ll receive an email and SMS with real-time tracking details.</p>
+      </div>
+
+      <!-- Q9 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          What if I receive a damaged item?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">In rare cases, if you receive a damaged product, please contact our support team within 48 hours for replacement.</p>
+      </div>
+
+      <!-- Q10 -->
+      <div class="bg-white shadow rounded-xl p-5">
+        <button class="faq-question flex justify-between items-center w-full text-left font-semibold">
+          How can I contact LUNAIRE support?
+          <svg class="w-5 h-5 transition-transform transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <p class="hidden mt-2 text-gray-600">You can reach us anytime via the <a href="contact.html" class="text-black underline">Contact</a> page or email at support@lunaire.com.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+ <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
+      <div>
+        <h3 class="font-bold mb-4">NEED HELP?</h3>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-phone"></i><span>+92 314 4891611</span></p>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-envelope"></i><span>amnasalam@gmail.com</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CATALOGUE</h3>
+        <ul class="space-y-2 text-gray-200">
+       
+          <li><a href="#" class="hover:text-black">New Arrivals</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">Contact Us</a></li>
+          <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
+          <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
+          <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">COMPANY</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">About Us</a></li>
+          <li><a href="#" class="hover:text-black">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">FOLLOW US</h3>
+        <div class="flex space-x-4 text-lg">
+          <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black text-white text-center text-xs py-4">
+      <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+<script src="universal-cart.js"></script>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const overlay = document.getElementById("overlay");
+
+    menuToggle.addEventListener("click", () => {
+      dropdownMenu.style.transform = "translateX(0)";
+      overlay.style.display = "block";
+    });
+
+    overlay.addEventListener("click", () => {
+      dropdownMenu.style.transform = "translateX(-100%)";
+      overlay.style.display = "none";
+    });
+
+    document.querySelectorAll(".submenu-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle("hidden");
+        btn.querySelector("span").classList.toggle("rotate-180");
+      });
+    });
+
+    document.getElementById("searchToggle").addEventListener("click", () => {
+      document.getElementById("searchBar").classList.toggle("hidden");
+    });
+
+    document.querySelectorAll(".faq-question").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const answer = btn.nextElementSibling;
+        const icon = btn.querySelector("svg");
+        answer.classList.toggle("hidden");
+        icon.classList.toggle("rotate-180");
+      });
+    });
+    fetch('about-panel.html')
+  .then(response => response.text())
+  .then(html => {
+    document.body.insertAdjacentHTML('beforeend', html);
+
+    // ✅ Add functionality after loading
+    const aboutLink = document.getElementById('aboutLink');
+    const aboutPanel = document.getElementById('aboutPanel');
+    const aboutContent = document.getElementById('aboutContent');
+    const closeAbout = document.getElementById('closeAbout');
+
+    if (aboutLink && aboutPanel) {
+      aboutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById("dropdownMenu")?.classList.remove("open");
+        document.getElementById("overlay")?.classList.remove("open");
+
+        aboutPanel.classList.remove('hidden');
+        setTimeout(() => {
+          aboutContent.classList.remove('translate-x-full');
+        }, 50);
+      });
+    }
+
+    // Close About
+    if (closeAbout) {
+      closeAbout.addEventListener('click', () => {
+        aboutContent.classList.add('translate-x-full');
+        setTimeout(() => {
+          aboutPanel.classList.add('hidden');
+        }, 500);
+      });
+    }
+
+    // Close when clicking background
+    aboutPanel?.addEventListener('click', (e) => {
+      if (e.target === aboutPanel) {
+        aboutContent.classList.add('translate-x-full');
+        setTimeout(() => {
+          aboutPanel.classList.add('hidden');
+        }, 500);
+      }
+    });
+  });
+  </script>
+   <script src="about.js"></script>
+
+</body>
+</html>
