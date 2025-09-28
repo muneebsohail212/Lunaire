@@ -67,7 +67,7 @@
             Shop <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
           </ul>
         </li>
         <li>
@@ -85,7 +85,7 @@
             About Us <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+            <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
           </ul>
         </li>
         <li>
@@ -93,7 +93,7 @@
             Catalogue <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+            <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
           </ul>
         </li>
         <li>
@@ -101,9 +101,7 @@
             FAQs <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Returns</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Size Guide</a></li>
+            <a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
           </ul>
         </li>
       </ul>
@@ -123,8 +121,9 @@
         <h2 class="text-4xl md:text-6xl font-bold mb-4">Latest Collection</h2>
         <p class="text-xl md:text-2xl mb-8">Timeless Black & White Elegance</p>
         <a href="AfterShp.html" class="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-md font-semibold transition-colors inline-block">
-      Shop Now
-    </a>
+          Shop Now
+        </a>
+      </div>
     </section>
 
     <!-- Featured Collection -->
@@ -149,14 +148,6 @@
       </div>
     </section>
 
-    <!-- About Us -->
-    <section class="bg-gray-50 py-20 px-6 md:px-32 text-center">
-      <h2 class="text-3xl font-bold mb-6">About Us</h2>
-      <p class="text-gray-700 max-w-3xl mx-auto">
-        At <span class="font-semibold">LUNAIRE</span>, we draw our inspiration from one of the most powerful forces in nature – the moon.  
-        It reminds us that beauty isn’t defined by perfection, but by phases – just like life, just like womanhood.
-      </p>
-    </section>
   </main>
 
   <!-- Footer -->
@@ -170,7 +161,6 @@
       <div>
         <h3 class="font-bold mb-4">CATALOGUE</h3>
         <ul class="space-y-2 text-gray-200">
-       
           <li><a href="#" class="hover:text-black">New Arrivals</a></li>
         </ul>
       </div>
@@ -205,7 +195,8 @@
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- Scripts -->
+  <script src="universal-cart.js"></script>
   <script>
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
@@ -238,5 +229,7 @@
       searchBar.classList.toggle("hidden");
     });
   </script>
+  <script src="about.js"></script>
+
 </body>
 </html>
