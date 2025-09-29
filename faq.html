@@ -18,16 +18,29 @@
     h1, h2 {
       font-family: 'Playfair Display', serif;
     }
-    #dropdownMenu {
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+    .font-lunaire { 
+      font-family: 'Playfair Display', serif; 
+      font-weight: 500; 
+    }
+    .dropdown-menu { 
+      transform: translateX(-100%); 
+      transition: transform 0.3s ease-in-out; 
+    }
+    .dropdown-menu.open { 
+      transform: translateX(0); 
+    }
+    .overlay { 
+      opacity: 0; 
+      visibility: hidden; 
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; 
+    }
+    .overlay.open { 
+      opacity: 1; 
+      visibility: visible; 
     }
     .rotate-180 {
       transform: rotate(180deg);
       transition: transform 0.3s ease;
-    }
-    #overlay {
-      display: none;
     }
   </style>
 </head>
@@ -78,19 +91,20 @@
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
       <ul class="space-y-4">
-        <li><a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
-       <li>
-  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-    Shop <span class="transform transition-transform">▾</span>
-  </button>
-  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-    <li>
-      <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
-        Collection Name
-      </a>
-    </li>
-  </ul>
-</li>
+        <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Shop <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li>
+              <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+                Collection Name
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
             My Account <span class="transform transition-transform">▾</span>
           </button>
@@ -105,93 +119,27 @@
             About Us <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-<li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+            <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
           </ul>
         </li>
         <li>
-          <li>
-  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-    Catalogue <span class="transform transition-transform">▾</span>
-  </button>
-  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-    <li>
-      <a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">
-        Collections
-      </a>
-    </li>
-  </ul>
-</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Catalogue <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li>
+              <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+                Collections
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
             FAQs <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-<a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
-
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Overlay -->
-  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
-
-  <!-- Dropdown Menu -->
-  <nav id="dropdownMenu" class="fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
-    <div class="p-6">
-      <div class="mb-8">
-        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
-      </div>
-
-      <ul class="space-y-4">
-        <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium">Home</a></li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
-            Shop <span class="transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black">Collection Name</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
-            My Account <span class="transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="login.html" class="block text-gray-500 hover:text-black">Login</a></li>
-            <li><a href="signup.html" class="block text-gray-500 hover:text-black">Sign Up</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black">Orders</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
-            About Us <span class="transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black">Our Story</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
-            Catalogue <span class="transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="catalogue.html" class="block text-gray-500 hover:text-black">Collections</a></li>
-          </ul>
-        </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 font-medium submenu-btn">
-            FAQs <span class="transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="faqs.html" class="block text-gray-500 hover:text-black">Shipping</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black">Returns</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black">Size Guide</a></li>
+            <li><a href="faq.html" class="text-black underline hover:text-gray-700 block">Visit FAQs</a></li>
           </ul>
         </li>
       </ul>
@@ -288,7 +236,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <p class="hidden mt-2 text-gray-600">Yes, once your order ships, you’ll receive an email and SMS with real-time tracking details.</p>
+        <p class="hidden mt-2 text-gray-600">Yes, once your order ships, you'll receive an email and SMS with real-time tracking details.</p>
       </div>
 
       <!-- Q9 -->
@@ -316,7 +264,7 @@
   </section>
 
   <!-- FOOTER -->
- <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
+  <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
     <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
       <div>
         <h3 class="font-bold mb-4">NEED HELP?</h3>
@@ -326,7 +274,6 @@
       <div>
         <h3 class="font-bold mb-4">CATALOGUE</h3>
         <ul class="space-y-2 text-gray-200">
-       
           <li><a href="#" class="hover:text-black">New Arrivals</a></li>
         </ul>
       </div>
@@ -362,24 +309,31 @@
   </footer>
 
   <!-- SCRIPTS -->
-<script src="universal-cart.js"></script>
+  <script src="universal-cart.js"></script>
 
   <script>
+    // Menu functionality
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const overlay = document.getElementById("overlay");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBar = document.getElementById("searchBar");
 
-    menuToggle.addEventListener("click", () => {
-      dropdownMenu.style.transform = "translateX(0)";
-      overlay.style.display = "block";
-    });
+    // Menu toggle
+    if (menuToggle && dropdownMenu && overlay) {
+      menuToggle.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("open");
+        overlay.classList.toggle("open");
+      });
 
-    overlay.addEventListener("click", () => {
-      dropdownMenu.style.transform = "translateX(-100%)";
-      overlay.style.display = "none";
-    });
+      overlay.addEventListener("click", () => {
+        dropdownMenu.classList.remove("open");
+        overlay.classList.remove("open");
+      });
+    }
 
-    document.querySelectorAll(".submenu-btn").forEach(btn => {
+    // Submenu toggle
+    document.querySelectorAll(".submenu-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const submenu = btn.nextElementSibling;
         submenu.classList.toggle("hidden");
@@ -387,10 +341,14 @@
       });
     });
 
-    document.getElementById("searchToggle").addEventListener("click", () => {
-      document.getElementById("searchBar").classList.toggle("hidden");
-    });
+    // Search bar toggle
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener("click", () => {
+        searchBar.classList.toggle("hidden");
+      });
+    }
 
+    // FAQ toggle functionality
     document.querySelectorAll(".faq-question").forEach(btn => {
       btn.addEventListener("click", () => {
         const answer = btn.nextElementSibling;
@@ -399,52 +357,75 @@
         icon.classList.toggle("rotate-180");
       });
     });
-    fetch('about-panel.html')
-  .then(response => response.text())
-  .then(html => {
-    document.body.insertAdjacentHTML('beforeend', html);
 
-    // ✅ Add functionality after loading
-    const aboutLink = document.getElementById('aboutLink');
-    const aboutPanel = document.getElementById('aboutPanel');
-    const aboutContent = document.getElementById('aboutContent');
-    const closeAbout = document.getElementById('closeAbout');
+    // About panel functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const aboutLink = document.getElementById('aboutLink');
+      if (aboutLink) {
+        aboutLink.addEventListener('click', async (e) => {
+          e.preventDefault();
+          
+          // Close dropdown menu if open
+          if (dropdownMenu && overlay) {
+            dropdownMenu.classList.remove("open");
+            overlay.classList.remove("open");
+          }
 
-    if (aboutLink && aboutPanel) {
-      aboutLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById("dropdownMenu")?.classList.remove("open");
-        document.getElementById("overlay")?.classList.remove("open");
+          try {
+            // Load about panel
+            const response = await fetch('aboutPanel.html');
+            if (!response.ok) throw new Error('Failed to load about panel');
+            const html = await response.text();
+            
+            // Create container if it doesn't exist
+            let aboutContainer = document.getElementById('aboutPanelContainer');
+            if (!aboutContainer) {
+              aboutContainer = document.createElement('div');
+              aboutContainer.id = 'aboutPanelContainer';
+              document.body.appendChild(aboutContainer);
+            }
+            
+            aboutContainer.innerHTML = html;
 
-        aboutPanel.classList.remove('hidden');
-        setTimeout(() => {
-          aboutContent.classList.remove('translate-x-full');
-        }, 50);
-      });
-    }
+            // Get panel elements
+            const aboutPanel = document.getElementById('aboutPanel');
+            const aboutContent = document.getElementById('aboutContent');
+            const closeAbout = document.getElementById('closeAbout');
 
-    // Close About
-    if (closeAbout) {
-      closeAbout.addEventListener('click', () => {
-        aboutContent.classList.add('translate-x-full');
-        setTimeout(() => {
-          aboutPanel.classList.add('hidden');
-        }, 500);
-      });
-    }
+            if (aboutPanel && aboutContent) {
+              // Show panel
+              aboutPanel.classList.remove('hidden');
+              setTimeout(() => {
+                aboutContent.classList.remove('translate-x-full');
+              }, 50);
 
-    // Close when clicking background
-    aboutPanel?.addEventListener('click', (e) => {
-      if (e.target === aboutPanel) {
-        aboutContent.classList.add('translate-x-full');
-        setTimeout(() => {
-          aboutPanel.classList.add('hidden');
-        }, 500);
+              // Close button
+              if (closeAbout) {
+                closeAbout.addEventListener('click', () => {
+                  aboutContent.classList.add('translate-x-full');
+                  setTimeout(() => {
+                    aboutPanel.classList.add('hidden');
+                  }, 500);
+                });
+              }
+
+              // Close when clicking background
+              aboutPanel.addEventListener('click', (e) => {
+                if (e.target === aboutPanel) {
+                  aboutContent.classList.add('translate-x-full');
+                  setTimeout(() => {
+                    aboutPanel.classList.add('hidden');
+                  }, 500);
+                }
+              });
+            }
+          } catch (error) {
+            console.error('Error loading about panel:', error);
+          }
+        });
       }
     });
-  });
   </script>
-   <script src="about.js"></script>
 
 </body>
 </html>
