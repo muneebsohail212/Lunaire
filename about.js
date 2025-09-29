@@ -1,52 +1,74 @@
 // about-panel.js
-const aboutLink = document.getElementById('aboutLink');
+document.addEventListener('DOMContentLoaded', function() {
+    const aboutLink = document.getElementById('aboutLink');
+    if (!aboutLink) return;
 
-// Create container for panel
-let aboutContainer = document.createElement('div');
-document.body.appendChild(aboutContainer);
+    // Create container for panel if it doesn't exist
+    let aboutContainer = document.getElementById('aboutPanelContainer');
+    if (!aboutContainer) {
+        aboutContainer = document.createElement('div');
+        aboutContainer.id = 'aboutPanelContainer';
+        document.body.appendChild(aboutContainer);
+    }
 
-aboutLink.addEventListener('click', async (e) => {
-  e.preventDefault();
+    aboutLink.addEventListener('click', async (e) => {
+        e.preventDefault();
 
-  if (!document.getElementById('aboutPanel')) {
-    // Fetch About Us HTML
-    const response = await fetch('aboutpanel.html');
-    const html = await response.text();
-    aboutContainer.innerHTML = html;
+        // Check if panel already exists
+        let aboutPanel = document.getElementById('aboutPanel');
+        let aboutContent = document.getElementById('aboutContent');
+        
+        if (!aboutPanel) {
+            try {
+                // Fetch About Us HTML
+                const response = await fetch('aboutPanel.html');
+                if (!response.ok) throw new Error('Failed to load aboutPanel.html');
+                const html = await response.text();
+                aboutContainer.innerHTML = html;
 
-    const aboutPanel = document.getElementById('aboutPanel');
-    const aboutContent = document.getElementById('aboutContent');
-    const closeAbout = document.getElementById('closeAbout');
+                // Re-select elements now that HTML is added
+                aboutPanel = document.getElementById('aboutPanel');
+                aboutContent = document.getElementById('aboutContent');
+                const closeAbout = document.getElementById('closeAbout');
 
-    // Open panel
-    aboutPanel.classList.remove('hidden');
-    setTimeout(() => {
-      aboutContent.classList.remove('translate-x-full');
-    }, 50);
+                if (!aboutPanel || !aboutContent || !closeAbout) {
+                    throw new Error('Required elements not found in aboutPanel.html');
+                }
 
-    // Close button
-    closeAbout.addEventListener('click', () => {
-      aboutContent.classList.add('translate-x-full');
-      setTimeout(() => {
-        aboutPanel.classList.add('hidden');
-      }, 500);
+                // Open panel
+                aboutPanel.classList.remove('hidden');
+                setTimeout(() => {
+                    aboutContent.classList.remove('translate-x-full');
+                }, 50);
+
+                // Close button
+                closeAbout.addEventListener('click', () => {
+                    aboutContent.classList.add('translate-x-full');
+                    setTimeout(() => {
+                        aboutPanel.classList.add('hidden');
+                    }, 500);
+                });
+
+                // Close when clicking outside the panel
+                aboutPanel.addEventListener('click', (e) => {
+                    if (e.target === aboutPanel) {
+                        aboutContent.classList.add('translate-x-full');
+                        setTimeout(() => {
+                            aboutPanel.classList.add('hidden');
+                        }, 500);
+                    }
+                });
+
+            } catch (err) {
+                console.error('Error loading About Panel:', err);
+                alert('Failed to load About Us panel.');
+            }
+        } else {
+            // Panel already exists, just open it
+            aboutPanel.classList.remove('hidden');
+            setTimeout(() => {
+                aboutContent.classList.remove('translate-x-full');
+            }, 50);
+        }
     });
-
-    // Close when clicking outside
-    aboutPanel.addEventListener('click', (e) => {
-      if (e.target === aboutPanel) {
-        aboutContent.classList.add('translate-x-full');
-        setTimeout(() => {
-          aboutPanel.classList.add('hidden');
-        }, 500);
-      }
-    });
-  } else {
-    const aboutPanel = document.getElementById('aboutPanel');
-    const aboutContent = document.getElementById('aboutContent');
-    aboutPanel.classList.remove('hidden');
-    setTimeout(() => {
-      aboutContent.classList.remove('translate-x-full');
-    }, 50);
-  }
 });
