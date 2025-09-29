@@ -23,8 +23,8 @@
 
 <body class="bg-gray-50 font-inter">
 
-  <!-- Header (unchanged) -->
-   <header class="relative bg-white border-b border-gray-200 z-50">
+  <!-- Header -->
+  <header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center px-6 py-4">
       <!-- Menu Toggle -->
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
@@ -51,7 +51,7 @@
         </button>
         <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
           <i class="fas fa-shopping-bag text-black text-xl"></i>
-          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+          <span id="headerCartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
         </button>
       </div>
     </div>
@@ -67,19 +67,20 @@
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
       <ul class="space-y-4">
-        <li><a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
-       <li>
-  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-    Shop <span class="transform transition-transform">▾</span>
-  </button>
-  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-    <li>
-      <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
-        Collection Name
-      </a>
-    </li>
-  </ul>
-</li>
+        <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Shop <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li>
+              <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+                Collection Name
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
             My Account <span class="transform transition-transform">▾</span>
           </button>
@@ -94,28 +95,27 @@
             About Us <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-<li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+            <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
           </ul>
         </li>
         <li>
-          <li>
-  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-    Catalogue <span class="transform transition-transform">▾</span>
-  </button>
-  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-    <li>
-      <a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">
-        Collections
-      </a>
-    </li>
-  </ul>
-</li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Catalogue <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li>
+              <a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">
+                Collections
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
             FAQs <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-<a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
-
+            <a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a>
           </ul>
         </li>
       </ul>
@@ -226,7 +226,7 @@
             Place Order
           </button>
 
-          <button type="button" id="clearCartBtn" class="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition">
+          <button type="button" id="clearCartBtn" class="flex-1 bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
             Clear Cart
           </button>
         </div>
@@ -234,47 +234,41 @@
     </section>
 
     <!-- Right: Order Summary -->
-    <aside class="bg-white rounded-lg shadow-md p-6 h-fit">
-      <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
+    <section>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-2xl font-playfair font-bold mb-6">Order Summary</h2>
 
-      <div id="cartItemsContainer" class="space-y-4 mb-4">
-        <!-- Items will be rendered here from localStorage -->
-      </div>
+        <!-- Cart Items -->
+        <div id="cartItems" class="space-y-4 mb-6">
+          <!-- Items will be dynamically inserted here -->
+          <div class="text-center text-gray-500 py-8">
+            <i class="fas fa-shopping-bag text-4xl mb-4"></i>
+            <p>Your cart is empty</p>
+          </div>
+        </div>
 
-      <!-- Discount code -->
-      <div class="flex space-x-2 mb-4">
-        <input id="discountCodeInput" type="text" placeholder="Discount code or gift card"
-          class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-black focus:outline-none">
-        <button id="applyDiscountBtn" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-md font-semibold">Apply</button>
+        <!-- Subtotal, Shipping, Total -->
+        <div class="border-t border-gray-200 pt-4 space-y-2">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span id="subtotal">Rs. 0</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Shipping</span>
+            <span id="shipping">Rs. 0</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold border-t border-gray-200 pt-4">
+            <span>Total</span>
+            <span id="total">Rs. 0</span>
+          </div>
+        </div>
       </div>
-      <p id="discountMsg" class="text-sm text-green-600 mb-2 hidden"></p>
-
-      <!-- Totals -->
-      <div class="border-t pt-4 space-y-2 text-gray-700">
-        <div class="flex justify-between"><span>Subtotal (<span id="countItems">0</span> items)</span><span id="subtotalEl">Rs 0</span></div>
-        <div class="flex justify-between"><span>Shipping</span><span id="shippingEl">Rs 0</span></div>
-        <div id="discountRow" class="flex justify-between text-green-700 hidden"><span>Discount</span><span id="discountEl">-Rs 0</span></div>
-      </div>
-
-      <div class="border-t mt-4 pt-4 flex justify-between text-lg font-bold">
-        <span>Total</span>
-        <span id="totalEl">PKR Rs 0</span>
-      </div>
-
-      <div class="mt-4 text-sm text-gray-500">
-        <p>*All orders may take up to 7 working days to be delivered to your doorstep</p>
-      </div>
-
-      <div id="emptyCartCTAs" class="mt-6 text-center hidden">
-        <p class="text-gray-500 mb-4">Your cart is empty.</p>
-        <a href="index.html" class="inline-block bg-black text-white px-6 py-2 rounded">Continue shopping</a>
-      </div>
-    </aside>
+    </section>
   </main>
 
-  <!-- Footer (unchanged) -->
-  <footer class="bg-gray-900 text-gray-100 py-8 mt-12">
-     <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
       <div>
         <h3 class="font-bold mb-4">NEED HELP?</h3>
         <p class="mb-2 flex items-center space-x-2"><i class="fas fa-phone"></i><span>+92 314 4891611</span></p>
@@ -317,309 +311,192 @@
     </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="universal-cart.js"></script>
   <script>
-    // --- Utility / cart handling ---
-    const parsePrice = (p) => {
-      if (typeof p === 'number') return p;
-      if (!p) return 0;
-      // Accept strings like "Rs 5,490.00" or "5,490" etc.
-      const num = String(p).replace(/[^\d.]/g, '');
-      return parseFloat(num) || 0;
-    };
-
-    const formatPKR = (n) => {
-      return 'Rs ' + Number(n).toLocaleString('en-PK', { maximumFractionDigits: 2 });
-    };
-
-    // Get cart from localStorage (robust)
-    let cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
-
-    // Discount state
-    let discount = { code: null, amount: 0 };
-
-    // DOM references
-    const cartItemsContainer = document.getElementById('cartItemsContainer');
-    const subtotalEl = document.getElementById('subtotalEl');
-    const shippingEl = document.getElementById('shippingEl');
-    const totalEl = document.getElementById('totalEl');
-    const countItemsEl = document.getElementById('countItems');
-    const headerCartCount = document.getElementById('headerCartCount');
-    const emptyCartCTAs = document.getElementById('emptyCartCTAs');
-    const discountMsg = document.getElementById('discountMsg');
-    const discountRow = document.getElementById('discountRow');
-    const discountEl = document.getElementById('discountEl');
-
-    // Save cart to localStorage
-    function saveCart() {
-      localStorage.setItem('cartItems', JSON.stringify(cart));
-    }
-
-    // Remove item
-    function removeItem(index) {
-      if (index < 0 || index >= cart.length) return;
-      cart.splice(index, 1);
-      saveCart();
-      renderOrderSummary();
-    }
-
-    // Update quantity
-    function updateQty(index, newQty) {
-      const qty = Number(newQty) || 1;
-      if (qty < 1) return;
-      if (!cart[index]) return;
-      cart[index].quantity = qty;
-      saveCart();
-      renderOrderSummary();
-    }
-
-    // Increase / decrease handlers
-    function changeQty(index, delta) {
-      if (!cart[index]) return;
-      cart[index].quantity = Math.max(1, Number(cart[index].quantity || 1) + delta);
-      saveCart();
-      renderOrderSummary();
-    }
-
-    // Apply discount (simple example: SAVE10 => 10% off)
-    function applyDiscount(code) {
-      code = (code || '').trim().toUpperCase();
-      discount = { code: null, amount: 0 };
-      if (!code) {
-        discountMsg.classList.add('hidden');
-        discountRow.classList.add('hidden');
-        renderOrderSummary();
-        return;
-      }
-      if (code === 'SAVE10') {
-        discount.code = 'SAVE10';
-        // discount amount will be computed during render
-        discountMsg.textContent = 'Code applied: SAVE10 (10% off)';
-        discountMsg.classList.remove('hidden');
-      } else {
-        discountMsg.textContent = 'Invalid code';
-        discountMsg.classList.remove('hidden');
-      }
-      renderOrderSummary();
-    }
-
-    // Compute totals and render
-    function renderOrderSummary() {
-      cartItemsContainer.innerHTML = '';
-      let subtotal = 0;
-      let itemsCount = 0;
-
-      if (!cart || cart.length === 0) {
-        emptyCartCTAs.classList.remove('hidden');
-        cartItemsContainer.innerHTML = '<p class="text-gray-500">No items in cart.</p>';
-        subtotalEl.textContent = formatPKR(0);
-        shippingEl.textContent = formatPKR(0);
-        totalEl.textContent = 'PKR ' + formatPKR(0);
-        countItemsEl.textContent = '0';
-        headerCartCount.textContent = '0';
-        discountRow.classList.add('hidden');
-        return;
-      }
-      emptyCartCTAs.classList.add('hidden');
-
-      cart.forEach((item, idx) => {
-        const price = parsePrice(item.price);
-        const qty = Number(item.quantity || 1);
-        const lineTotal = price * qty;
-        subtotal += lineTotal;
-        itemsCount += qty;
-
-        // build item row
-        const itemHtml = document.createElement('div');
-        itemHtml.className = 'flex justify-between items-center';
-        itemHtml.innerHTML = `
-          <div class="flex items-center space-x-4">
-            <img src="${item.img || 'https://via.placeholder.com/60'}" class="w-16 h-16 rounded-md object-cover" alt="">
-            <div>
-              <p class="font-medium">${item.name || 'Product'}</p>
-              <p class="text-sm text-gray-500">${item.size ? item.size : ''}</p>
-              <div class="mt-2 flex items-center space-x-2">
-                <button class="qty-btn" data-idx="${idx}" data-action="dec">−</button>
-                <input class="qty-input" data-idx="${idx}" type="number" min="1" value="${qty}">
-                <button class="qty-btn" data-idx="${idx}" data-action="inc">+</button>
-                <button class="text-sm text-red-600 ml-3" data-idx="${idx}" data-action="remove">Remove</button>
-              </div>
-            </div>
-          </div>
-          <div class="text-right">
-            <p class="font-semibold text-gray-900">${formatPKR(lineTotal)}</p>
-            <p class="text-sm text-gray-500">${formatPKR(price)} each</p>
-          </div>
-        `;
-        cartItemsContainer.appendChild(itemHtml);
-      });
-
-      // attach event listeners for qty and remove
-      cartItemsContainer.querySelectorAll('[data-action]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const idx = Number(btn.getAttribute('data-idx'));
-          const action = btn.getAttribute('data-action');
-          if (action === 'dec') changeQty(idx, -1);
-          else if (action === 'inc') changeQty(idx, +1);
-          else if (action === 'remove') {
-            if (confirm('Remove this item from cart?')) removeItem(idx);
-          }
-        });
-      });
-
-      // attach change handler for numeric inputs
-      cartItemsContainer.querySelectorAll('.qty-input').forEach(inp => {
-        inp.addEventListener('change', (e) => {
-          const idx = Number(inp.getAttribute('data-idx'));
-          const val = Number(inp.value || 1);
-          updateQty(idx, Math.max(1, Math.floor(val)));
-        });
-      });
-
-      // Shipping logic (flat Rs 250 if subtotal > 0)
-      const shipping = subtotal > 0 ? 250 : 0;
-
-      // Discount calculation
-      let discountAmount = 0;
-      if (discount.code === 'SAVE10') {
-        discountAmount = subtotal * 0.10; // 10%
-      }
-
-      const total = subtotal - discountAmount + shipping;
-
-      // Update DOM
-      subtotalEl.textContent = formatPKR(subtotal);
-      shippingEl.textContent = formatPKR(shipping);
-      countItemsEl.textContent = String(itemsCount);
-      headerCartCount.textContent = String(itemsCount);
-
-      if (discountAmount > 0) {
-        discountEl.textContent = '- ' + formatPKR(discountAmount);
-        discountRow.classList.remove('hidden');
-        discountMsg.classList.remove('hidden');
-      } else {
-        discountRow.classList.add('hidden');
-      }
-
-      totalEl.textContent = 'PKR ' + formatPKR(total);
-    }
-
-    // Initial render
-    renderOrderSummary();
-
-    // --- Discount button ---
-    document.getElementById('applyDiscountBtn').addEventListener('click', () => {
-      const code = document.getElementById('discountCodeInput').value;
-      applyDiscount(code);
-    });
-
-    // --- Clear cart ---
-    document.getElementById('clearCartBtn').addEventListener('click', () => {
-      if (!cart || cart.length === 0) {
-        alert('Cart is already empty.');
-        return;
-      }
-      if (confirm('Are you sure you want to clear your cart?')) {
-        cart = [];
-        saveCart();
-        renderOrderSummary();
-        alert('Cart cleared successfully.');
-      }
-    });
-
-    // --- Place order (validate city & non-empty cart) ---
-    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      // Validate cart
-      if (!cart || cart.length === 0) {
-        alert('Your cart is empty. Please add some items before placing an order.');
-        return;
-      }
-
-      // Validate primary city selection like screenshot behavior
-      const primaryCity = document.getElementById('primaryCity');
-      const cityError = document.getElementById('cityError');
-      if (!primaryCity.value) {
-        cityError.classList.remove('hidden');
-        primaryCity.classList.add('border-red-500', 'ring-0');
-        primaryCity.focus();
-        return;
-      } else {
-        cityError.classList.add('hidden');
-        primaryCity.classList.remove('border-red-500');
-      }
-
-      // collect form data
-      const orderData = {
-        name: (document.getElementById('firstName').value || '') + ' ' + (document.getElementById('lastName').value || ''),
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        address: document.getElementById('address').value,
-        city: primaryCity.value,
-        postal: document.getElementById('postal').value,
-        country: 'Pakistan',
-        payment: 'COD', // placeholder (you can add payment selection)
-        items: cart,
-        discountCode: discount.code || null,
-        totals: {
-          subtotal: parsePrice(subtotalEl.textContent),
-          shipping: parsePrice(shippingEl.textContent),
-          discount: discount.code ? parsePrice(discountEl.textContent) : 0,
-          totalText: totalEl.textContent
-        }
-      };
-
-      console.log('Order Data:', orderData);
-
-      // Simulate order processing
-      alert('Order placed successfully!\n\n' + JSON.stringify({
-        name: orderData.name,
-        total: orderData.totals.totalText,
-        items: orderData.items.length
-      }, null, 2));
-
-      // Clear cart and redirect (or you can keep cart)
-      localStorage.removeItem('cartItems');
-      cart = [];
-      renderOrderSummary();
-
-      // redirect to home (optional)
-      window.location.href = 'index.html';
-    });
-
-    // --- Mobile menu toggle (unchanged) ---
+    // Menu toggle functionality
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const overlay = document.getElementById("overlay");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBar = document.getElementById("searchBar");
 
-    menuToggle.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("open");
-      overlay.classList.toggle("open");
+    // Menu toggle
+    if (menuToggle && dropdownMenu && overlay) {
+      menuToggle.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("open");
+        overlay.classList.toggle("open");
+      });
+
+      overlay.addEventListener("click", () => {
+        dropdownMenu.classList.remove("open");
+        overlay.classList.remove("open");
+      });
+    }
+
+    // Submenu toggle
+    document.querySelectorAll(".submenu-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle("hidden");
+        btn.querySelector("span").classList.toggle("rotate-180");
+      });
     });
 
-    overlay.addEventListener("click", () => {
-      dropdownMenu.classList.remove("open");
-      overlay.classList.remove("open");
+    // Search bar toggle
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener("click", () => {
+        searchBar.classList.toggle("hidden");
+      });
+    }
+
+    // Checkout functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const checkoutForm = document.getElementById('checkoutForm');
+      const primaryCity = document.getElementById('primaryCity');
+      const cityError = document.getElementById('cityError');
+      const clearCartBtn = document.getElementById('clearCartBtn');
+      const placeOrderBtn = document.getElementById('placeOrderBtn');
+
+      // Validate city dropdown
+      if (primaryCity) {
+        primaryCity.addEventListener('change', function() {
+          if (this.value) {
+            cityError.classList.add('hidden');
+          }
+        });
+      }
+
+      // Form submission
+      if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Validate city
+          if (!primaryCity.value) {
+            cityError.classList.remove('hidden');
+            primaryCity.focus();
+            return;
+          }
+
+          // Validate other required fields
+          const requiredFields = ['email', 'firstName', 'lastName', 'address', 'phone'];
+          let isValid = true;
+          
+          requiredFields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element && !element.value.trim()) {
+              isValid = false;
+              element.classList.add('border-red-500');
+            } else if (element) {
+              element.classList.remove('border-red-500');
+            }
+          });
+
+          if (!isValid) {
+            alert('Please fill in all required fields.');
+            return;
+          }
+
+          // If validation passes
+          alert('Order placed successfully!');
+          // Clear cart
+          clearCart();
+          // Redirect to home
+          window.location.href = 'index.html';
+        });
+      }
+
+      // Clear cart button
+      if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', function() {
+          if (confirm('Are you sure you want to clear your cart?')) {
+            clearCart();
+            alert('Cart cleared successfully!');
+            window.location.reload();
+          }
+        });
+      }
+
+      // Load cart items on page load
+      loadCartItems();
     });
-    // --- Dropdown submenu toggle ---
-document.querySelectorAll(".submenu-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const submenu = btn.nextElementSibling;
-    const arrow = btn.querySelector("span");
 
-    submenu.classList.toggle("hidden");
-    arrow.classList.toggle("rotate-180");
-  });
-});
+    // Load cart items function
+    function loadCartItems() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const subtotalElement = document.getElementById('subtotal');
+      const shippingElement = document.getElementById('shipping');
+      const totalElement = document.getElementById('total');
+      const headerCartCount = document.getElementById('headerCartCount');
 
+      try {
+        const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+        
+        if (savedCart.length === 0) {
+          cartItemsContainer.innerHTML = `
+            <div class="text-center text-gray-500 py-8">
+              <i class="fas fa-shopping-bag text-4xl mb-4"></i>
+              <p>Your cart is empty</p>
+            </div>
+          `;
+          subtotalElement.textContent = 'Rs. 0';
+          shippingElement.textContent = 'Rs. 0';
+          totalElement.textContent = 'Rs. 0';
+          if (headerCartCount) headerCartCount.textContent = '0';
+          return;
+        }
 
-    // If some other code on your site uses a different cart key,
-    // adjust `localStorage.getItem('cartItems')` to match that key.
-    //
-    // Example cart item shape expected:
-    // { id: 1, name: "Jeans", price: 5490, quantity: 2, img: "https://...", size: "26" }
+        let subtotal = 0;
+        let html = '';
+
+        savedCart.forEach((item, index) => {
+          const itemTotal = (item.price || 0) * (item.quantity || 1);
+          subtotal += itemTotal;
+
+          html += `
+            <div class="flex items-center space-x-4 border-b pb-4">
+              <img src="${item.img || 'placeholder.jpg'}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+              <div class="flex-1">
+                <h3 class="font-medium">${item.name}</h3>
+                <p class="text-sm text-gray-600">Size: ${item.size || 'WS-25'}</p>
+                <p class="text-sm text-gray-600">Rs. ${(item.price || 0).toLocaleString()}</p>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm">Qty: ${item.quantity || 1}</span>
+              </div>
+            </div>
+          `;
+        });
+
+        cartItemsContainer.innerHTML = html;
+        
+        const shipping = subtotal > 0 ? 250 : 0;
+        const total = subtotal + shipping;
+
+        subtotalElement.textContent = `Rs. ${subtotal.toLocaleString()}`;
+        shippingElement.textContent = `Rs. ${shipping.toLocaleString()}`;
+        totalElement.textContent = `Rs. ${total.toLocaleString()}`;
+        
+        const totalItems = savedCart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        if (headerCartCount) headerCartCount.textContent = totalItems.toString();
+
+      } catch (e) {
+        console.error('Error loading cart items:', e);
+      }
+    }
+
+    // Clear cart function
+    function clearCart() {
+      try {
+        localStorage.removeItem("cartItems");
+        loadCartItems();
+      } catch (e) {
+        console.error('Error clearing cart:', e);
+      }
+    }
   </script>
-   <script src="about.js"></script>
+  <script src="about.js"></script>
 
 </body>
-</html>  
+</html>
