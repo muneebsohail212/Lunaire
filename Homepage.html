@@ -61,7 +61,7 @@
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
       <ul class="space-y-4">
-        <li><a href="#" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+      <li><a href="./index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
         <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
             Shop <span class="transform transition-transform">▾</span>
@@ -93,7 +93,7 @@
             Catalogue <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
           </ul>
         </li>
         <li>
@@ -205,15 +205,17 @@
     const searchBar = document.getElementById("searchBar");
 
     // Menu toggle
-    menuToggle.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("open");
-      overlay.classList.toggle("open");
-    });
+    if (menuToggle && dropdownMenu && overlay) {
+      menuToggle.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("open");
+        overlay.classList.toggle("open");
+      });
 
-    overlay.addEventListener("click", () => {
-      dropdownMenu.classList.remove("open");
-      overlay.classList.remove("open");
-    });
+      overlay.addEventListener("click", () => {
+        dropdownMenu.classList.remove("open");
+        overlay.classList.remove("open");
+      });
+    }
 
     // Submenu toggle
     document.querySelectorAll(".submenu-btn").forEach((btn) => {
@@ -225,11 +227,13 @@
     });
 
     // Search bar toggle
-    searchToggle.addEventListener("click", () => {
-      searchBar.classList.toggle("hidden");
-    });
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener("click", () => {
+        searchBar.classList.toggle("hidden");
+      });
+    }
   </script>
-  <script src="about.js"></script>
+  <script src="./about.js"></script>
 
 </body>
-</html>
+./</html>
