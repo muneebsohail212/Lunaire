@@ -1,6 +1,4 @@
-// ==================== UNIVERSAL CART & NAVIGATION SYSTEM ==================== //
 
-// Global cart items array - persists across all pages
 let cartItems = [];
 
 // Initialize cart on page load for ALL pages
