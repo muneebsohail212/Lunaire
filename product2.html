@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Classic Black and White Dress - LUNAIRE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
+    .dropdown-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+    .dropdown-menu.open { transform: translateX(0); }
+    .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+    .overlay.open { opacity: 1; visibility: visible; }
+
+    /* flying element uses transform (JS calculates delta) */
+    .flying {
+      position: absolute;
+      font-size: 14px;
+      font-weight: 700;
+      color: black;
+      z-index: 9999;
+      pointer-events: none;
+      transition: transform 0.8s cubic-bezier(.2,.8,.2,1), opacity 0.8s;
+      will-change: transform, opacity;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="relative bg-white border-b border-gray-200 z-50">
+    <div class="flex items-center px-6 py-4">
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-7 h-0.5 bg-black transition-all"></span>
+      </button>
+      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+      <div class="flex items-center space-x-4">
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-search text-black text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-user text-black text-xl"></i>
+        </button>
+        <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+          <i class="fas fa-shopping-bag text-black text-xl"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-6">
+      <div class="mb-8">
+        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
+      </div>
+      <ul class="space-y-4">
+        <li><a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Shop <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+          </ul>
+        </li>
+
+       <li>
+  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+    My Account
+    <span class="transform transition-transform">▾</span>
+  </button>
+  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+    <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+    <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+    <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
+</ul>
+</li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            About Us <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            Catalogue <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            FAQs <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Returns</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Size Guide</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+ <!-- Product Detail Section -->
+<main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+  <!-- Left: Product Image + Description -->
+  <div class="space-y-8">
+    <!-- Image -->
+    <div class="relative rounded-lg overflow-hidden shadow">
+      <div class="relative w-full h-[700px] overflow-hidden">
+        <img id="productImage" src="white dress 4.jpg" alt="" 
+             class="w-full h-full object-cover transition-all duration-500">
+      </div>
+
+      <!-- Arrows -->
+      <button onclick="prevImage()" 
+        class="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
+        <i class="fas fa-chevron-left text-black"></i>
+      </button>
+      <button onclick="nextImage()" 
+        class="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
+        <i class="fas fa-chevron-right text-black"></i>
+      </button>
+    </div>
+
+    <!-- Detailed Description -->
+    <div class="text-gray-700 leading-relaxed">
+      <p class="mb-4"><strong>Colour:</strong>Pure White Ensemble</p>
+      <h3 class="font-bold mb-2">Product Description:</h3>
+      <p class="mb-4">A stylish cotton lawn dress with elegant embroidery. Perfect for both casual and formal gatherings.</p>
+
+      <h3 class="font-bold mb-2">Fabric Details:</h3>
+      <ul class="list-disc list-inside mb-4">
+        <li>Shirt : Cotton Lawn</li>
+        <li>Dupatta : Chiffon Lawn</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right: Product Info -->
+  <div>
+    <h2 class="text-3xl font-bold mb-4">Pure White Ensemble</h2>
+    <p class="text-xl text-gray-600 mb-6">Rs. 4,000</p>
+    <p class="text-gray-700 mb-6">
+      
+    </p>
+
+    <!-- Sizes -->
+    <div class="mb-6">
+      <h3 class="font-semibold mb-2">Size:</h3>
+      <div class="flex space-x-3">
+        <button class="border px-4 py-2 rounded hover:bg-gray-100">S</button>
+        <button class="border px-4 py-2 rounded hover:bg-gray-100">M</button>
+        <button class="border px-4 py-2 rounded hover:bg-gray-100">L</button>
+        <button class="border px-4 py-2 rounded hover:bg-gray-100">XL</button>
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="mb-6">
+      <h3 class="font-semibold mb-2">Color:</h3>
+      <div class="flex space-x-3">
+     
+        <button class="w-8 h-8 rounded-full border border-gray-300" style="background-color: white;"></button>
+        
+      </div>
+    </div>
+
+    <!-- Quantity with + - -->
+    <div class="mb-6">
+      <h3 class="font-semibold mb-2">Quantity:</h3>
+      <div class="flex items-center space-x-3">
+        <button id="decreaseQty" class="border px-3 py-1 rounded text-lg font-bold">-</button>
+        <input id="quantityInput" type="number" value="1" min="1" class="border w-20 text-center rounded" readonly>
+        <button id="increaseQty" class="border px-3 py-1 rounded text-lg font-bold">+</button>
+      </div>
+    </div>
+
+    <!-- Add to Cart -->
+    <button id="addToCartBtn" class="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition">
+      Add to Cart
+    </button>
+  </div>
+</main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
+      <div>
+        <h3 class="font-bold mb-4">NEED HELP?</h3>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-phone"></i><span>+92 314 4891611</span></p>
+        <p class="mb-2 flex items-center space-x-2"><i class="fas fa-envelope"></i><span>Lunairewomen@gmail.com</span></p>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CATALOGUE</h3>
+        <ul class="space-y-2 text-gray-200">
+      
+          <li><a href="#" class="hover:text-black">New Arrivals</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">Contact Us</a></li>
+          <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
+          <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
+          <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">COMPANY</h3>
+        <ul class="space-y-2 text-gray-200">
+          <li><a href="#" class="hover:text-black">About Us</a></li>
+          <li><a href="#" class="hover:text-black">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold mb-4">FOLLOW US</h3>
+        <div class="flex space-x-4 text-lg">
+          <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/lunaire_online?igsh=MXU1MGJmY2F2b2IwdA==" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-black text-white text-center text-xs py-4">
+      <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // menu toggle + submenu
+    const menuToggle = document.getElementById("menuToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const overlay = document.getElementById("overlay");
+
+    menuToggle.addEventListener("click", () => {
+      dropdownMenu.classList.toggle("open");
+      overlay.classList.toggle("open");
+    });
+
+    overlay.addEventListener("click", () => {
+      dropdownMenu.classList.remove("open");
+      overlay.classList.remove("open");
+    });
+
+    document.querySelectorAll(".submenu-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle("hidden");
+
+        const arrow = btn.querySelector("span");
+        arrow.classList.toggle("rotate-180");
+      });
+    });
+  </script>
+
+<script>
+  // Product images
+  const images = ["white dress 3.jpg","white dress 2.jpg","white dress 1.jpg","white dress 4.jpg"];
+  let currentIndex = 0;
+  const productImage = document.getElementById("productImage");
+
+  function showImage(index) { productImage.src = images[index]; }
+  function nextImage() { currentIndex = (currentIndex + 1) % images.length; showImage(currentIndex); }
+  function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(currentIndex); }
+
+  // Cart + quantity + flying animation to cart icon
+  const addToCartBtn = document.getElementById("addToCartBtn");
+  const cartCount = document.getElementById("cartCount");
+  const quantityInput = document.getElementById("quantityInput");
+  const increaseQty = document.getElementById("increaseQty");
+  const decreaseQty = document.getElementById("decreaseQty");
+  const cartIcon = document.getElementById("cartIcon");
+  let cartNumber = 0;
+
+  // Quantity +/- handlers
+  increaseQty.addEventListener("click", () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+  });
+  decreaseQty.addEventListener("click", () => {
+    if (parseInt(quantityInput.value) > 1) {
+      quantityInput.value = parseInt(quantityInput.value) - 1;
+    }
+  });
+
+  // Helper to get center point of a DOMRect
+  function centerOfRect(rect) {
+    return { x: rect.left + rect.width / 2 + window.scrollX, y: rect.top + rect.height / 2 + window.scrollY };
+  }
+
+  addToCartBtn.addEventListener("click", (e) => {
+    const quantity = parseInt(quantityInput.value) || 1;
+    cartNumber += quantity;
+    cartCount.textContent = cartNumber;
+
+    // Create flying element + positioning
+    const flying = document.createElement("span");
+    flying.className = "flying";
+    flying.textContent = `+${quantity}`;
+    document.body.appendChild(flying);
+
+    // Start position: center of the Add to Cart button
+    const startRect = e.target.getBoundingClientRect();
+    const start = centerOfRect(startRect);
+
+    // End position: center of cart icon
+    const endRect = cartIcon.getBoundingClientRect();
+    const end = centerOfRect(endRect);
+
+    // Place flying at start (adjust for element size after append)
+    const flyingRect = flying.getBoundingClientRect();
+    // set initial left/top so the element is centered at start
+    flying.style.left = (start.x - flyingRect.width / 2) + "px";
+    flying.style.top = (start.y - flyingRect.height / 2) + "px";
+    flying.style.opacity = "1";
+    flying.style.transform = "translate(0, 0) scale(1)";
+
+    // Force layout so transition will run
+    void flying.offsetWidth;
+
+    // compute delta (translate)
+    const dx = end.x - start.x;
+    const dy = end.y - start.y;
+
+    // Start the transition toward cart icon
+    requestAnimationFrame(() => {
+      flying.style.transform = `translate(${dx}px, ${dy}px) scale(0.5)`;
+      flying.style.opacity = "0";
+    });
+
+    // remove after transition (safe fallback 900ms)
+    setTimeout(() => {
+      flying.remove();
+    }, 900);
+  });
+</script>
+
+</body>
+</html>
