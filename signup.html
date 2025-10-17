@@ -223,12 +223,19 @@
         arrow.classList.toggle("rotate-180");
       });
     });
-  </script>
+    
+  // Load footer dynamically
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer").innerHTML = data;
+    })
+    .catch(err => console.error("Failed to load footer:", err));
+</script>
+
+ 
   
-  <p class="text-sm mt-4 text-center">
-  Already have an account? 
-  <a href="mylogin.html" class="text-blue-600 hover:underline">Login</a>
-</p>
+  
 
 
 </body>
