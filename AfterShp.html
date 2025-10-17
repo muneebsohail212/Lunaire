@@ -58,113 +58,258 @@
         .menu-btn.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -6px);
         }
+
+        /* Premium Collection Title Animation */
+        .hero-title {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 4s ease infinite, fade-in-up 1s ease-out;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #000000, #4a4a4a, #000000);
+            animation: line-expand 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes line-expand {
+            to { width: 150px; }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Premium Product Card Animations */
+        .product-card {
+            animation: fade-in-scale 0.8s ease-out backwards;
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #000000, #333333, #000000);
+            background-size: 400% 400%;
+            border-radius: 1rem;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            animation: gradient-rotate 3s ease infinite;
+        }
+
+        .product-card:hover::before {
+            opacity: 0.7;
+        }
+
+        @keyframes gradient-rotate {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+        .product-card:nth-child(5) { animation-delay: 0.5s; }
+        .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fade-in-scale {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Premium Image Hover Effects */
+        .product-image {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.95);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        /* Premium Button Animation */
+        .quick-add {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .quick-add::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .quick-add:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Shimmer Effect on Product Cards */
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: linear-gradient(to right, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transform: rotate(25deg);
+            animation: shimmer 6s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -60%; }
+            20% { left: 120%; }
+            100% { left: 120%; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-inter">
-     <!-- Header -->
-   <header class="relative bg-white border-b border-gray-200 z-50">
-    <div class="flex items-center px-6 py-4">
-      <!-- Menu Toggle -->
-      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
-      </button>
+    <!-- Header -->
+    <header class="relative bg-white border-b border-gray-200 z-50">
+        <div class="flex items-center px-6 py-4">
+            <!-- Menu Toggle -->
+            <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
+                <span class="w-7 h-0.5 bg-black transition-all"></span>
+                <span class="w-7 h-0.5 bg-black transition-all"></span>
+                <span class="w-7 h-0.5 bg-black transition-all"></span>
+            </button>
 
-      <!-- Logo -->
-      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+            <!-- Logo -->
+            <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
 
-      <!-- Search Bar (Hidden by default) -->
-      <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
-        <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
-      </div>
+            <!-- Search Bar (Hidden by default) -->
+            <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
+                <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+            </div>
 
-      <!-- Icons -->
-      <div class="flex items-center space-x-4">
-        <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <i class="fas fa-search text-black text-xl"></i>
-        </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <i class="fas fa-user text-black text-xl"></i>
-        </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
-          <i class="fas fa-shopping-bag text-black text-xl"></i>
-          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-        </button>
-      </div>
-    </div>
-  </header>
+            <!-- Icons -->
+            <div class="flex items-center space-x-4">
+                <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <i class="fas fa-search text-black text-xl"></i>
+                </button>
+                <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                    <i class="fas fa-user text-black text-xl"></i>
+                </button>
+                <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+                    <i class="fas fa-shopping-bag text-black text-xl"></i>
+                    <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <!-- Overlay -->
-  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+    <!-- Overlay -->
+    <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-  <!-- Dropdown Menu -->
-  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
-    <div class="p-6">
-      <div class="mb-8">
-        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
-      </div>
-    <ul class="space-y-4">
-  <li>
-    <a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a>
-  </li>
-
-  <li>
-    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-      Shop <span class="transform transition-transform">▾</span>
-    </button>
-    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-      <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
-    </ul>
-  </li>
-
-  <li>
-    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-      My Account <span class="transform transition-transform">▾</span>
-    </button>
-    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-      <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
-      <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
-      <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
-    </ul>
-  </li>
-
-  <li>
-    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-      About Us <span class="transform transition-transform">▾</span>
-    </button>
-    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-      <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
-    </ul>
-  </li>
-
-  <li>
-    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-      Catalogue <span class="transform transition-transform">▾</span>
-    </button>
-    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-      <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
-    </ul>
-  </li>
-
-  <li>
-    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-      FAQs <span class="transform transition-transform">▾</span>
-    </button>
-    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-      <li><a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a></li>
-    </ul>
-  </li>
-</ul>
-
-    </div>
-  </nav>
+    <!-- Dropdown Menu -->
+    <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="mb-8">
+                <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
+            </div>
+            <ul class="space-y-4">
+                <li>
+                    <a href="index.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a>
+                </li>
+                <li>
+                    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+                        Shop <span class="transform transition-transform">▾</span>
+                    </button>
+                    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+                        <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+                        My Account <span class="transform transition-transform">▾</span>
+                    </button>
+                    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+                        <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+                        <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+                        <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+                        About Us <span class="transform transition-transform">▾</span>
+                    </button>
+                    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+                        <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+                        Catalogue <span class="transform transition-transform">▾</span>
+                    </button>
+                    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+                        <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+                        FAQs <span class="transform transition-transform">▾</span>
+                    </button>
+                    <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+                        <li><a href="faq.html" class="text-black underline hover:text-gray-700">Visit FAQs</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         <!-- Header Section -->
         <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">Collection</h2>
+            <h2 class="hero-title text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">Latest Collection</h2>
         </div>
 
         <!-- Product Grid -->
@@ -258,112 +403,106 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Product 6 -->
-           
         </div>
     </main>
 
-<!-- Cart Modal Popup -->
-<div id="cartPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
-  <div class="absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="cartPanel">
-    <!-- Header -->
-    <div class="flex justify-between items-center border-b p-4">
-      <h2 class="text-xl font-semibold">ADDED TO YOUR BASKET</h2>
-      <button id="closeCartPopup" class="text-gray-500 hover:text-black text-2xl">&times;</button>
-    </div>
+    <!-- Cart Modal Popup -->
+    <div id="cartPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="cartPanel">
+            <!-- Header -->
+            <div class="flex justify-between items-center border-b p-4">
+                <h2 class="text-xl font-semibold">ADDED TO YOUR BASKET</h2>
+                <button id="closeCartPopup" class="text-gray-500 hover:text-black text-2xl">&times;</button>
+            </div>
 
-    <!-- Cart Items -->
-    <div id="cartItemsPopup" class="p-4 space-y-6">
-      <p class="text-gray-500 text-center">Your basket is empty.</p>
-    </div>
+            <!-- Cart Items -->
+            <div id="cartItemsPopup" class="p-4 space-y-6">
+                <p class="text-gray-500 text-center">Your basket is empty.</p>
+            </div>
 
-    <!-- Total Section -->
-    <div class="border-t p-4">
-      <div class="flex justify-between text-lg font-semibold mb-4">
-        <span>TOTAL:</span>
-        <span id="cartTotal">PKR 0</span>
-      </div>
-      <p class="text-xs text-gray-500 mb-4">
-        *ALL ORDERS MAY TAKE UPTO 7 WORKING DAYS TO BE DELIVERED TO YOUR DOORSTEP
-      </p>
+            <!-- Total Section -->
+            <div class="border-t p-4">
+                <div class="flex justify-between text-lg font-semibold mb-4">
+                    <span>TOTAL:</span>
+                    <span id="cartTotal">PKR 0</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4">
+                    *ALL ORDERS MAY TAKE UPTO 7 WORKING DAYS TO BE DELIVERED TO YOUR DOORSTEP
+                </p>
 
-      <!-- Buttons -->
-      <div class="space-y-3">
-        <button class="w-full bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">CHECK OUT</button>
-        <button class="w-full border border-black text-black py-3 rounded font-semibold hover:bg-gray-100 transition">VIEW SHOPPING BASKET</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-   <!-- Footer  -->
-  <footer class="bg-gray-900 text-gray-100 border-t border-gray-200">
-    <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
-
-      <div>
-        <h3 class="font-bold mb-4">NEED HELP?</h3>
-        <p class="mb-2 flex items-center space-x-2">
-          <i class="fas fa-phone"></i>
-          <span>+92 314 4891611</span>
-        </p>
-        <p class="mb-2 flex items-center space-x-2">
-          <i class="fas fa-envelope"></i>
-          <span>Lunairewomen@gmail.com</span>
-        </p>
-      </div>
-
-      <div>
-        <h3 class="font-bold mb-4">CATALOGUE</h3>
-        <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">New Arrivals</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
-        <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">Contact Us</a></li>
-          <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
-          <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
-          <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
-          <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="font-bold mb-4">COMPANY</h3>
-        <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">About Us</a></li>
-          <li><a href="#" class="hover:text-black">Careers</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="font-bold mb-4">FOLLOW US</h3>
-        <div class="flex space-x-4 text-lg">
-          <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
-           <a href="https://www.instagram.com/lunaire_online?igsh=MXU1MGJmY2F2b2IwdA==" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+                <!-- Buttons -->
+                <div class="space-y-3">
+                    <button class="w-full bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">CHECK OUT</button>
+                    <button class="w-full border border-black text-black py-3 rounded font-semibold hover:bg-gray-100 transition">VIEW SHOPPING BASKET</button>
+                </div>
+            </div>
         </div>
-      </div>
-
     </div>
 
-    <div class="bg-black text-white text-center text-xs py-4">
-      <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-100 border-t border-gray-200 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-5 gap-8 text-sm">
+            <div>
+                <h3 class="font-bold mb-4">NEED HELP?</h3>
+                <p class="mb-2 flex items-center space-x-2">
+                    <i class="fas fa-phone"></i>
+                    <span>+92 314 4891611</span>
+                </p>
+                <p class="mb-2 flex items-center space-x-2">
+                    <i class="fas fa-envelope"></i>
+                    <span>Lunairewomen@gmail.com</span>
+                </p>
+            </div>
+
+            <div>
+                <h3 class="font-bold mb-4">CATALOGUE</h3>
+                <ul class="space-y-2 text-gray-200">
+                    <li><a href="#" class="hover:text-black">New Arrivals</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
+                <ul class="space-y-2 text-gray-200">
+                    <li><a href="#" class="hover:text-black">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
+                    <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
+                    <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
+                    <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="font-bold mb-4">COMPANY</h3>
+                <ul class="space-y-2 text-gray-200">
+                    <li><a href="#" class="hover:text-black">About Us</a></li>
+                    <li><a href="#" class="hover:text-black">Careers</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="font-bold mb-4">FOLLOW US</h3>
+                <div class="flex space-x-4 text-lg">
+                    <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/lunaire_online?igsh=MXU1MGJmY2F2b2IwdA==" class="hover:text-black"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-black text-white text-center text-xs py-4">
+            <p>&copy; 2025 LUNAIRE. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        // Get elements
+        // Menu and interaction functionality
         const menuToggle = document.getElementById("menuToggle");
         const dropdownMenu = document.getElementById("dropdownMenu");
         const overlay = document.getElementById("overlay");
         const searchToggle = document.getElementById("searchToggle");
         const searchBar = document.getElementById("searchBar");
 
-        // Menu toggle functionality
         menuToggle.addEventListener("click", function(e) {
             e.preventDefault();
             dropdownMenu.classList.toggle("open");
@@ -371,14 +510,12 @@
             menuToggle.classList.toggle("active");
         });
 
-        // Close menu when overlay is clicked
         overlay.addEventListener("click", function() {
             dropdownMenu.classList.remove("open");
             overlay.classList.remove("open");
             menuToggle.classList.remove("active");
         });
 
-        // Submenu toggle functionality
         document.querySelectorAll(".submenu-btn").forEach((btn) => {
             btn.addEventListener("click", function(e) {
                 e.preventDefault();
@@ -389,110 +526,103 @@
             });
         });
 
-        // Search bar toggle
         searchToggle.addEventListener("click", function() {
             searchBar.classList.toggle("hidden");
         });
 
-        // === Cart Popup Logic ===
+        // Cart functionality
         const cartPopup = document.getElementById("cartPopup");
         const closeCartPopup = document.getElementById("closeCartPopup");
         const cartItemsContainer = document.getElementById("cartItemsPopup");
         const cartTotal = document.getElementById("cartTotal");
         const cartCount = document.querySelector(".fa-shopping-bag + span");
-
         let cartItems = [];
-
         const cartPanel = document.getElementById("cartPanel");
 
         function openCartPopup() {
-          cartPopup.classList.remove("hidden");
-          setTimeout(() => {
-            cartPanel.classList.remove("translate-x-full");
-          }, 10);
+            cartPopup.classList.remove("hidden");
+            setTimeout(() => {
+                cartPanel.classList.remove("translate-x-full");
+            }, 10);
         }
 
         function closeCartFn() {
-          cartPanel.classList.add("translate-x-full");
-          setTimeout(() => {
-            cartPopup.classList.add("hidden");
-          }, 300);
+            cartPanel.classList.add("translate-x-full");
+            setTimeout(() => {
+                cartPopup.classList.add("hidden");
+            }, 300);
         }
 
         closeCartPopup.addEventListener("click", closeCartFn);
         cartPopup.addEventListener("click", (e) => {
-          if (e.target === cartPopup) closeCartFn();
+            if (e.target === cartPopup) closeCartFn();
         });
 
-        // Quick Add to Cart
         document.querySelectorAll(".quick-add").forEach((button) => {
-          button.addEventListener("click", (e) => {
-            e.preventDefault();
-            
-            const productCard = button.closest(".product-card");
-            const productName = productCard.querySelector("h3").innerText || "Unnamed Product";
-            const productPriceText = productCard.querySelector("p").innerText;
-            const productImg = productCard.querySelector("img").src;
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                
+                const productCard = button.closest(".product-card");
+                const productName = productCard.querySelector("h3").innerText || "Unnamed Product";
+                const productPriceText = productCard.querySelector("p").innerText;
+                const productImg = productCard.querySelector("img").src;
 
-            const cleanPrice = productPriceText
-              .replace(/Rs\./g, '')
-              .replace(/PKR/g, '')
-              .replace(/[^\d.,]/g, '')
-              .replace(/,/g, '');
-            
-            const priceValue = parseFloat(cleanPrice) || 0;
+                const cleanPrice = productPriceText
+                    .replace(/Rs\./g, '')
+                    .replace(/PKR/g, '')
+                    .replace(/[^\d.,]/g, '')
+                    .replace(/,/g, '');
+                
+                const priceValue = parseFloat(cleanPrice) || 0;
 
-            cartItems.push({
-              name: productName,
-              price: priceValue,
-              img: productImg,
-              size: "M",
-              quantity: 1
+                cartItems.push({
+                    name: productName,
+                    price: priceValue,
+                    img: productImg,
+                    size: "M",
+                    quantity: 1
+                });
+
+                renderCartPopup();
+                openCartPopup();
+                addCartButtonListeners();
             });
-
-            renderCartPopup();
-            openCartPopup();
-            addCartButtonListeners(); 
-          });
         });
 
-        // Render popup items
         function renderCartPopup() {
-          if (cartItems.length === 0) {
-            cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center">Your basket is empty.</p>`;
-            cartTotal.textContent = "PKR 0";
-            cartCount.innerText = 0;
-            return;
-          }
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center">Your basket is empty.</p>`;
+                cartTotal.textContent = "PKR 0";
+                cartCount.innerText = 0;
+                return;
+            }
 
-          let total = 0;
+            let total = 0;
+            cartItemsContainer.innerHTML = cartItems.map((item, index) => {
+                total += item.price * item.quantity;
+                return `
+                    <div class="flex space-x-4 items-center">
+                        <img src="${item.img}" alt="${item.name}" class="w-20 h-24 object-cover rounded">
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-sm">${item.name}</h3>
+                            <p class="text-gray-500 text-xs">${item.size}</p>
+                            <p class="text-sm mt-1">${item.quantity}X</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold">PKR ${item.price.toLocaleString()}</p>
+                            <button onclick="removeItem(${index})" class="text-gray-500 hover:text-black text-lg mt-1"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            }).join("");
 
-          cartItemsContainer.innerHTML = cartItems.map((item, index) => {
-            total += item.price * item.quantity;
-            return `
-              <div class="flex space-x-4 items-center">
-                <img src="${item.img}" alt="${item.name}" class="w-20 h-24 object-cover rounded">
-                <div class="flex-1">
-                  <h3 class="font-semibold text-sm">${item.name}</h3>
-                  <p class="text-gray-500 text-xs">${item.size}</p>
-                  <p class="text-sm mt-1">${item.quantity}X</p>
-                </div>
-                <div class="text-right">
-                  <p class="font-semibold">PKR ${item.price.toLocaleString()}</p>
-                  <button onclick="removeItem(${index})" class="text-gray-500 hover:text-black text-lg mt-1"><i class="fas fa-trash"></i></button>
-                </div>
-              </div>
-            `;
-          }).join("");
-
-          cartTotal.textContent = "PKR " + total.toLocaleString();
-          cartCount.innerText = cartItems.length;
+            cartTotal.textContent = "PKR " + total.toLocaleString();
+            cartCount.innerText = cartItems.length;
         }
 
-        // Remove item
         function removeItem(index) {
-          cartItems.splice(index, 1);
-          renderCartPopup();
+            cartItems.splice(index, 1);
+            renderCartPopup();
         }
 
         function addCartButtonListeners() {
@@ -529,19 +659,15 @@
             });
         }
 
-        // Initialize cart count
         if (cartCount) {
             cartCount.textContent = 0;
         }
 
-        // Make removeItem function globally accessible
         window.removeItem = removeItem;
 
-        // Get elements
         const cartIcon = document.querySelector(".fa-shopping-bag").parentElement;
         const accountIcon = document.querySelector(".fa-user").parentElement;
 
-        // Redirect to basket page on cart icon click
         cartIcon.addEventListener("click", (e) => {
             e.preventDefault();
             if (cartItems.length === 0) {
@@ -551,15 +677,10 @@
             window.location.href = "basket.html";
         });
 
-        // Redirect to login page on account icon click
         accountIcon.addEventListener("click", (e) => {
             e.preventDefault();
             window.location.href = "login.html";
         });
-
     </script>
-    
-    <script src="about.js"></script>
-
 </body>
 </html>
