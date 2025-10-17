@@ -13,6 +13,176 @@
     .dropdown-menu.open { transform: translateX(0); }
     .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
     .overlay.open { opacity: 1; visibility: visible; }
+    
+    /* Premium Hero Animation */
+    @keyframes heroParallax {
+      0% { transform: scale(1.15) translateY(0); }
+      100% { transform: scale(1.15) translateY(-20px); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
+    .hero-image {
+      animation: heroParallax 25s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+    
+    .hero-content {
+      animation: fadeInUp 1.2s ease-out 0.3s both;
+    }
+    
+    .hero-title {
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    .hero-subtitle {
+      animation: fadeInUp 1s ease-out 0.7s both;
+    }
+    
+    .hero-button {
+      animation: fadeInUp 1s ease-out 0.9s both;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .hero-button:hover::before {
+      left: 100%;
+    }
+    
+    /* Premium Product Card Animations */
+    .product-card {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+    }
+    
+    .product-card.animate {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .product-card:hover::before {
+      opacity: 1;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .product-image-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image {
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .product-card:hover .product-image {
+      transform: scale(1.1) rotate(1deg);
+    }
+    
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+    
+    .product-title {
+      transition: all 0.4s ease;
+    }
+    
+    .product-card:hover .product-title {
+      transform: translateY(-3px);
+      color: #000;
+    }
+    
+    /* Staggered animation delays */
+    .product-card:nth-child(1) { transition-delay: 0.1s; }
+    .product-card:nth-child(2) { transition-delay: 0.25s; }
+    .product-card:nth-child(3) { transition-delay: 0.4s; }
+    
+    /* Section Title Animation */
+    .section-title {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .section-title.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Premium Shine Effect */
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .shine-effect::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine 3s infinite;
+      animation-delay: 2s;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
@@ -114,36 +284,51 @@
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
       <div class="absolute inset-0">
-        <img src="final.jpg" class="w-full h-full object-cover object-center" alt="Latest Collection">
-        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <img src="final.jpg" class="hero-image w-full h-full object-cover object-center" alt="Latest Collection">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
       </div>
-      <div class="relative z-10 text-center text-white px-6">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4">Latest Collection</h2>
-        <p class="text-xl md:text-2xl mb-8">Timeless Black & White Elegance</p>
-        <a href="AfterShp.html" class="bg-white text-black hover:bg-gray-100 px-8 py-3 rounded-md font-semibold transition-colors inline-block">
+      <div class="relative z-10 text-center text-white px-6 hero-content">
+        <h2 class="hero-title text-5xl md:text-7xl font-bold mb-6 tracking-tight">Latest Collection</h2>
+        <p class="hero-subtitle text-xl md:text-3xl mb-10 font-light tracking-wide">Timeless Black & White Elegance</p>
+        <a href="AfterShp.html" class="hero-button shine-effect bg-white text-black hover:bg-opacity-90 px-12 py-4 rounded-full font-semibold text-lg transition-all inline-block shadow-2xl hover:shadow-white/20">
           Shop Now
         </a>
       </div>
     </section>
 
     <!-- Featured Collection -->
-    <section class="py-16 px-6 md:px-20 bg-white text-center">
-      <h2 class="text-3xl font-bold mb-12">Featured Collection</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="productdetail.html" class="block overflow-hidden rounded-lg shadow hover:shadow-lg transition">
-          <img src="bss.jpg" alt="Black Dress" class="w-full h-72 object-cover">
-          <h3 class="mt-4 text-lg font-semibold">Classic Black and White Dress</h3>
-          <p class="text-gray-600 text-sm mb-4">Timeless style for evening elegance.</p>
+    <section class="py-20 px-6 md:px-20 bg-gradient-to-b from-white to-gray-50 text-center">
+      <h2 class="section-title text-4xl md:text-5xl font-bold mb-16 tracking-tight">Featured Collection</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        <a href="productdetail.html" class="product-card block overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div class="product-image-wrapper relative">
+            <img src="bss.jpg" alt="Black Dress" class="product-image w-full h-80 object-cover">
+            <div class="product-overlay"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="product-title text-xl font-semibold mb-2">Classic Black and White Dress</h3>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Timeless style for evening elegance.</p>
+          </div>
         </a>
-        <a href="product2.html" class="block overflow-hidden rounded-lg shadow hover:shadow-lg transition">
-          <img src="white dress 5.jpg" alt="White Outfit" class="w-full h-72 object-cover">
-          <h3 class="mt-4 text-lg font-semibold">Pure White Ensemble</h3>
-          <p class="text-gray-600 text-sm mb-4">Graceful designs for  women.</p>
+        <a href="product2.html" class="product-card block overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div class="product-image-wrapper relative">
+            <img src="white dress 5.jpg" alt="White Outfit" class="product-image w-full h-80 object-cover">
+            <div class="product-overlay"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="product-title text-xl font-semibold mb-2">Pure White Ensemble</h3>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Graceful designs for women.</p>
+          </div>
         </a>
-        <a href="product3.html" class="block overflow-hidden rounded-lg shadow hover:shadow-lg transition">
-          <img src="white grey 2.jpg" alt="Evening Gown" class="w-full h-72 object-cover">
-          <h3 class="mt-4 text-lg font-semibold">White Grey</h3>
-          <p class="text-gray-600 text-sm mb-4">Soft fabrics that speak elegance.</p>
+        <a href="product3.html" class="product-card block overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div class="product-image-wrapper relative">
+            <img src="white grey 2.jpg" alt="Evening Gown" class="product-image w-full h-80 object-cover">
+            <div class="product-overlay"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="product-title text-xl font-semibold mb-2">White Grey</h3>
+            <p class="text-gray-600 text-sm mb-4 leading-relaxed">Soft fabrics that speak elegance.</p>
+          </div>
         </a>
       </div>
     </section>
@@ -161,32 +346,32 @@
       <div>
         <h3 class="font-bold mb-4">CATALOGUE</h3>
         <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">New Arrivals</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">New Arrivals</a></li>
         </ul>
       </div>
       <div>
         <h3 class="font-bold mb-4">CUSTOMER SERVICE</h3>
         <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">Contact Us</a></li>
-          <li><a href="#" class="hover:text-black">Delivery & Orders</a></li>
-          <li><a href="#" class="hover:text-black">Returns & Exchanges</a></li>
-          <li><a href="#" class="hover:text-black">Terms & Conditions</a></li>
-          <li><a href="#" class="hover:text-black">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Delivery & Orders</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Returns & Exchanges</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
         </ul>
       </div>
       <div>
         <h3 class="font-bold mb-4">COMPANY</h3>
         <ul class="space-y-2 text-gray-200">
-          <li><a href="#" class="hover:text-black">About Us</a></li>
-          <li><a href="#" class="hover:text-black">Careers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
         </ul>
       </div>
       <div>
         <h3 class="font-bold mb-4">FOLLOW US</h3>
         <div class="flex space-x-4 text-lg">
-          <a href="#" class="hover:text-black"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/lunaire_online?igsh=MXU1MGJmY2F2b2IwdA==" class="hover:text-black"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="hover:text-black"><i class="fab fa-linkedin"></i></a>
+          <a href="#" class="hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/lunaire_online?igsh=MXU1MGJmY2F2b2IwdA==" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:text-white transition-colors"><i class="fab fa-linkedin"></i></a>
         </div>
       </div>
     </div>
@@ -232,8 +417,43 @@
         searchBar.classList.toggle("hidden");
       });
     }
+    
+    // Premium scroll animations with Intersection Observer
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -80px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('.product-card, .section-title').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Parallax effect on scroll for hero
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const heroImage = document.querySelector('.hero-image');
+          if (heroImage && scrolled < window.innerHeight) {
+            heroImage.style.transform = `scale(1.15) translateY(${scrolled * 0.3}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
   </script>
   <script src="./about.js"></script>
 
 </body>
-./</html>
+</html>
