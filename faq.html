@@ -49,40 +49,33 @@
 
   <!-- HEADER START -->
   <header class="relative bg-white border-b border-gray-200 z-50">
-    <div class="flex items-center px-6 py-4">
+    <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
       <!-- Menu Toggle -->
-      <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
-        <span class="w-7 h-0.5 bg-black transition-all"></span>
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors">
+        <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
       </button>
 
       <!-- Logo -->
-      <a href="Homepage.html" class="flex-1">
-  <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
-</a>
-
-      <!-- Search Bar (Hidden by default) -->
-      <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
-        <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
-      </div>
+      <a href="Homepage.html" class="flex-1 ml-3 sm:ml-6">
+        <h1 class="font-lunaire text-xl sm:text-2xl md:text-3xl lg:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
+      </a>
 
       <!-- Icons -->
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2 sm:space-x-4">
         <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <i class="fas fa-search text-black text-xl"></i>
+          <i class="fas fa-search text-black text-base sm:text-xl"></i>
         </button>
         <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-          <i class="fas fa-user text-black text-xl"></i>
+          <i class="fas fa-user text-black text-base sm:text-xl"></i>
         </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+        <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative">
           <i class="fas fa-shopping-bag text-black text-xl"></i>
-          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-        </button>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </a>
       </div>
     </div>
-  </header>
-
   <!-- Overlay -->
   <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
