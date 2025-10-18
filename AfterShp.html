@@ -209,6 +209,28 @@
             20% { left: 120%; }
             100% { left: 120%; }
         }
+
+        /* Search Result Highlighting */
+        .search-highlight {
+            background-color: #fef3c7;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        /* No Results Message */
+        .no-results {
+            animation: fade-in 0.5s ease;
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Filtered Out Products */
+        .product-card.hidden-search {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-inter">
@@ -227,7 +249,12 @@
 
             <!-- Search Bar (Hidden by default) -->
             <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
-                <input type="text" placeholder="Search..." class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search products..." class="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-black">
+                    <button id="clearSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-black hidden">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Icons -->
@@ -310,99 +337,25 @@
         <!-- Header Section -->
         <div class="text-center mb-16">
             <h2 class="hero-title text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">Latest Collection</h2>
+            
+            <!-- Search Results Info -->
+            <div id="searchResultsInfo" class="hidden mt-4">
+                <p class="text-gray-600 text-lg">
+                    <span id="resultsCount">0</span> results found for "<span id="searchQuery" class="font-semibold"></span>"
+                </p>
+            </div>
+        </div>
+
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden no-results text-center py-16">
+            <i class="fas fa-search text-gray-300 text-6xl mb-4"></i>
+            <h3 class="text-2xl font-playfair font-semibold text-gray-700 mb-2">No products found</h3>
+            <p class="text-gray-500">Try adjusting your search terms</p>
         </div>
 
         <!-- Product Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            <!-- Product 1 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="productdes1.html">
-                <a href="Productdes1.html" class="block aspect-w-3 aspect-h-4 overflow-hidden">
-                    <img src="images/purple dress 1.jpg" 
-                         alt="Elegant White Saree" 
-                         class="product-image w-full h-96 object-cover">
-                </a>
-                <div class="p-6">
-                    <a href="Productdes1.html">
-                        <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">Purple embroided</h3>
-                    </a>
-                    <p class="text-2xl font-bold text-gray-900">Rs.5,999.00 PKR</p>
-                    <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                        Quick Add
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="productdes2.html">
-                <a href="Productdes2.html" class="block aspect-w-3 aspect-h-4 overflow-hidden">
-                    <img src="images/grey dress 2.jpg" 
-                         alt="Emerald Green Outfit" 
-                         class="product-image w-full h-96 object-cover">
-                </a>
-                <div class="p-6">
-                    <a href="Productdes2.html">
-                        <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">Grey lawn</h3>
-                    </a>
-                    <p class="text-2xl font-bold text-gray-900">Rs.4,000.00 PKR</p>
-                    <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                        Quick Add
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="productdes3.html">
-                <a href="Productdes3.html" class="block aspect-w-3 aspect-h-4 overflow-hidden">
-                    <img src="images/bss.jpg" 
-                         alt="Black Traditional Dress" 
-                         class="product-image w-full h-96 object-cover">
-                </a>
-                <div class="p-6">
-                    <a href="Productdes3.html">
-                        <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">Classic black and white</h3>
-                    </a>
-                    <p class="text-2xl font-bold text-gray-900">Rs.5,999.00 PKR</p>
-                    <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                        Quick Add
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="productdes4.html">
-                <a href="Productdes4.html" class="block aspect-w-3 aspect-h-4 overflow-hidden">
-                    <img src="images/white grey 2.jpg" 
-                         alt="Royal Blue Lehenga" 
-                         class="product-image w-full h-96 object-cover">
-                </a>
-                <div class="p-6">
-                    <a href="Productdes4.html">
-                        <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">White Grey</h3>
-                    </a>
-                    <p class="text-2xl font-bold text-gray-900">Rs.6,000.00 PKR</p>
-                    <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                        Quick Add
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="productdes5.html">
-                <a href="Productdes5.html" class="block aspect-w-3 aspect-h-4 overflow-hidden">
-                    <img src="images/white dress 2.jpg" 
-                         alt="Pink Elegant Dress" 
-                         class="product-image w-full h-96 object-cover">
-                </a>
-                <div class="p-6">
-                    <a href="Productdes5.html">
-                        <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">Pure white cotton</h3>
-                    </a>
-                    <p class="text-2xl font-bold text-gray-900">Rs.4,000.00 PKR</p>
-                    <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
-                        Quick Add
-                    </button>
-                </div>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="productGrid">
+            <!-- Products will be dynamically rendered here -->
         </div>
     </main>
 
@@ -438,7 +391,8 @@
             </div>
         </div>
     </div>
-           <!-- footer -->
+    
+    <!-- footer -->
     <div id="footer"></div>
 
     <script>
@@ -474,6 +428,11 @@
 
         searchToggle.addEventListener("click", function() {
             searchBar.classList.toggle("hidden");
+            if (!searchBar.classList.contains("hidden")) {
+                document.getElementById("searchInput").focus();
+            } else {
+                clearSearchFn();
+            }
         });
 
         // Cart functionality
@@ -502,37 +461,6 @@
         closeCartPopup.addEventListener("click", closeCartFn);
         cartPopup.addEventListener("click", (e) => {
             if (e.target === cartPopup) closeCartFn();
-        });
-
-        document.querySelectorAll(".quick-add").forEach((button) => {
-            button.addEventListener("click", (e) => {
-                e.preventDefault();
-                
-                const productCard = button.closest(".product-card");
-                const productName = productCard.querySelector("h3").innerText || "Unnamed Product";
-                const productPriceText = productCard.querySelector("p").innerText;
-                const productImg = productCard.querySelector("img").src;
-
-                const cleanPrice = productPriceText
-                    .replace(/Rs\./g, '')
-                    .replace(/PKR/g, '')
-                    .replace(/[^\d.,]/g, '')
-                    .replace(/,/g, '');
-                
-                const priceValue = parseFloat(cleanPrice) || 0;
-
-                cartItems.push({
-                    name: productName,
-                    price: priceValue,
-                    img: productImg,
-                    size: "M",
-                    quantity: 1
-                });
-
-                renderCartPopup();
-                openCartPopup();
-                addCartButtonListeners();
-            });
         });
 
         function renderCartPopup() {
@@ -627,16 +555,185 @@
             e.preventDefault();
             window.location.href = "login.html";
         });
+
+        // ===== SEARCH FUNCTIONALITY =====
+        const searchInput = document.getElementById("searchInput");
+        const clearSearchBtn = document.getElementById("clearSearch");
+        const productGrid = document.getElementById("productGrid");
+        const searchResultsInfo = document.getElementById("searchResultsInfo");
+        const resultsCount = document.getElementById("resultsCount");
+        const searchQuerySpan = document.getElementById("searchQuery");
+        const noResultsDiv = document.getElementById("noResults");
+
+        // Product data for search
+        const products = [
+            {
+                name: "Purple embroided",
+                price: "Rs.5,999.00 PKR",
+                image: "images/purple dress 1.jpg",
+                link: "Productdes1.html",
+                tags: ["purple", "embroidered", "dress", "formal", "elegant"]
+            },
+            {
+                name: "Grey lawn",
+                price: "Rs.4,000.00 PKR",
+                image: "images/grey dress 2.jpg",
+                link: "Productdes2.html",
+                tags: ["grey", "gray", "lawn", "casual", "summer"]
+            },
+            {
+                name: "Classic black and white",
+                price: "Rs.5,999.00 PKR",
+                image: "images/bss.jpg",
+                link: "Productdes3.html",
+                tags: ["black", "white", "classic", "traditional", "formal"]
+            },
+            {
+                name: "White Grey",
+                price: "Rs.6,000.00 PKR",
+                image: "images/white grey 2.jpg",
+                link: "Productdes4.html",
+                tags: ["white", "grey", "gray", "elegant", "party"]
+            },
+            {
+                name: "Pure white cotton",
+                price: "Rs.4,000.00 PKR",
+                image: "images/white dress 2.jpg",
+                link: "Productdes5.html",
+                tags: ["white", "cotton", "pure", "casual", "comfortable"]
+            }
+        ];
+
+        // Initial render of products
+        function renderProducts(productsToRender = products) {
+            productGrid.innerHTML = productsToRender.map((product, index) => `
+                <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="${product.link}" style="animation-delay: ${index * 0.1}s">
+                    <a href="${product.link}" class="block aspect-w-3 aspect-h-4 overflow-hidden">
+                        <img src="${product.image}" 
+                             alt="${product.name}" 
+                             class="product-image w-full h-96 object-cover">
+                    </a>
+                    <div class="p-6">
+                        <a href="${product.link}">
+                            <h3 class="text-xl font-playfair font-semibold text-gray-900 mb-2 hover:text-gray-600 cursor-pointer">${product.name}</h3>
+                        </a>
+                        <p class="text-2xl font-bold text-gray-900">${product.price}</p>
+                        <button class="quick-add mt-4 w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-medium hover:bg-gray-800 transition-colors">
+                            Quick Add
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+
+            // Re-attach quick add listeners
+            attachQuickAddListeners();
+        }
+
+        // Attach quick add button listeners
+        function attachQuickAddListeners() {
+            document.querySelectorAll(".quick-add").forEach((button) => {
+                button.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    
+                    const productCard = button.closest(".product-card");
+                    const productName = productCard.querySelector("h3").innerText || "Unnamed Product";
+                    const productPriceText = productCard.querySelector("p").innerText;
+                    const productImg = productCard.querySelector("img").src;
+
+                    const cleanPrice = productPriceText
+                        .replace(/Rs\./g, '')
+                        .replace(/PKR/g, '')
+                        .replace(/[^\d.,]/g, '')
+                        .replace(/,/g, '');
+                    
+                    const priceValue = parseFloat(cleanPrice) || 0;
+
+                    cartItems.push({
+                        name: productName,
+                        price: priceValue,
+                        img: productImg,
+                        size: "M",
+                        quantity: 1
+                    });
+
+                    renderCartPopup();
+                    openCartPopup();
+                    addCartButtonListeners();
+                });
+            });
+        }
+
+        // Search function
+        function performSearch(query) {
+            const searchTerm = query.toLowerCase().trim();
+
+            if (searchTerm === "") {
+                clearSearchFn();
+                return;
+            }
+
+            // Filter products based on name and tags
+            const filteredProducts = products.filter(product => {
+                const nameMatch = product.name.toLowerCase().includes(searchTerm);
+                const tagsMatch = product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+                const priceMatch = product.price.toLowerCase().includes(searchTerm);
+                
+                return nameMatch || tagsMatch || priceMatch;
+            });
+
+            // Show/hide UI elements
+            if (filteredProducts.length > 0) {
+                noResultsDiv.classList.add("hidden");
+                productGrid.classList.remove("hidden");
+                searchResultsInfo.classList.remove("hidden");
+                resultsCount.textContent = filteredProducts.length;
+                searchQuerySpan.textContent = query;
+                
+                renderProducts(filteredProducts);
+            } else {
+                productGrid.classList.add("hidden");
+                searchResultsInfo.classList.add("hidden");
+                noResultsDiv.classList.remove("hidden");
+            }
+
+            clearSearchBtn.classList.remove("hidden");
+        }
+
+        // Clear search function
+        function clearSearchFn() {
+            searchInput.value = "";
+            clearSearchBtn.classList.add("hidden");
+            searchResultsInfo.classList.add("hidden");
+            noResultsDiv.classList.add("hidden");
+            productGrid.classList.remove("hidden");
+            renderProducts(products);
+        }
+
+        // Event listeners for search
+        searchInput.addEventListener("input", (e) => {
+            const query = e.target.value;
+            performSearch(query);
+        });
+
+        searchInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                performSearch(searchInput.value);
+            }
+        });
+
+        clearSearchBtn.addEventListener("click", clearSearchFn);
+
+        // Initial render
+        renderProducts();
     
-   
-  // Load footer dynamically
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer").innerHTML = data;
-    })
-    .catch(err => console.error("Failed to load footer:", err));
-</script>
+        // Load footer dynamically
+        fetch("footer.html")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("footer").innerHTML = data;
+            })
+            .catch(err => console.error("Failed to load footer:", err));
+    </script>
 
 </body>
 </html>
