@@ -14,7 +14,100 @@
     .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
     .overlay.open { opacity: 1; visibility: visible; }
 
-    /* flying element uses transform (JS calculates delta) */
+    /* Premium Page Load Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+
+    /* Image Hover Effect */
+    #productImage {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #productImage:hover {
+      transform: scale(1.05);
+    }
+
+    /* Premium Button Hover */
+    .premium-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .premium-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .premium-btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .premium-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Size/Color Button Animations */
+    .option-btn {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-btn.selected {
+      background: black;
+      color: white;
+      border-color: black;
+    }
+
+    /* Quantity Button Premium Effect */
+    .qty-btn {
+      transition: all 0.3s ease;
+    }
+
+    .qty-btn:hover {
+      background: black;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .qty-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Flying animation to cart icon */
     .flying {
       position: absolute;
       font-size: 14px;
@@ -25,27 +118,156 @@
       transition: transform 0.8s cubic-bezier(.2,.8,.2,1), opacity 0.8s;
       will-change: transform, opacity;
     }
+
+    /* Cart Icon Bounce */
+    @keyframes cartBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .cart-bounce {
+      animation: cartBounce 0.5s ease;
+    }
+
+    /* Floating Particles Background */
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.05;
+      }
+      50% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 0.1;
+      }
+    }
+
+    .floating-bg {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(0,0,0,0.3), transparent);
+      border-radius: 50%;
+      animation: float 8s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1) { top: 10%; left: 20%; animation-duration: 7s; }
+    .particle:nth-child(2) { top: 30%; left: 80%; animation-duration: 9s; animation-delay: 1s; }
+    .particle:nth-child(3) { top: 60%; left: 10%; animation-duration: 11s; animation-delay: 2s; }
+    .particle:nth-child(4) { top: 80%; left: 70%; animation-duration: 8s; animation-delay: 0.5s; }
+    .particle:nth-child(5) { top: 40%; left: 50%; animation-duration: 10s; animation-delay: 1.5s; }
+
+    /* Premium Text Shimmer */
+    .shimmer-text {
+      background: linear-gradient(90deg, #000 0%, #333 50%, #000 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    /* Arrow Button Pulse */
+    .arrow-btn {
+      transition: all 0.3s ease;
+    }
+
+    .arrow-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Premium Divider */
+    .premium-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+      margin: 2rem 0;
+    }
+
+    /* Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Image Container Shadow */
+    .image-container {
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.4s ease;
+    }
+
+    .image-container:hover {
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer Link Hover */
+    footer a {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    footer a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    footer a:hover::after {
+      width: 100%;
+    }
+
+    /* Page Container */
+    main {
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
 
+  <!-- Floating Background Particles -->
+  <div class="floating-bg">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
   <!-- Header -->
-  <header class="relative bg-white border-b border-gray-200 z-50">
+  <header class="relative bg-white border-b border-gray-200 z-50 fade-in-up">
     <div class="flex items-center px-6 py-4">
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
         <span class="w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-7 h-0.5 bg-black transition-all"></span>
       </button>
-      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+      <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1 shimmer-text">LUNAIRE</h1>
       <div class="flex items-center space-x-4">
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110">
           <i class="fas fa-search text-black text-xl"></i>
         </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110">
           <i class="fas fa-user text-black text-xl"></i>
         </button>
-        <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+        <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative">
           <i class="fas fa-shopping-bag text-black text-xl"></i>
           <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
         </a>
@@ -122,89 +344,86 @@
  <!-- Product Detail Section -->
 <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
   <!-- Left: Product Image + Description -->
-  <div class="space-y-8">
+  <div class="space-y-8 fade-in-up delay-100">
     <!-- Image -->
-    <div class="relative rounded-lg overflow-hidden shadow">
+    <div class="relative rounded-lg overflow-hidden image-container">
       <div class="relative w-full h-[700px] overflow-hidden">
-        <img id="productImage" src="grey dress 2.jpg" alt="" 
-             class="w-full h-full object-cover transition-all duration-500">
+       <img id="productImage" src="images/grey dress 2.jpg" alt=""
+             class="w-full h-full object-cover">
       </div>
 
       <!-- Arrows -->
       <button onclick="prevImage()" 
-        class="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
+        class="arrow-btn absolute top-1/2 left-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
         <i class="fas fa-chevron-left text-black"></i>
       </button>
       <button onclick="nextImage()" 
-        class="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
+        class="arrow-btn absolute top-1/2 right-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
         <i class="fas fa-chevron-right text-black"></i>
       </button>
     </div>
 
     <!-- Detailed Description -->
     <div class="text-gray-700 leading-relaxed">
-      <p class="mb-4"><strong>Colour:</strong>Grey</p>
-      <h3 class="font-bold mb-2">Product Description:</h3>
+      <p class="mb-4"><strong>Colour:</strong> Black and Grey</p>
+      <div class="premium-divider"></div>
+      <h3 class="font-bold mb-2 text-lg">Product Description:</h3>
       <p class="mb-4">A stylish cotton lawn dress with elegant embroidery. Perfect for both casual and formal gatherings.</p>
 
-      <h3 class="font-bold mb-2">Fabric Details:</h3>
-      <ul class="list-disc list-inside mb-4">
-        <li>Shirt : Cotton Lawn</li>
-        <li>Dupatta : Chiffon Lawn</li>
+      <h3 class="font-bold mb-2 text-lg">Fabric Details:</h3>
+      <ul class="list-disc list-inside mb-4 space-y-1">
+        <li>Shirt: Cotton Lawn</li>
+        <li>Dupatta: Chiffon Lawn</li>
       </ul>
     </div>
   </div>
 
   <!-- Right: Product Info -->
-  <div>
-    <h2 class="text-3xl font-bold mb-4">Grey lawn</h2>
-    <p class="text-xl text-gray-600 mb-6">Rs. 4,000</p>
-    <p class="text-gray-700 mb-6">
-      
-    </p>
+  <div class="fade-in-up delay-200">
+    <h2 class="text-4xl font-bold mb-4">Classic Black and White</h2>
+    <p class="text-2xl text-gray-600 mb-6">Rs. 5,999</p>
+
+    <div class="premium-divider"></div>
 
     <!-- Sizes -->
     <div class="mb-6">
-      <h3 class="font-semibold mb-2">Size:</h3>
+      <h3 class="font-semibold mb-3 text-lg">Size:</h3>
       <div class="flex space-x-3">
-        <button class="border px-4 py-2 rounded hover:bg-gray-100">S</button>
-        <button class="border px-4 py-2 rounded hover:bg-gray-100">M</button>
-        <button class="border px-4 py-2 rounded hover:bg-gray-100">L</button>
-        <button class="border px-4 py-2 rounded hover:bg-gray-100">XL</button>
+        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">S</button>
+        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">M</button>
+        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">L</button>
+        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">XL</button>
       </div>
     </div>
 
     <!-- Colors -->
     <div class="mb-6">
-      <h3 class="font-semibold mb-2">Color:</h3>
+      <h3 class="font-semibold mb-3 text-lg">Color:</h3>
       <div class="flex space-x-3">
-        <button class="w-8 h-8 rounded-full border border-gray-300" style="background-color: black;"></button>
-        <button class="w-8 h-8 rounded-full border border-gray-300" style="background-color: white;"></button>
-        <button class="w-8 h-8 rounded-full border border-gray-300" style="background-color: gray;"></button>
+        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: black;"></button>
+        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: white;"></button>
+        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: gray;"></button>
       </div>
     </div>
 
     <!-- Quantity with + - -->
-    <div class="mb-6">
-      <h3 class="font-semibold mb-2">Quantity:</h3>
+    <div class="mb-8">
+      <h3 class="font-semibold mb-3 text-lg">Quantity:</h3>
       <div class="flex items-center space-x-3">
-        <button id="decreaseQty" class="border px-3 py-1 rounded text-lg font-bold">-</button>
-        <input id="quantityInput" type="number" value="1" min="1" class="border w-20 text-center rounded" readonly>
-        <button id="increaseQty" class="border px-3 py-1 rounded text-lg font-bold">+</button>
+        <button id="decreaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">-</button>
+        <input id="quantityInput" type="number" value="1" min="1" class="border-2 border-gray-300 w-20 text-center rounded-lg py-2 text-lg font-semibold" readonly>
+        <button id="increaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">+</button>
       </div>
     </div>
 
     <!-- Add to Cart -->
-    <button id="addToCartBtn" class="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition">
+    <button id="addToCartBtn" class="premium-btn bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold w-full md:w-auto">
       Add to Cart
     </button>
   </div>
 </main>
-<!-- FOOTER PLACEHOLDER -->
-<div id="footer"></div>
 
-  
-
+  <div id="footer"></div>
   <!-- Scripts -->
   <script>
     // menu toggle + submenu
@@ -231,11 +450,19 @@
         arrow.classList.toggle("rotate-180");
       });
     });
+
+    // Size/Color selection
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
   </script>
 
 <script>
   // Product images
-  const images = ["grey dress 3.jpg","grey dress 1.jpg"];
+ const images = ["images/grey dress 3.jpg","images/grey dress 1.jpg"];
   let currentIndex = 0;
   const productImage = document.getElementById("productImage");
 
@@ -271,6 +498,10 @@
     const quantity = parseInt(quantityInput.value) || 1;
     cartNumber += quantity;
     cartCount.textContent = cartNumber;
+
+    // Add bounce animation to cart icon
+    cartIcon.classList.add('cart-bounce');
+    setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
 
     // Create flying element + positioning
     const flying = document.createElement("span");
