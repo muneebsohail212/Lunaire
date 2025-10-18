@@ -252,7 +252,7 @@
   </div>
 
   <!-- Header -->
-  <header class="relative bg-white border-b border-gray-200 z-50">
+ <header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
       <!-- Menu Toggle -->
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors">
@@ -271,9 +271,10 @@
         <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <i class="fas fa-search text-black text-base sm:text-xl"></i>
         </button>
-        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+         <a href="login.html" id="login" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <i class="fas fa-user text-black text-base sm:text-xl"></i>
-        </button>
+      
+        </a>
         <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative">
           <i class="fas fa-shopping-bag text-black text-xl"></i>
           <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
@@ -281,7 +282,10 @@
       </div>
     </div>
 
-  <!-- Overlay -->
+    <!-- Search Bar Overlay -->
+   
+  </header>
+  <!--  Overlay -->
   <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
   <!-- Dropdown Menu -->
@@ -291,32 +295,35 @@
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
       <ul class="space-y-4">
+
         <li><a href="Homepage.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
 
         <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Shop <span class="transform transition-transform">▾</span>
+            Shop
+            <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
             <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
           </ul>
         </li>
 
-       <li>
-  <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-    My Account
-    <span class="transform transition-transform">▾</span>
-  </button>
-  <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-    <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
-    <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
-    <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Orders</a></li>
-</ul>
-</li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+            My Account
+            <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
+        
+          </ul>
+        </li>
 
         <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            About Us <span class="transform transition-transform">▾</span>
+            About Us
+            <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
             <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
@@ -325,7 +332,8 @@
 
         <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Catalogue <span class="transform transition-transform">▾</span>
+            Catalogue
+            <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
             <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
@@ -334,7 +342,8 @@
 
         <li>
           <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            FAQs <span class="transform transition-transform">▾</span>
+            FAQs
+            <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
             <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
@@ -346,6 +355,7 @@
       </ul>
     </div>
   </nav>
+
 
  <!-- Product Detail Section -->
 <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
