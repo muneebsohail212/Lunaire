@@ -236,21 +236,21 @@
 <body class="bg-gray-50 font-inter">
     <!-- Header -->
     <header class="relative bg-white border-b border-gray-200 z-50">
-        <div class="flex items-center px-6 py-4">
+        <div class="flex items-center px-4 md:px-6 py-4">
             <!-- Menu Toggle -->
-            <button id="menuToggle" class="flex flex-col space-y-1.5 p-3 hover:bg-gray-100 rounded-md transition-colors mr-6">
-                <span class="w-7 h-0.5 bg-black transition-all"></span>
-                <span class="w-7 h-0.5 bg-black transition-all"></span>
-                <span class="w-7 h-0.5 bg-black transition-all"></span>
+            <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 md:p-3 hover:bg-gray-100 rounded-md transition-colors mr-3 md:mr-6">
+                <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
+                <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
+                <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
             </button>
 
             <!-- Logo -->
-            <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide flex-1">LUNAIRE</h1>
+            <h1 class="font-lunaire text-2xl md:text-3xl lg:text-4xl text-black tracking-wide flex-1" id="headerLogo">LUNAIRE</h1>
 
             <!-- Search Bar (Hidden by default) -->
-            <div id="searchBar" class="hidden flex-1 max-w-md mx-4">
+            <div id="searchBar" class="hidden absolute left-0 right-0 top-full bg-white px-4 py-3 border-b border-gray-200 md:relative md:flex-1 md:max-w-md md:mx-4 md:border-0 md:p-0">
                 <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Search products..." class="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-black">
+                    <input type="text" id="searchInput" placeholder="Search products..." class="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-black text-base">
                     <button id="clearSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-black hidden">
                         <i class="fas fa-times"></i>
                     </button>
@@ -258,21 +258,20 @@
             </div>
 
             <!-- Icons -->
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 md:space-x-4">
                 <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                    <i class="fas fa-search text-black text-xl"></i>
+                    <i class="fas fa-search text-black text-lg md:text-xl"></i>
                 </button>
                 <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                    <i class="fas fa-user text-black text-xl"></i>
+                    <i class="fas fa-user text-black text-lg md:text-xl"></i>
                 </button>
                 <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
-                    <i class="fas fa-shopping-bag text-black text-xl"></i>
+                    <i class="fas fa-shopping-bag text-black text-lg md:text-xl"></i>
                     <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
                 </button>
             </div>
         </div>
     </header>
-
     <!-- Overlay -->
     <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
