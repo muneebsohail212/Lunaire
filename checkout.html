@@ -267,8 +267,7 @@
    <!-- FOOTER PLACEHOLDER -->
 <div id="footer"></div>
 
-
-  <!-- Scripts -->
+  <!-- Load universal-cart.js BEFORE other scripts so functions are available -->
   <script src="universal-cart.js"></script>
   <script>
     // Menu toggle functionality
@@ -307,7 +306,64 @@
       });
     }
 
-    // Checkout functionality
+    function loadCartItems() {
+      const cartItemsContainer = document.getElementById('cartItems');
+      const subtotalElement = document.getElementById('subtotal');
+      const shippingElement = document.getElementById('shipping');
+      const totalElement = document.getElementById('total');
+      const headerCartCount = document.querySelector('.fa-shopping-bag + span');
+
+      console.log("[v0] Loading cart items for checkout:", cartItems);
+      
+      if (cartItems.length === 0) {
+        cartItemsContainer.innerHTML = `
+          <div class="text-center text-gray-500 py-8">
+            <i class="fas fa-shopping-bag text-4xl mb-4"></i>
+            <p>Your cart is empty</p>
+          </div>
+        `;
+        subtotalElement.textContent = 'Rs. 0';
+        shippingElement.textContent = 'Rs. 0';
+        totalElement.textContent = 'Rs. 0';
+        if (headerCartCount) headerCartCount.textContent = '0';
+        return;
+      }
+
+      let subtotal = 0;
+      let html = '';
+
+      cartItems.forEach((item, index) => {
+        const itemTotal = (item.price || 0) * (item.quantity || 1);
+        subtotal += itemTotal;
+
+        html += `
+          <div class="flex items-center space-x-4 border-b pb-4">
+            <img src="${item.img || 'placeholder.jpg'}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+            <div class="flex-1">
+              <h3 class="font-medium">${item.name}</h3>
+              <p class="text-sm text-gray-600">Size: ${item.size || 'WS-25'}</p>
+              <p class="text-sm text-gray-600">Rs. ${(item.price || 0).toLocaleString()}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm">Qty: ${item.quantity || 1}</span>
+            </div>
+          </div>
+        `;
+      });
+
+      cartItemsContainer.innerHTML = html;
+      
+      const shipping = subtotal > 0 ? 250 : 0;
+      const total = subtotal + shipping;
+
+      subtotalElement.textContent = `Rs. ${subtotal.toLocaleString()}`;
+      shippingElement.textContent = `Rs. ${shipping.toLocaleString()}`;
+      totalElement.textContent = `Rs. ${total.toLocaleString()}`;
+      
+      const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      if (headerCartCount) headerCartCount.textContent = totalItems.toString();
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       const checkoutForm = document.getElementById('checkoutForm');
       const primaryCity = document.getElementById('primaryCity');
@@ -357,7 +413,6 @@
 
           // If validation passes
           alert('Order placed successfully!');
-          // Clear cart
           clearCart();
           // Redirect to home
           window.location.href = 'Homepage.html';
@@ -370,88 +425,16 @@
           if (confirm('Are you sure you want to clear your cart?')) {
             clearCart();
             alert('Cart cleared successfully!');
-            window.location.reload();
+            loadCartItems();
           }
         });
       }
 
-      // Load cart items on page load
-      loadCartItems();
+      setTimeout(() => {
+        loadCartItems();
+      }, 50);
     });
 
-    // Load cart items function
-    function loadCartItems() {
-      const cartItemsContainer = document.getElementById('cartItems');
-      const subtotalElement = document.getElementById('subtotal');
-      const shippingElement = document.getElementById('shipping');
-      const totalElement = document.getElementById('total');
-      const headerCartCount = document.getElementById('headerCartCount');
-
-      try {
-        const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-        
-        if (savedCart.length === 0) {
-          cartItemsContainer.innerHTML = `
-            <div class="text-center text-gray-500 py-8">
-              <i class="fas fa-shopping-bag text-4xl mb-4"></i>
-              <p>Your cart is empty</p>
-            </div>
-          `;
-          subtotalElement.textContent = 'Rs. 0';
-          shippingElement.textContent = 'Rs. 0';
-          totalElement.textContent = 'Rs. 0';
-          if (headerCartCount) headerCartCount.textContent = '0';
-          return;
-        }
-
-        let subtotal = 0;
-        let html = '';
-
-        savedCart.forEach((item, index) => {
-          const itemTotal = (item.price || 0) * (item.quantity || 1);
-          subtotal += itemTotal;
-
-          html += `
-            <div class="flex items-center space-x-4 border-b pb-4">
-              <img src="${item.img || 'placeholder.jpg'}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
-              <div class="flex-1">
-                <h3 class="font-medium">${item.name}</h3>
-                <p class="text-sm text-gray-600">Size: ${item.size || 'WS-25'}</p>
-                <p class="text-sm text-gray-600">Rs. ${(item.price || 0).toLocaleString()}</p>
-              </div>
-              <div class="flex items-center space-x-2">
-                <span class="text-sm">Qty: ${item.quantity || 1}</span>
-              </div>
-            </div>
-          `;
-        });
-
-        cartItemsContainer.innerHTML = html;
-        
-        const shipping = subtotal > 0 ? 250 : 0;
-        const total = subtotal + shipping;
-
-        subtotalElement.textContent = `Rs. ${subtotal.toLocaleString()}`;
-        shippingElement.textContent = `Rs. ${shipping.toLocaleString()}`;
-        totalElement.textContent = `Rs. ${total.toLocaleString()}`;
-        
-        const totalItems = savedCart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        if (headerCartCount) headerCartCount.textContent = totalItems.toString();
-
-      } catch (e) {
-        console.error('Error loading cart items:', e);
-      }
-    }
-
-    // Clear cart function
-    function clearCart() {
-      try {
-        localStorage.removeItem("cartItems");
-        loadCartItems();
-      } catch (e) {
-        console.error('Error clearing cart:', e);
-      }
-    }
     fetch("footer.html")
     .then(response => response.text())
     .then(data => {
@@ -460,6 +443,7 @@
     .catch(err => console.error("Failed to load footer:", err));
 
   </script>
+
   <script src="about.js"></script>
 
 </body>

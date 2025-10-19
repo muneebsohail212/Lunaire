@@ -13,7 +13,6 @@
         .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
         .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         
-        /* Fixed dropdown menu styles */
         .dropdown-menu { 
             transform: translateX(-100%); 
             transition: transform 0.3s ease-in-out; 
@@ -22,7 +21,6 @@
             transform: translateX(0); 
         }
         
-        /* Fixed overlay styles */
         .overlay { 
             opacity: 0; 
             visibility: hidden; 
@@ -48,7 +46,6 @@
             transform: scale(1.05);
         }
 
-        /* Hamburger menu animation */
         .menu-btn.active span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
@@ -59,7 +56,6 @@
             transform: rotate(-45deg) translate(7px, -6px);
         }
 
-        /* Premium Collection Title Animation */
         .hero-title {
             background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
             background-size: 200% 200%;
@@ -103,7 +99,6 @@
             }
         }
 
-        /* Premium Product Card Animations */
         .product-card {
             animation: fade-in-scale 0.8s ease-out backwards;
             position: relative;
@@ -152,7 +147,6 @@
             }
         }
 
-        /* Premium Image Hover Effects */
         .product-image {
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             filter: brightness(0.95);
@@ -163,7 +157,6 @@
             filter: brightness(1.05) contrast(1.05);
         }
 
-        /* Premium Button Animation */
         .quick-add {
             position: relative;
             overflow: hidden;
@@ -188,7 +181,6 @@
             height: 300px;
         }
 
-        /* Shimmer Effect on Product Cards */
         .product-card::after {
             content: '';
             position: absolute;
@@ -210,14 +202,12 @@
             100% { left: 120%; }
         }
 
-        /* Search Result Highlighting */
         .search-highlight {
             background-color: #fef3c7;
             padding: 2px 4px;
             border-radius: 2px;
         }
 
-        /* No Results Message */
         .no-results {
             animation: fade-in 0.5s ease;
         }
@@ -227,28 +217,24 @@
             to { opacity: 1; }
         }
 
-        /* Filtered Out Products */
         .product-card.hidden-search {
             display: none;
         }
     </style>
 </head>
 <body class="bg-gray-50 font-inter">
-    <!-- Header -->
     <header class="relative bg-white border-b border-gray-200 z-50">
         <div class="flex items-center px-4 md:px-6 py-4">
-            <!-- Menu Toggle -->
             <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 md:p-3 hover:bg-gray-100 rounded-md transition-colors mr-3 md:mr-6">
                 <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
                 <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
                 <span class="w-6 md:w-7 h-0.5 bg-black transition-all"></span>
             </button>
 
-            <!-- Logo -->
-         <a href="Homepage.html" class="flex-1">
-  <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
-</a>
-            <!-- Search Bar (Hidden by default) -->
+            <a href="Homepage.html" class="flex-1">
+                <h1 class="font-lunaire text-3xl md:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
+            </a>
+
             <div id="searchBar" class="hidden absolute left-0 right-0 top-full bg-white px-4 py-3 border-b border-gray-200 md:relative md:flex-1 md:max-w-md md:mx-4 md:border-0 md:p-0">
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="Search products..." class="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-black text-base">
@@ -258,7 +244,6 @@
                 </div>
             </div>
 
-            <!-- Icons -->
             <div class="flex items-center space-x-2 md:space-x-4">
                 <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
                     <i class="fas fa-search text-black text-lg md:text-xl"></i>
@@ -273,10 +258,9 @@
             </div>
         </div>
     </header>
-    <!-- Overlay -->
+
     <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-    <!-- Dropdown Menu -->
     <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
         <div class="p-6">
             <div class="mb-8">
@@ -332,13 +316,10 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        <!-- Header Section -->
         <div class="text-center mb-16">
             <h2 class="hero-title text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">Latest Collection</h2>
             
-            <!-- Search Results Info -->
             <div id="searchResultsInfo" class="hidden mt-4">
                 <p class="text-gray-600 text-lg">
                     <span id="resultsCount">0</span> results found for "<span id="searchQuery" class="font-semibold"></span>"
@@ -346,34 +327,26 @@
             </div>
         </div>
 
-        <!-- No Results Message -->
         <div id="noResults" class="hidden no-results text-center py-16">
             <i class="fas fa-search text-gray-300 text-6xl mb-4"></i>
             <h3 class="text-2xl font-playfair font-semibold text-gray-700 mb-2">No products found</h3>
             <p class="text-gray-500">Try adjusting your search terms</p>
         </div>
 
-        <!-- Product Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="productGrid">
-            <!-- Products will be dynamically rendered here -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" id="productGrid"></div>
     </main>
 
-    <!-- Cart Modal Popup -->
     <div id="cartPopup" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="absolute top-0 right-0 w-80 h-full bg-white shadow-2xl transform translate-x-full transition-transform duration-300" id="cartPanel">
-            <!-- Header -->
             <div class="flex justify-between items-center border-b p-4">
                 <h2 class="text-xl font-semibold">ADDED TO YOUR BASKET</h2>
                 <button id="closeCartPopup" class="text-gray-500 hover:text-black text-2xl">&times;</button>
             </div>
 
-            <!-- Cart Items -->
             <div id="cartItemsPopup" class="p-4 space-y-6">
                 <p class="text-gray-500 text-center">Your basket is empty.</p>
             </div>
 
-            <!-- Total Section -->
             <div class="border-t p-4">
                 <div class="flex justify-between text-lg font-semibold mb-4">
                     <span>TOTAL:</span>
@@ -383,20 +356,18 @@
                     *ALL ORDERS MAY TAKE UPTO 7 WORKING DAYS TO BE DELIVERED TO YOUR DOORSTEP
                 </p>
 
-                <!-- Buttons -->
                 <div class="space-y-3">
-                    <button class="w-full bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">CHECK OUT</button>
-                    <button class="w-full border border-black text-black py-3 rounded font-semibold hover:bg-gray-100 transition">VIEW SHOPPING BASKET</button>
+                    <button id="checkoutBtn" class="w-full bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition">CHECK OUT</button>
+                    <button id="viewBasketBtn" class="w-full border border-black text-black py-3 rounded font-semibold hover:bg-gray-100 transition">VIEW SHOPPING BASKET</button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- footer -->
     <div id="footer"></div>
 
     <script>
-        // Menu and interaction functionality
+        // Menu functionality
         const menuToggle = document.getElementById("menuToggle");
         const dropdownMenu = document.getElementById("dropdownMenu");
         const overlay = document.getElementById("overlay");
@@ -435,14 +406,17 @@
             }
         });
 
-        // Cart functionality
+        // ===== CART SYSTEM - USES LOCALSTORAGE =====
         const cartPopup = document.getElementById("cartPopup");
         const closeCartPopup = document.getElementById("closeCartPopup");
         const cartItemsContainer = document.getElementById("cartItemsPopup");
         const cartTotal = document.getElementById("cartTotal");
         const cartCount = document.querySelector(".fa-shopping-bag + span");
-        let cartItems = [];
         const cartPanel = document.getElementById("cartPanel");
+
+        // Load cart from localStorage on page load
+        let cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+        console.log("Cart loaded from localStorage:", cartItems);
 
         function openCartPopup() {
             cartPopup.classList.remove("hidden");
@@ -463,17 +437,25 @@
             if (e.target === cartPopup) closeCartFn();
         });
 
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            console.log("Cart saved to localStorage:", cartItems);
+        }
+
         function renderCartPopup() {
             if (cartItems.length === 0) {
                 cartItemsContainer.innerHTML = `<p class="text-gray-500 text-center">Your basket is empty.</p>`;
                 cartTotal.textContent = "PKR 0";
-                cartCount.innerText = 0;
+                if (cartCount) cartCount.innerText = "0";
                 return;
             }
 
             let total = 0;
+            let totalQty = 0;
+            
             cartItemsContainer.innerHTML = cartItems.map((item, index) => {
                 total += item.price * item.quantity;
+                totalQty += item.quantity;
                 return `
                     <div class="flex space-x-4 items-center">
                         <img src="${item.img}" alt="${item.name}" class="w-20 h-24 object-cover rounded">
@@ -491,63 +473,43 @@
             }).join("");
 
             cartTotal.textContent = "PKR " + total.toLocaleString();
-            cartCount.innerText = cartItems.length;
+            if (cartCount) cartCount.innerText = totalQty.toString();
         }
 
         function removeItem(index) {
             cartItems.splice(index, 1);
+            saveCartToLocalStorage();
             renderCartPopup();
-        }
-
-        function addCartButtonListeners() {
-            const buttons = document.querySelectorAll('#cartPopup button');
-            
-            buttons.forEach(button => {
-                if (button.textContent.includes('CHECK OUT') && !button.hasAttribute('data-checkout-added')) {
-                    button.setAttribute('data-checkout-added', 'true');
-                    button.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        
-                        if (cartItems.length === 0) {
-                            alert("Your cart is empty. Please add some items before checkout.");
-                            return;
-                        }
-                        
-                        window.location.href = "checkout.html";
-                    });
-                }
-                
-                if (button.textContent.includes('VIEW SHOPPING BASKET') && !button.hasAttribute('data-basket-added')) {
-                    button.setAttribute('data-basket-added', 'true');
-                    button.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        
-                        if (cartItems.length === 0) {
-                            alert("Your cart is empty. Please add some items before viewing basket.");
-                            return;
-                        }
-                        
-                        window.location.href = "basket.html";
-                    });
-                }
-            });
-        }
-
-        if (cartCount) {
-            cartCount.textContent = 0;
         }
 
         window.removeItem = removeItem;
 
+        // Cart button listeners
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (cartItems.length === 0) {
+                alert("Your cart is empty. Please add some items before checkout.");
+                return;
+            }
+            saveCartToLocalStorage();
+            window.location.href = "checkout.html";
+        });
+
+        document.getElementById('viewBasketBtn').addEventListener('click', function() {
+            if (cartItems.length === 0) {
+                alert("Your cart is empty. Please add some items first.");
+                return;
+            }
+            saveCartToLocalStorage();
+            window.location.href = "basket.html";
+        });
+
+        // Header cart icon
         const cartIcon = document.querySelector(".fa-shopping-bag").parentElement;
         const accountIcon = document.querySelector(".fa-user").parentElement;
 
         cartIcon.addEventListener("click", (e) => {
             e.preventDefault();
-            if (cartItems.length === 0) {
-                alert("Your cart is empty. Please add some items first.");
-                return;
-            }
+            saveCartToLocalStorage();
             window.location.href = "basket.html";
         });
 
@@ -556,16 +518,7 @@
             window.location.href = "login.html";
         });
 
-        // ===== SEARCH FUNCTIONALITY =====
-        const searchInput = document.getElementById("searchInput");
-        const clearSearchBtn = document.getElementById("clearSearch");
-        const productGrid = document.getElementById("productGrid");
-        const searchResultsInfo = document.getElementById("searchResultsInfo");
-        const resultsCount = document.getElementById("resultsCount");
-        const searchQuerySpan = document.getElementById("searchQuery");
-        const noResultsDiv = document.getElementById("noResults");
-
-        // Product data for search
+        // ===== PRODUCT DATA =====
         const products = [
             {
                 name: "Purple embroided",
@@ -604,8 +557,8 @@
             }
         ];
 
-        // Initial render of products
         function renderProducts(productsToRender = products) {
+            const productGrid = document.getElementById("productGrid");
             productGrid.innerHTML = productsToRender.map((product, index) => `
                 <div class="product-card bg-white rounded-2xl shadow-lg overflow-hidden" data-product-page="${product.link}" style="animation-delay: ${index * 0.1}s">
                     <a href="${product.link}" class="block aspect-w-3 aspect-h-4 overflow-hidden">
@@ -625,11 +578,9 @@
                 </div>
             `).join("");
 
-            // Re-attach quick add listeners
             attachQuickAddListeners();
         }
 
-        // Attach quick add button listeners
         function attachQuickAddListeners() {
             document.querySelectorAll(".quick-add").forEach((button) => {
                 button.addEventListener("click", (e) => {
@@ -648,6 +599,7 @@
                     
                     const priceValue = parseFloat(cleanPrice) || 0;
 
+                    // Add to cart array
                     cartItems.push({
                         name: productName,
                         price: priceValue,
@@ -656,14 +608,25 @@
                         quantity: 1
                     });
 
+                    // Save to localStorage immediately
+                    saveCartToLocalStorage();
+
+                    // Update UI
                     renderCartPopup();
                     openCartPopup();
-                    addCartButtonListeners();
                 });
             });
         }
 
-        // Search function
+        // ===== SEARCH FUNCTIONALITY =====
+        const searchInput = document.getElementById("searchInput");
+        const clearSearchBtn = document.getElementById("clearSearch");
+        const searchResultsInfo = document.getElementById("searchResultsInfo");
+        const resultsCount = document.getElementById("resultsCount");
+        const searchQuerySpan = document.getElementById("searchQuery");
+        const noResultsDiv = document.getElementById("noResults");
+        const productGrid = document.getElementById("productGrid");
+
         function performSearch(query) {
             const searchTerm = query.toLowerCase().trim();
 
@@ -672,7 +635,6 @@
                 return;
             }
 
-            // Filter products based on name and tags
             const filteredProducts = products.filter(product => {
                 const nameMatch = product.name.toLowerCase().includes(searchTerm);
                 const tagsMatch = product.tags.some(tag => tag.toLowerCase().includes(searchTerm));
@@ -681,7 +643,6 @@
                 return nameMatch || tagsMatch || priceMatch;
             });
 
-            // Show/hide UI elements
             if (filteredProducts.length > 0) {
                 noResultsDiv.classList.add("hidden");
                 productGrid.classList.remove("hidden");
@@ -699,7 +660,6 @@
             clearSearchBtn.classList.remove("hidden");
         }
 
-        // Clear search function
         function clearSearchFn() {
             searchInput.value = "";
             clearSearchBtn.classList.add("hidden");
@@ -709,10 +669,8 @@
             renderProducts(products);
         }
 
-        // Event listeners for search
         searchInput.addEventListener("input", (e) => {
-            const query = e.target.value;
-            performSearch(query);
+            performSearch(e.target.value);
         });
 
         searchInput.addEventListener("keypress", (e) => {
@@ -723,10 +681,11 @@
 
         clearSearchBtn.addEventListener("click", clearSearchFn);
 
-        // Initial render
+        // Initialize page
         renderProducts();
-    
-        // Load footer dynamically
+        renderCartPopup();
+
+        // Load footer
         fetch("footer.html")
             .then(response => response.text())
             .then(data => {

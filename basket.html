@@ -98,7 +98,7 @@
                 </li>
                 <li>
                     <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-                        Catac:\Users\Laptop Point\Desktop\Admin panel\Admin panel.htmllogue <span class="transform transition-transform">▾</span>
+            Catalogue <span class="transform transition-transform">▾</span>
                     </button>
                     <ul class="ml-4 mt-2 space-y-2 hidden submenu">
                         <li><a href="Aftershp.html" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
@@ -195,6 +195,7 @@
     <!-- FOOTER PLACEHOLDER -->
 <div id="footer"></div>
 
+   <!-- Load universal-cart.js BEFORE other scripts so functions are available -->
    <script src="universal-cart.js"></script>
 
     <script>
@@ -229,7 +230,7 @@
         const emptyBasket = document.getElementById('emptyBasket');
         const subtotalElement = document.getElementById('subtotal');
         const totalAmountElement = document.getElementById('totalAmount');
-        const cartCountElement = document.getElementById('cartCount');
+        const cartCountElement = document.querySelector('.fa-shopping-bag + span');
 
         function updateQuantity(index, change) {
             if (basketItems[index]) {
@@ -256,7 +257,7 @@
                 emptyBasket.classList.remove('hidden');
                 subtotalElement.textContent = 'PKR 0';
                 totalAmountElement.textContent = 'PKR 200';
-                cartCountElement.textContent = '0';
+                if (cartCountElement) cartCountElement.textContent = '0';
                 return;
             }
 
@@ -305,7 +306,7 @@
 
             subtotalElement.textContent = `PKR ${subtotal.toLocaleString()}`;
             totalAmountElement.textContent = `PKR ${total.toLocaleString()}`;
-            cartCountElement.textContent = totalItems.toString();
+            if (cartCountElement) cartCountElement.textContent = totalItems.toString();
         }
 
         // Button event listeners
@@ -328,13 +329,14 @@
                 localStorage.removeItem('cartItems');
                 renderBasket();
             }
-        });fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer").innerHTML = data;
-    })
-    .catch(err => console.error("Failed to load footer:", err));
+        });
 
+        fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch(err => console.error("Failed to load footer:", err));
 
         // Initialize basket on page load
         renderBasket();
