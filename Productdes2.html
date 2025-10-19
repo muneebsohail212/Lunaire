@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Classic Black and White Dress - LUNAIRE</title>
+  <title>Grey and Lilac  Dress - LUNAIRE</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -14,38 +14,18 @@
     .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
     .overlay.open { opacity: 1; visibility: visible; }
 
-    /* Premium Page Load Animation */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .fade-in-up {
-      opacity: 0;
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
-
+    .fade-in-up { opacity: 0; animation: fadeInUp 0.8s ease-out forwards; }
     .delay-100 { animation-delay: 0.1s; }
     .delay-200 { animation-delay: 0.2s; }
-    .delay-300 { animation-delay: 0.3s; }
-    .delay-400 { animation-delay: 0.4s; }
 
-    /* Image Hover Effect */
-    #productImage {
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    #productImage { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    #productImage:hover { transform: scale(1.05); }
 
-    #productImage:hover {
-      transform: scale(1.05);
-    }
-
-    /* Premium Button Hover */
     .premium-btn {
       position: relative;
       overflow: hidden;
@@ -65,49 +45,21 @@
       transition: width 0.6s, height 0.6s;
     }
 
-    .premium-btn:hover::before {
-      width: 300px;
-      height: 300px;
-    }
+    .premium-btn:hover::before { width: 300px; height: 300px; }
+    .premium-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); }
 
-    .premium-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    /* Size/Color Button Animations */
     .option-btn {
       position: relative;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .option-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    }
+    .option-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); }
+    .option-btn.selected { background: black; color: white; border-color: black; }
 
-    .option-btn.selected {
-      background: black;
-      color: white;
-      border-color: black;
-    }
+    .qty-btn { transition: all 0.3s ease; }
+    .qty-btn:hover { background: black; color: white; transform: scale(1.1); }
+    .qty-btn:active { transform: scale(0.95); }
 
-    /* Quantity Button Premium Effect */
-    .qty-btn {
-      transition: all 0.3s ease;
-    }
-
-    .qty-btn:hover {
-      background: black;
-      color: white;
-      transform: scale(1.1);
-    }
-
-    .qty-btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Flying animation to cart icon */
     .flying {
       position: absolute;
       font-size: 14px;
@@ -119,37 +71,19 @@
       will-change: transform, opacity;
     }
 
-    /* Cart Icon Bounce */
     @keyframes cartBounce {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
 
-    .cart-bounce {
-      animation: cartBounce 0.5s ease;
-    }
+    .cart-bounce { animation: cartBounce 0.5s ease; }
 
-    /* Floating Particles Background */
     @keyframes float {
-      0%, 100% {
-        transform: translateY(0px) translateX(0px);
-        opacity: 0.05;
-      }
-      50% {
-        transform: translateY(-20px) translateX(10px);
-        opacity: 0.1;
-      }
+      0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.05; }
+      50% { transform: translateY(-20px) translateX(10px); opacity: 0.1; }
     }
 
-    .floating-bg {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
+    .floating-bg { position: fixed; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; z-index: 0; }
 
     .particle {
       position: absolute;
@@ -166,114 +100,52 @@
     .particle:nth-child(4) { top: 80%; left: 70%; animation-duration: 8s; animation-delay: 0.5s; }
     .particle:nth-child(5) { top: 40%; left: 50%; animation-duration: 10s; animation-delay: 1.5s; }
 
-    /* Premium Text Shimmer */
-    .shimmer-text {
-      background: linear-gradient(90deg, #000 0%, #333 50%, #000 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 3s linear infinite;
-    }
+    .arrow-btn { transition: all 0.3s ease; }
+    .arrow-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
 
-    @keyframes shimmer {
-      to { background-position: 200% center; }
-    }
-
-    /* Arrow Button Pulse */
-    .arrow-btn {
-      transition: all 0.3s ease;
-    }
-
-    .arrow-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Premium Divider */
     .premium-divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
       margin: 2rem 0;
     }
 
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
-    /* Image Container Shadow */
     .image-container {
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
       transition: box-shadow 0.4s ease;
     }
 
-    .image-container:hover {
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
-    }
+    .image-container:hover { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15); }
 
-    /* Footer Link Hover */
-    footer a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    footer a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: white;
-      transition: width 0.3s ease;
-    }
-
-    footer a:hover::after {
-      width: 100%;
-    }
-
-    /* Page Container */
-    main {
-      position: relative;
-      z-index: 1;
-    }
+    main { position: relative; z-index: 1; }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
 
-  <!-- Floating Background Particles -->
   <div class="floating-bg">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+    <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
   </div>
 
-  <!-- Header -->
+  <!-- HEADER (same as Purple Embroidered) -->
   <header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
-      <!-- Menu Toggle -->
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors">
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
       </button>
 
-      <!-- Logo -->
       <a href="Homepage.html" class="flex-1 ml-3 sm:ml-6">
         <h1 class="font-lunaire text-xl sm:text-2xl md:text-3xl lg:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
       </a>
 
-      <!-- Icons -->
       <div class="flex items-center space-x-2 sm:space-x-4">
         <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <i class="fas fa-search text-black text-base sm:text-xl"></i>
         </button>
-         <a href="login.html" id="login" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <a href="login.html" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
           <i class="fas fa-user text-black text-base sm:text-xl"></i>
-      
         </a>
         <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative">
           <i class="fas fa-shopping-bag text-black text-xl"></i>
@@ -281,294 +153,164 @@
         </a>
       </div>
     </div>
-
-    <!-- Search Bar Overlay -->
-   
   </header>
-  <!--  Overlay -->
-  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
-  <!-- Dropdown Menu -->
+  <!-- OVERLAY + MENU -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
   <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
     <div class="p-6">
-      <div class="mb-8">
-        <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
-      </div>
+      <div class="mb-8"><h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2></div>
       <ul class="space-y-4">
-
-        <li><a href="Homepage.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Shop
-            <span class="transform transition-transform">▾</span>
-          </button>
+        <li><a href="Homepage.html" class="block text-gray-700 hover:text-black font-medium">Home</a></li>
+        <li><button class="flex justify-between w-full text-gray-700 hover:text-black font-medium submenu-btn">Shop<span>▾</span></button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black">Collection Name</a></li>
           </ul>
         </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            My Account
-            <span class="transform transition-transform">▾</span>
-          </button>
+        <li><button class="flex justify-between w-full text-gray-700 hover:text-black font-medium submenu-btn">My Account<span>▾</span></button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
-            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
-        
+            <li><a href="login.html" class="block text-gray-500 hover:text-black">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black">Sign-up</a></li>
           </ul>
         </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            About Us
-            <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
-          </ul>
+        <li><button class="flex justify-between w-full text-gray-700 hover:text-black font-medium submenu-btn">About Us<span>▾</span></button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu"><li><a href="#" class="block text-gray-500 hover:text-black">Our Story</a></li></ul>
         </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            Catalogue
-            <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
-          </ul>
+        <li><button class="flex justify-between w-full text-gray-700 hover:text-black font-medium submenu-btn">Catalogue<span>▾</span></button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu"><li><a href="AfterShp.html" class="block text-gray-500 hover:text-black">Collections</a></li></ul>
         </li>
-
-        <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
-            FAQs
-            <span class="transform transition-transform">▾</span>
-          </button>
-          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Returns</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Size Guide</a></li>
-          </ul>
+        <li><button class="flex justify-between w-full text-gray-700 hover:text-black font-medium submenu-btn">FAQs<span>▾</span></button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu"><li><a href="faq.html" class="block text-gray-500 hover:text-black">FAQs</a></li></ul>
         </li>
-
       </ul>
     </div>
   </nav>
 
-
- <!-- Product Detail Section -->
-<main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
-  <!-- Left: Product Image + Description -->
-  <div class="space-y-8 fade-in-up delay-100">
-    <!-- Image -->
-    <div class="relative rounded-lg overflow-hidden image-container">
-      <div class="relative w-full h-[700px] overflow-hidden">
-       <img id="productImage" src="images/grey dress 2.jpg" alt=""
-             class="w-full h-full object-cover">
+  <!-- MAIN PRODUCT -->
+  <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div class="space-y-8 fade-in-up delay-100">
+      <div class="relative rounded-lg overflow-hidden image-container">
+        <div class="relative w-full h-[700px] overflow-hidden">
+          <img id="productImage" src="images/grey dress 1.jpg" alt="Classic Black and White Dress" class="w-full h-full object-cover">
+        </div>
+        <button onclick="prevImage()" class="arrow-btn absolute top-1/2 left-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow"><i class="fas fa-chevron-left text-black"></i></button>
+        <button onclick="nextImage()" class="arrow-btn absolute top-1/2 right-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow"><i class="fas fa-chevron-right text-black"></i></button>
       </div>
 
-      <!-- Arrows -->
-      <button onclick="prevImage()" 
-        class="arrow-btn absolute top-1/2 left-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
-        <i class="fas fa-chevron-left text-black"></i>
-      </button>
-      <button onclick="nextImage()" 
-        class="arrow-btn absolute top-1/2 right-3 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 p-3 rounded-full shadow">
-        <i class="fas fa-chevron-right text-black"></i>
-      </button>
+      <div class="text-gray-700 leading-relaxed">
+        <p class="mb-4"><strong>Colour:</strong>Grey and Lilac</p>
+        <div class="premium-divider"></div>
+        <h3 class="font-bold mb-2 text-lg">Product Description:</h3>
+        <p class="mb-4">A premium cotton lawn dress featuring elegant grey and lilac embroidery for an effortlessly classy look.</p>
+
+        <h3 class="font-bold mb-2 text-lg">Fabric Details:</h3>
+        <ul class="list-disc list-inside mb-4 space-y-1">
+          <li>Shirt: Cotton Lawn</li>
+          <li>Trouser: Cotton</li>
+
+          <li>Dupatta: Chiffon </li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Detailed Description -->
-    <div class="text-gray-700 leading-relaxed">
-      <p class="mb-4"><strong>Colour:</strong> Grey Lawn</p>
+    <div class="fade-in-up delay-200">
+      <h2 class="text-4xl font-bold mb-4">Gray and Lilac Dress</h2>
+      <p class="text-2xl text-gray-600 mb-6">Rs. 5,999</p>
       <div class="premium-divider"></div>
-      <h3 class="font-bold mb-2 text-lg">Product Description:</h3>
-      <p class="mb-4">A stylish cotton lawn dress with elegant embroidery. Perfect for both casual and formal gatherings.</p>
 
-      <h3 class="font-bold mb-2 text-lg">Fabric Details:</h3>
-      <ul class="list-disc list-inside mb-4 space-y-1">
-        <li>Shirt: Cotton Lawn</li>
-        <li>Dupatta: Chiffon Lawn</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Right: Product Info -->
-  <div class="fade-in-up delay-200">
-    <h2 class="text-4xl font-bold mb-4">Grey Lawn</h2>
-    <p class="text-2xl text-gray-600 mb-6">Rs. 5,999</p>
-
-    <div class="premium-divider"></div>
-
-    <!-- Sizes -->
-    <div class="mb-6">
-      <h3 class="font-semibold mb-3 text-lg">Size:</h3>
-      <div class="flex space-x-3">
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">S</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">M</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">L</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">XL</button>
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-lg">Size:</h3>
+        <div class="flex space-x-3">
+          <button class="size-btn option-btn border-2 border-gray-300 px-5 py-2 rounded-lg">S</button>
+          <button class="size-btn option-btn border-2 border-gray-300 px-5 py-2 rounded-lg selected">M</button>
+          <button class="size-btn option-btn border-2 border-gray-300 px-5 py-2 rounded-lg">L</button>
+          <button class="size-btn option-btn border-2 border-gray-300 px-5 py-2 rounded-lg">XL</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Colors -->
-    <div class="mb-6">
-      <h3 class="font-semibold mb-3 text-lg">Color:</h3>
-      <div class="flex space-x-3">
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: black;"></button>
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: white;"></button>
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: gray;"></button>
+      <div class="mb-6">
+        <h3 class="font-semibold mb-3 text-lg">Color:</h3>
+        <div class="flex space-x-3">
+         <button class="color-btn option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color:gray;"></button>
+          <button class="color-btn option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md selected" style="background-color:orchid;"></button>
+          <button class="color-btn option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color:white;"></button>
+        </div>
       </div>
-    </div>
 
-    <!-- Quantity with + - -->
-    <div class="mb-8">
-      <h3 class="font-semibold mb-3 text-lg">Quantity:</h3>
-      <div class="flex items-center space-x-3">
-        <button id="decreaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">-</button>
-        <input id="quantityInput" type="number" value="1" min="1" class="border-2 border-gray-300 w-20 text-center rounded-lg py-2 text-lg font-semibold" readonly>
-        <button id="increaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">+</button>
+      <div class="mb-8">
+        <h3 class="font-semibold mb-3 text-lg">Quantity:</h3>
+        <div class="flex items-center space-x-3">
+          <button id="decreaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">-</button>
+          <input id="quantityInput" type="number" value="1" min="1" class="border-2 border-gray-300 w-20 text-center rounded-lg py-2 text-lg font-semibold" readonly>
+          <button id="increaseQty" class="qty-btn border-2 border-gray-300 px-4 py-2 rounded-lg text-lg font-bold">+</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Add to Cart -->
-    <button id="addToCartBtn" class="premium-btn bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold w-full md:w-auto">
-      Add to Cart
-    </button>
-  </div>
-</main>
+      <button id="addToCartBtn" class="premium-btn bg-black text-white px-8 py-4 rounded-lg text-lg font-semibold w-full md:w-auto">Add to Cart</button>
+    </div>
+  </main>
 
   <div id="footer"></div>
-  <!-- Scripts -->
+
   <script>
-    // menu toggle + submenu
-    const menuToggle = document.getElementById("menuToggle");
-    const dropdownMenu = document.getElementById("dropdownMenu");
-    const overlay = document.getElementById("overlay");
+    // Menu toggle
+    const menuToggle=document.getElementById("menuToggle"),dropdownMenu=document.getElementById("dropdownMenu"),overlay=document.getElementById("overlay");
+    menuToggle.addEventListener("click",()=>{dropdownMenu.classList.toggle("open");overlay.classList.toggle("open");});
+    overlay.addEventListener("click",()=>{dropdownMenu.classList.remove("open");overlay.classList.remove("open");});
+    document.querySelectorAll(".submenu-btn").forEach(btn=>{btn.addEventListener("click",()=>{const submenu=btn.nextElementSibling;submenu.classList.toggle("hidden");btn.querySelector("span").classList.toggle("rotate-180");});});
 
-    menuToggle.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("open");
-      overlay.classList.toggle("open");
+    // Size/Color select
+    document.querySelectorAll('.size-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('selected'));this.classList.add('selected');}));
+    document.querySelectorAll('.color-btn').forEach(b=>b.addEventListener('click',function(){document.querySelectorAll('.color-btn').forEach(x=>x.classList.remove('selected'));this.classList.add('selected');}));
+
+    // Product images
+    const images=["images/grey dress 1.jpg","images/grey dress 2.jpg","images/grey dress 3.jpg"];
+    let currentIndex=0;const productImage=document.getElementById("productImage");
+    function showImage(i){productImage.src=images[i];}
+    function nextImage(){currentIndex=(currentIndex+1)%images.length;showImage(currentIndex);}
+    function prevImage(){currentIndex=(currentIndex-1+images.length)%images.length;showImage(currentIndex);}
+
+    // CART SYSTEM
+    const addToCartBtn=document.getElementById("addToCartBtn"),cartCount=document.getElementById("cartCount"),quantityInput=document.getElementById("quantityInput"),increaseQty=document.getElementById("increaseQty"),decreaseQty=document.getElementById("decreaseQty"),cartIcon=document.getElementById("cartIcon");
+
+    let cartItems=JSON.parse(localStorage.getItem('cartItems')||'[]');
+    function updateCartCount(){const total=cartItems.reduce((s,i)=>s+i.quantity,0);cartCount.textContent=total;}
+
+    updateCartCount();
+
+    increaseQty.addEventListener("click",()=>{quantityInput.value=parseInt(quantityInput.value)+1;});
+    decreaseQty.addEventListener("click",()=>{if(parseInt(quantityInput.value)>1)quantityInput.value=parseInt(quantityInput.value)-1;});
+
+    function centerOfRect(r){return{x:r.left+r.width/2+window.scrollX,y:r.top+r.height/2+window.scrollY};}
+
+    addToCartBtn.addEventListener("click",e=>{
+      const qty=parseInt(quantityInput.value)||1;
+      const size=document.querySelector('.size-btn.selected')?.textContent.trim()||'M';
+      const name=document.querySelector('main h2').textContent.trim();
+      const priceText=document.querySelector('main p.text-2xl').textContent.trim();
+      const img=productImage.src;
+      const priceValue=parseFloat(priceText.replace(/Rs\.|PKR|,/g,'').trim())||0;
+
+      const newItem={name,price:priceValue,img,size,quantity:qty};
+      const existing=cartItems.find(i=>i.name===newItem.name&&i.size===newItem.size);
+      if(existing){existing.quantity+=qty;}else{cartItems.push(newItem);}
+      localStorage.setItem('cartItems',JSON.stringify(cartItems));
+      updateCartCount();
+
+      cartIcon.classList.add('cart-bounce');
+      setTimeout(()=>cartIcon.classList.remove('cart-bounce'),500);
+
+      const flying=document.createElement("span");
+      flying.className="flying";flying.textContent=`+${qty}`;document.body.appendChild(flying);
+      const s=centerOfRect(e.target.getBoundingClientRect()),t=centerOfRect(cartIcon.getBoundingClientRect());
+      flying.style.left=s.x+"px";flying.style.top=s.y+"px";
+      requestAnimationFrame(()=>{flying.style.transform=`translate(${t.x-s.x}px,${t.y-s.y}px) scale(0.5)`;flying.style.opacity="0";});
+      setTimeout(()=>flying.remove(),900);
+
+      alert(`${name} (${qty}x) added to cart!`);
     });
 
-    overlay.addEventListener("click", () => {
-      dropdownMenu.classList.remove("open");
-      overlay.classList.remove("open");
-    });
-
-    document.querySelectorAll(".submenu-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const submenu = btn.nextElementSibling;
-        submenu.classList.toggle("hidden");
-
-        const arrow = btn.querySelector("span");
-        arrow.classList.toggle("rotate-180");
-      });
-    });
-
-    // Size/Color selection
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        this.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-      });
-    });
+    fetch("footer.html").then(r=>r.text()).then(d=>{document.getElementById("footer").innerHTML=d;});
   </script>
-
-<script>
-  // Product images
- const images = ["images/grey dress 3.jpg","images/grey dress 1.jpg"];
-  let currentIndex = 0;
-  const productImage = document.getElementById("productImage");
-
-  function showImage(index) { productImage.src = images[index]; }
-  function nextImage() { currentIndex = (currentIndex + 1) % images.length; showImage(currentIndex); }
-  function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(currentIndex); }
-
-  // Cart + quantity + flying animation to cart icon
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  const cartCount = document.getElementById("cartCount");
-  const quantityInput = document.getElementById("quantityInput");
-  const increaseQty = document.getElementById("increaseQty");
-  const decreaseQty = document.getElementById("decreaseQty");
-  const cartIcon = document.getElementById("cartIcon");
-  let cartNumber = 0;
-
-  // Quantity +/- handlers
-  increaseQty.addEventListener("click", () => {
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-  });
-  decreaseQty.addEventListener("click", () => {
-    if (parseInt(quantityInput.value) > 1) {
-      quantityInput.value = parseInt(quantityInput.value) - 1;
-    }
-  });
-
-  // Helper to get center point of a DOMRect
-  function centerOfRect(rect) {
-    return { x: rect.left + rect.width / 2 + window.scrollX, y: rect.top + rect.height / 2 + window.scrollY };
-  }
-
-  addToCartBtn.addEventListener("click", (e) => {
-    const quantity = parseInt(quantityInput.value) || 1;
-    cartNumber += quantity;
-    cartCount.textContent = cartNumber;
-
-    // Add bounce animation to cart icon
-    cartIcon.classList.add('cart-bounce');
-    setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
-
-    // Create flying element + positioning
-    const flying = document.createElement("span");
-    flying.className = "flying";
-    flying.textContent = `+${quantity}`;
-    document.body.appendChild(flying);
-
-    // Start position: center of the Add to Cart button
-    const startRect = e.target.getBoundingClientRect();
-    const start = centerOfRect(startRect);
-
-    // End position: center of cart icon
-    const endRect = cartIcon.getBoundingClientRect();
-    const end = centerOfRect(endRect);
-
-    // Place flying at start (adjust for element size after append)
-    const flyingRect = flying.getBoundingClientRect();
-    // set initial left/top so the element is centered at start
-    flying.style.left = (start.x - flyingRect.width / 2) + "px";
-    flying.style.top = (start.y - flyingRect.height / 2) + "px";
-    flying.style.opacity = "1";
-    flying.style.transform = "translate(0, 0) scale(1)";
-
-    // Force layout so transition will run
-    void flying.offsetWidth;
-
-    // compute delta (translate)
-    const dx = end.x - start.x;
-    const dy = end.y - start.y;
-
-    // Start the transition toward cart icon
-    requestAnimationFrame(() => {
-      flying.style.transform = `translate(${dx}px, ${dy}px) scale(0.5)`;
-      flying.style.opacity = "0";
-    });
-
-    // remove after transition (safe fallback 900ms)
-    setTimeout(() => {
-      flying.remove();
-    }, 900);
-  });
-
-  // Load footer dynamically
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer").innerHTML = data;
-    })
-    .catch(err => console.error("Failed to load footer:", err));
-</script>
-
-
 </body>
 </html>

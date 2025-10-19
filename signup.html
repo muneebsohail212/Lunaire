@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign Up - LUNAIRE</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
   <style>
-    .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
-    .dropdown-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
-    .dropdown-menu.open { transform: translateX(0); }
-    .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-    .overlay.open { opacity: 1; visibility: visible; }
+    .font-lunaire {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+    }
+    .dropdown-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .dropdown-menu.open {
+      transform: translateX(0);
+    }
+    .overlay {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+    .overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
-
+  <!-- HEADER -->
   <header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
       <!-- Menu Toggle -->
-      <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors">
+      <button
+        id="menuToggle"
+        class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors"
+      >
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
         <span class="w-5 sm:w-7 h-0.5 bg-black transition-all"></span>
@@ -28,131 +52,259 @@
 
       <!-- Logo -->
       <a href="Homepage.html" class="flex-1 ml-3 sm:ml-6">
-        <h1 class="font-lunaire text-xl sm:text-2xl md:text-3xl lg:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
+        <h1
+          class="font-lunaire text-xl sm:text-2xl md:text-3xl lg:text-4xl text-black tracking-wide cursor-pointer"
+        >
+          LUNAIRE
+        </h1>
       </a>
 
       <!-- Icons -->
       <div class="flex items-center space-x-2 sm:space-x-4">
-        <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <button
+          id="searchToggle"
+          class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
           <i class="fas fa-search text-black text-base sm:text-xl"></i>
         </button>
-         <a href="login.html" id="login" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <a
+          href="login.html"
+          id="login"
+          class="p-2 hover:bg-gray-100 rounded-full transition-colors"
+        >
           <i class="fas fa-user text-black text-base sm:text-xl"></i>
-      
         </a>
-        <a href="basket.html" id="cartIcon" class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative">
+        <a
+          href="basket.html"
+          id="cartIcon"
+          class="p-2 hover:bg-gray-100 rounded-full transition-all hover:scale-110 relative"
+        >
           <i class="fas fa-shopping-bag text-black text-xl"></i>
-          <span id="cartCount" class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+          <span
+            id="cartCount"
+            class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            >0</span
+          >
         </a>
       </div>
     </div>
-
-    <!-- Search Bar Overlay -->
-   
   </header>
-  <!--  Overlay -->
+
+  <!-- Overlay -->
   <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 
   <!-- Dropdown Menu -->
-  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+  <nav
+    id="dropdownMenu"
+    class="dropdown-menu fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 overflow-y-auto"
+  >
     <div class="p-6">
       <div class="mb-8">
         <h2 class="font-lunaire text-xl text-black tracking-wide">LUNAIRE</h2>
       </div>
       <ul class="space-y-4">
-
-        <li><a href="Homepage.html" class="block text-gray-700 hover:text-black font-medium transition-colors">Home</a></li>
-
         <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+          <a
+            href="Homepage.html"
+            class="block text-gray-700 hover:text-black font-medium transition-colors"
+            >Home</a
+          >
+        </li>
+        <li>
+          <button
+            class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn"
+          >
             Shop
             <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collection Name</a></li>
+            <li>
+              <a
+                href="AfterShp.html"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Collection Name</a
+              >
+            </li>
           </ul>
         </li>
-
         <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+          <button
+            class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn"
+          >
             My Account
             <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors">Login</a></li>
-            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors">Sign-up</a></li>
-        
+            <li>
+              <a
+                href="login.html"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a
+                href="signup.html"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Sign-up</a
+              >
+            </li>
           </ul>
         </li>
-
         <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+          <button
+            class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn"
+          >
             About Us
             <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Our Story</a></li>
+            <li>
+              <a
+                href="#"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Our Story</a
+              >
+            </li>
           </ul>
         </li>
-
         <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+          <button
+            class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn"
+          >
             Catalogue
             <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Collections</a></li>
+            <li>
+              <a
+                href="#"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Collections</a
+              >
+            </li>
           </ul>
         </li>
-
         <li>
-          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn">
+          <button
+            class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn"
+          >
             FAQs
             <span class="transform transition-transform">▾</span>
           </button>
           <ul class="ml-4 mt-2 space-y-2 hidden submenu">
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Shipping</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Returns</a></li>
-            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors">Size Guide</a></li>
+            <li>
+              <a
+                href="#"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Shipping</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Returns</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block text-gray-500 hover:text-black transition-colors"
+                >Size Guide</a
+              >
+            </li>
           </ul>
         </li>
-
       </ul>
     </div>
   </nav>
 
-  <!--  Signup Form -->
+  <!-- SIGNUP FORM -->
   <main class="flex items-center justify-center min-h-screen py-12 px-6">
     <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
       <h2 class="text-3xl font-bold mb-6 text-center">Create Account</h2>
       <form class="space-y-4">
         <div>
           <label class="block mb-1 font-medium">Full Name</label>
-          <input type="text" class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black" required>
+          <input
+            type="text"
+            class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black"
+            required
+          />
         </div>
         <div>
           <label class="block mb-1 font-medium">Email</label>
-          <input type="email" class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black" required>
+          <input
+            type="email"
+            class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black"
+            required
+          />
         </div>
         <div>
           <label class="block mb-1 font-medium">Password</label>
-          <input type="password" class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black" required>
+          <input
+            type="password"
+            class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black"
+            required
+          />
         </div>
         <div>
           <label class="block mb-1 font-medium">Confirm Password</label>
-          <input type="password" class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black" required>
+          <input
+            type="password"
+            class="w-full border px-3 py-2 rounded-md focus:ring-2 focus:ring-black"
+            required
+          />
         </div>
-        <button type="submit" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition">Sign Up</button>
+        <button
+          type="submit"
+          class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
+        >
+          Sign Up
+        </button>
       </form>
-      <p class="text-sm mt-4 text-center">Already have an account? <a href="login.html" class="text-blue-600 hover:underline">Login</a></p>
+
+      <!-- Divider -->
+      <div class="flex items-center justify-center my-6">
+        <span class="border-t border-gray-300 w-1/4"></span>
+        <span class="mx-3 text-gray-500 text-sm">or continue with</span>
+        <span class="border-t border-gray-300 w-1/4"></span>
+      </div>
+
+      <!-- Social Login Buttons (Horizontal) -->
+      <div class="flex justify-center space-x-4">
+        <button
+          class="flex items-center space-x-2 border px-4 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          <i class="fab fa-google text-red-500"></i>
+          <span class="text-sm font-medium">Google</span>
+        </button>
+        <button
+          class="flex items-center space-x-2 border px-4 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          <i class="fab fa-facebook text-blue-600"></i>
+          <span class="text-sm font-medium">Facebook</span>
+        </button>
+        <button
+          class="flex items-center space-x-2 border px-4 py-2 rounded-md hover:bg-gray-100 transition"
+        >
+          <i class="fab fa-instagram text-pink-500"></i>
+          <span class="text-sm font-medium">Instagram</span>
+        </button>
+      </div>
+
+      <p class="text-sm mt-4 text-center">
+        Already have an account?
+        <a href="login.html" class="text-blue-600 hover:underline">Login</a>
+      </p>
     </div>
   </main>
 
-   <!-- FOOTER PLACEHOLDER -->
-<div id="footer"></div>
+  <!-- FOOTER PLACEHOLDER -->
+  <div id="footer"></div>
 
-
-  <!-- ✅ Script -->
+  <!-- Script -->
   <script>
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
@@ -172,25 +324,18 @@
       btn.addEventListener("click", () => {
         const submenu = btn.nextElementSibling;
         submenu.classList.toggle("hidden");
-
         const arrow = btn.querySelector("span");
         arrow.classList.toggle("rotate-180");
       });
     });
-    
-  // Load footer dynamically
-  fetch("footer.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("footer").innerHTML = data;
-    })
-    .catch(err => console.error("Failed to load footer:", err));
-</script>
 
- 
-  
-  
-
-
+    // Load footer dynamically
+    fetch("footer.html")
+      .then((response) => response.text())
+      .then((data) => {
+        document.getElementById("footer").innerHTML = data;
+      })
+      .catch((err) => console.error("Failed to load footer:", err));
+  </script>
 </body>
 </html>

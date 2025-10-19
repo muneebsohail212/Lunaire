@@ -251,8 +251,7 @@
     <div class="particle"></div>
   </div>
 
-  <!-- Header -->
-  <header class="relative bg-white border-b border-gray-200 z-50">
+<header class="relative bg-white border-b border-gray-200 z-50">
     <div class="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
       <!-- Menu Toggle -->
       <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 sm:p-3 hover:bg-gray-100 rounded-md transition-colors">
@@ -355,7 +354,6 @@
       </ul>
     </div>
   </nav>
-
  <!-- Product Detail Section -->
 <main class="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
   <!-- Left: Product Image + Description -->
@@ -380,22 +378,24 @@
 
     <!-- Detailed Description -->
     <div class="text-gray-700 leading-relaxed">
-      <p class="mb-4"><strong>Colour:</strong> White Grey</p>
+      <p class="mb-4"><strong>Colour:</strong>Light green beige
       <div class="premium-divider"></div>
       <h3 class="font-bold mb-2 text-lg">Product Description:</h3>
-      <p class="mb-4">A stylish cotton lawn dress with elegant embroidery. Perfect for both casual and formal gatherings.</p>
+      <p class="mb-4">A stylish cotton lawn frock with elegant embroidery. Perfect for both casual and formal gatherings.</p>
 
       <h3 class="font-bold mb-2 text-lg">Fabric Details:</h3>
       <ul class="list-disc list-inside mb-4 space-y-1">
         <li>Shirt: Cotton Lawn</li>
-        <li>Dupatta: Chiffon Lawn</li>
+        <li>Trouser: Cotton</li>
+
+        <li>Dupatta: Silk </li>
       </ul>
     </div>
   </div>
 
   <!-- Right: Product Info -->
   <div class="fade-in-up delay-200">
-    <h2 class="text-4xl font-bold mb-4">White Grey</h2>
+    <h2 class="text-4xl font-bold mb-4">Long Frock</h2>
     <p class="text-2xl text-gray-600 mb-6">Rs. 6,000</p>
 
     <div class="premium-divider"></div>
@@ -404,10 +404,10 @@
     <div class="mb-6">
       <h3 class="font-semibold mb-3 text-lg">Size:</h3>
       <div class="flex space-x-3">
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">S</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">M</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">L</button>
-        <button class="option-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">XL</button>
+        <button class="option-btn size-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">S</button>
+        <button class="option-btn size-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">M</button>
+        <button class="option-btn size-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">L</button>
+        <button class="option-btn size-btn border-2 border-gray-300 px-5 py-2 rounded-lg hover:bg-gray-100">XL</button>
       </div>
     </div>
 
@@ -415,9 +415,9 @@
     <div class="mb-6">
       <h3 class="font-semibold mb-3 text-lg">Color:</h3>
       <div class="flex space-x-3">
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: white;"></button>
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: grey;"></button>
-        <button class="option-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: rgb(0, 1, 0);"></button>
+        <button class="option-btn color-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color: white;"></button>
+        <button class="option-btn color-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color:lightgreen;"></button>
+        <button class="option-btn color-btn w-10 h-10 rounded-full border-2 border-gray-300 shadow-md" style="background-color:beige;"></button>
       </div>
     </div>
 
@@ -438,9 +438,9 @@
   </div>
 </main>
 
-  
-   <!-- FOOTER PLACEHOLDER -->
+  <!-- FOOTER PLACEHOLDER -->
 <div id="footer"></div>
+
 
   <!-- Scripts -->
   <script>
@@ -470,9 +470,17 @@
     });
 
     // Size/Color selection
-    document.querySelectorAll('.option-btn').forEach(btn => {
+    // size-btn and color-btn classes added so selection is easy and explicit
+    document.querySelectorAll('.size-btn').forEach(btn => {
       btn.addEventListener('click', function() {
-        this.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    document.querySelectorAll('.color-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
         this.classList.add('selected');
       });
     });
@@ -488,23 +496,61 @@
   function nextImage() { currentIndex = (currentIndex + 1) % images.length; showImage(currentIndex); }
   function prevImage() { currentIndex = (currentIndex - 1 + images.length) % images.length; showImage(currentIndex); }
 
-  // Cart + quantity + flying animation to cart icon
+  // Cart + quantity + flying animation to cart icon (localStorage-backed)
   const addToCartBtn = document.getElementById("addToCartBtn");
   const cartCount = document.getElementById("cartCount");
   const quantityInput = document.getElementById("quantityInput");
   const increaseQty = document.getElementById("increaseQty");
   const decreaseQty = document.getElementById("decreaseQty");
   const cartIcon = document.getElementById("cartIcon");
-  let cartNumber = 0;
+
+  // Utility: load cart from localStorage
+  function loadCart() {
+    try {
+      return JSON.parse(localStorage.getItem('cartItems') || '[]');
+    } catch (e) {
+      console.error('Failed to parse cartItems from localStorage', e);
+      return [];
+    }
+  }
+
+  // Utility: save cart to localStorage
+  function saveCart(items) {
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  }
+
+  // Initialize cart
+  let cartItems = loadCart();
+
+  // Update cart count based on cartItems
+  function updateCartCount() {
+    const total = cartItems.reduce((s, it) => s + (it.quantity || 0), 0);
+    cartCount.textContent = total;
+  }
+
+  // Initialize count on page load
+  updateCartCount();
 
   // Quantity +/- handlers
   increaseQty.addEventListener("click", () => {
-    quantityInput.value = parseInt(quantityInput.value) + 1;
+    quantityInput.value = parseInt(quantityInput.value || "1") + 1;
   });
   decreaseQty.addEventListener("click", () => {
-    if (parseInt(quantityInput.value) > 1) {
+    if (parseInt(quantityInput.value || "1") > 1) {
       quantityInput.value = parseInt(quantityInput.value) - 1;
     }
+  });
+
+  // Clicking cart icon: go to basket.html if items present, otherwise alert
+  cartIcon.addEventListener("click", (e) => {
+    // prefer normal navigation to basket.html
+    const total = cartItems.reduce((s, it) => s + (it.quantity || 0), 0);
+    if (total === 0) {
+      e.preventDefault();
+      alert("Your cart is empty. Please add items first.");
+      return;
+    }
+    // allow default link behavior to basket.html
   });
 
   // Helper to get center point of a DOMRect
@@ -512,58 +558,109 @@
     return { x: rect.left + rect.width / 2 + window.scrollX, y: rect.top + rect.height / 2 + window.scrollY };
   }
 
+  // Add to cart handler
   addToCartBtn.addEventListener("click", (e) => {
-    const quantity = parseInt(quantityInput.value) || 1;
-    cartNumber += quantity;
-    cartCount.textContent = cartNumber;
+    const quantity = Math.max(1, parseInt(quantityInput.value || "1"));
 
-    // Add bounce animation to cart icon
+    // Get selected size
+    const selectedSizeBtn = document.querySelector('.size-btn.selected');
+    const selectedSize = selectedSizeBtn ? selectedSizeBtn.textContent.trim() : 'M';
+
+    // Get selected color (we'll use background color value or 'default')
+    const selectedColorBtn = document.querySelector('.color-btn.selected');
+    let selectedColor = 'Default';
+    if (selectedColorBtn) {
+      // try to get inline style backgroundColor
+      selectedColor = selectedColorBtn.style.backgroundColor || 'Default';
+    }
+
+    // Product details
+    const productName = document.querySelector('main h2').textContent.trim();
+    const productPriceText = document.querySelector('main p.text-2xl').textContent.trim();
+    const productImg = productImage.src;
+
+    // Clean price to a numeric value
+    const cleanPrice = productPriceText
+      .replace(/Rs\./g, '')
+      .replace(/PKR/g, '')
+      .replace(/[^\d.,]/g, '')
+      .replace(/,/g, '');
+    const priceValue = parseFloat(cleanPrice) || 0;
+
+    // Build item object
+    const newItem = {
+      name: productName,
+      price: priceValue,
+      img: productImg,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: quantity
+    };
+
+    // If same item (name+size+color) exists, increment quantity
+    const existingIndex = cartItems.findIndex(it =>
+      it.name === newItem.name && it.size === newItem.size && it.color === newItem.color
+    );
+
+    if (existingIndex >= 0) {
+      cartItems[existingIndex].quantity = (cartItems[existingIndex].quantity || 0) + quantity;
+    } else {
+      cartItems.push(newItem);
+    }
+
+    // Save and update UI
+    saveCart(cartItems);
+    updateCartCount();
+
+    // Cart icon bounce
     cartIcon.classList.add('cart-bounce');
     setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
 
-    // Create flying element + positioning
+    // Flying animation
     const flying = document.createElement("span");
     flying.className = "flying";
     flying.textContent = `+${quantity}`;
     document.body.appendChild(flying);
 
-    // Start position: center of the Add to Cart button
     const startRect = e.target.getBoundingClientRect();
     const start = centerOfRect(startRect);
-
-    // End position: center of cart icon
     const endRect = cartIcon.getBoundingClientRect();
     const end = centerOfRect(endRect);
 
-    // Place flying at start (adjust for element size after append)
+    // position flying centered on start
     const flyingRect = flying.getBoundingClientRect();
-    // set initial left/top so the element is centered at start
-    flying.style.left = (start.x - flyingRect.width / 2) + "px";
-    flying.style.top = (start.y - flyingRect.height / 2) + "px";
+    flying.style.left = (start.x - (flyingRect.width / 2)) + "px";
+    flying.style.top = (start.y - (flyingRect.height / 2)) + "px";
     flying.style.opacity = "1";
     flying.style.transform = "translate(0, 0) scale(1)";
 
-    // Force layout so transition will run
+    // Force layout
     void flying.offsetWidth;
 
-    // compute delta (translate)
     const dx = end.x - start.x;
     const dy = end.y - start.y;
 
-    // Start the transition toward cart icon
     requestAnimationFrame(() => {
       flying.style.transform = `translate(${dx}px, ${dy}px) scale(0.5)`;
       flying.style.opacity = "0";
     });
 
-    // remove after transition (safe fallback 900ms)
-    setTimeout(() => {
-      flying.remove();
-    }, 900);
+    setTimeout(() => flying.remove(), 900);
+
+    // Simple confirmation
+    alert(`${productName} (${quantity}x) added to cart!`);
   });
-  
-  
-fetch("footer.html")
+
+  // Keep cart count in sync if other pages change localStorage while this page is open
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'cartItems') {
+      cartItems = loadCart();
+      updateCartCount();
+    }
+  });
+
+  // Load footer dynamically
+  fetch("footer.html")
     .then(response => response.text())
     .then(data => {
       document.getElementById("footer").innerHTML = data;
