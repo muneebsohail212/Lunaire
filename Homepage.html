@@ -330,7 +330,7 @@
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
   <!-- Video container -->
   <div class="absolute inset-0">
-    <video id="heroVideo" autoplay muted loop playsinline class="w-full h-full object-cover object-center">
+    <video id="heroVideo" autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
       <source id="videoSource" src="" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -349,8 +349,8 @@
   </div>
 </section>
 
+<!-- Script for responsive video -->
 <script>
-  // Function to choose the right video based on screen width
   function setHeroVideo() {
     const video = document.getElementById('heroVideo');
     const source = document.getElementById('videoSource');
@@ -358,23 +358,52 @@
     if (window.innerWidth <= 768) {
       // Mobile (portrait)
       source.src = 'Homepage2.mp4';
+      video.style.objectFit = 'cover';
+      video.style.width = '100%';
+      video.style.height = '100%';
     } else {
       // Desktop / Laptop
       source.src = 'homepage.mp4';
+      video.style.objectFit = 'cover';
+      video.style.width = '100%';
+      video.style.height = '100%';
     }
 
-    video.load(); // reload the video
-    video.play().catch(() => {}); // try to auto-play safely
+    video.load();
+    video.play().catch(() => {});
   }
 
-  // Run on page load
+  // Run on load
   setHeroVideo();
 
-  // Optional: re-check when resizing (for responsiveness)
+  // Update if resized
   window.addEventListener('resize', () => {
     setHeroVideo();
   });
 </script>
+
+<!-- Extra CSS for fine-tuning mobile display -->
+<style>
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  /* Prevent black bars on mobile Safari / Android */
+  @media (max-width: 768px) {
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+</style>
 
 
     <!-- Featured Collection -->
