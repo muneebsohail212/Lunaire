@@ -325,24 +325,40 @@
 
   <!-- Main Content -->
   <main class="relative">
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Desktop/Laptop Video -->
+  <div class="absolute inset-0 hidden sm:block">
+    <video autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
+      <source src="homepage.mp4" type="video/mp4">
+      <source src="homepage.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+  </div>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-      <div class="absolute inset-0">
-        <video autoplay muted loop playsinline class="hero-image w-full h-full object-cover object-center">
-          <source src="homepage.mp4" type="video/mp4">
-          <source src="homepage.webm" type="video/webm">
-          Your browser does not support the video tag.
-        </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
-      </div>
-      <div class="relative z-10 text-center text-white px-4 sm:px-6 hero-content">
-        <h2 class="hero-title font-lunaire text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-6 sm:mb-8 tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">Latest Collection</h2>
-        <a href="AfterShp.html" class="hero-button shine-effect font-lunaire bg-white text-black hover:bg-opacity-90 px-8 sm:px-12 md:px-14 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl transition-all inline-block shadow-2xl hover:shadow-white/20 hover:scale-105">
-          Shop Now
-        </a>
-      </div>
-    </section>
+  <!-- Mobile Video -->
+  <div class="absolute inset-0 sm:hidden">
+    <video autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
+      <source src="homepage2.mp4" type="video/mp4">
+      <source src="homepage2.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+  </div>
+
+  <!-- Hero Text & Button -->
+  <div class="relative z-10 text-center text-white px-4 sm:px-6 hero-content">
+    <h2 class="hero-title font-lunaire text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-6 sm:mb-8 tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+      Latest Collection
+    </h2>
+    <a href="AfterShp.html"
+       class="hero-button shine-effect font-lunaire bg-white text-black hover:bg-opacity-90 px-8 sm:px-12 md:px-14 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl transition-all inline-block shadow-2xl hover:shadow-white/20 hover:scale-105">
+      Shop Now
+    </a>
+  </div>
+</section>
+
 
     <!-- Featured Collection -->
     <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-20 bg-gradient-to-b from-white to-gray-50 text-center">
