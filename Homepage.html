@@ -14,6 +14,23 @@
     .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
     .overlay.open { opacity: 1; visibility: visible; }
     
+    /* Promo Bar Animation */
+    .promo-bar {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .promo-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: slideLeft 15s linear infinite;
+    }
+    
+    @keyframes slideLeft {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
     /* Premium Hero Animation */
     @keyframes heroParallax {
       0% { transform: scale(1.15) translateY(0); }
@@ -221,9 +238,75 @@
         font-size: 1.875rem;
       }
     }
+
+    /* About Section Animations */
+    .about-image-container {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-image {
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .about-image-container:hover .about-image {
+      transform: scale(1.05);
+    }
+    
+    .about-content {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .about-content.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .floating-moon {
+      animation: floatMoon 6s ease-in-out infinite;
+    }
+    
+    @keyframes floatMoon {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .glow-text {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Hero Video */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* Prevent black bars on mobile Safari / Android */
+    @media (max-width: 768px) {
+      .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans">
+
+  <!-- Promo Bar -->
+  <div class="promo-bar bg-black text-white text-center py-2 px-4">
+    <p class="promo-text text-xs sm:text-sm md:text-base font-medium">
+      🌙 10% OFF ON YOUR FIRST ORDER 🌙 &nbsp;&nbsp;&nbsp; 🌙 10% OFF ON YOUR FIRST ORDER 🌙 &nbsp;&nbsp;&nbsp; 🌙 10% OFF ON YOUR FIRST ORDER 🌙
+    </p>
+  </div>
 
   <!-- Header -->
   <header class="relative bg-white border-b border-gray-200 z-50">
@@ -325,84 +408,28 @@
 
   <!-- Main Content -->
   <main class="relative">
-<!-- Hero Section -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
-  <!-- Video container -->
-  <div class="absolute inset-0">
-    <video id="heroVideo" autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
-      <source id="videoSource" src="" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
-  </div>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+      <!-- Video container -->
+      <div class="absolute inset-0">
+        <video id="heroVideo" autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
+          <source id="videoSource" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+      </div>
 
-  <!-- Hero Text & Button -->
-  <div class="relative z-10 text-center text-white px-4 sm:px-6 hero-content">
-    <h2 class="hero-title font-lunaire text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-6 sm:mb-8 tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
-      Latest Collection
-    </h2>
-    <a href="AfterShp.html"
-       class="hero-button shine-effect font-lunaire bg-white text-black hover:bg-opacity-90 px-8 sm:px-12 md:px-14 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl transition-all inline-block shadow-2xl hover:shadow-white/20 hover:scale-105">
-      Shop Now
-    </a>
-  </div>
-</section>
-
-<!-- Script for responsive video -->
-<script>
-  function setHeroVideo() {
-    const video = document.getElementById('heroVideo');
-    const source = document.getElementById('videoSource');
-
-    if (window.innerWidth <= 768) {
-      // Mobile (portrait)
-      source.src = 'Homepage2.mp4';
-      video.style.objectFit = 'cover';
-      video.style.width = '100%';
-      video.style.height = '100%';
-    } else {
-      // Desktop / Laptop
-      source.src = 'homepage.mp4';
-      video.style.objectFit = 'cover';
-      video.style.width = '100%';
-      video.style.height = '100%';
-    }
-
-    video.load();
-    video.play().catch(() => {});
-  }
-
-  // Run on load
-  setHeroVideo();
-
-  // Update if resized
-  window.addEventListener('resize', () => {
-    setHeroVideo();
-  });
-</script>
-
-<!-- Extra CSS for fine-tuning mobile display -->
-<style>
-  .hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    object-position: center center;
-  }
-
-  /* Prevent black bars on mobile Safari / Android */
-  @media (max-width: 768px) {
-    .hero-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
-  }
-</style>
+      <!-- Hero Text & Button -->
+      <div class="relative z-10 text-center text-white px-4 sm:px-6 hero-content">
+        <h2 class="hero-title font-lunaire text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-6 sm:mb-8 tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+          Latest Collection
+        </h2>
+        <a href="AfterShp.html"
+           class="hero-button shine-effect font-lunaire bg-white text-black hover:bg-opacity-90 px-8 sm:px-12 md:px-14 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl transition-all inline-block shadow-2xl hover:shadow-white/20 hover:scale-105">
+          Shop Now
+        </a>
+      </div>
+    </section>
 
     <!-- Featured Collection -->
     <section class="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-20 bg-gradient-to-b from-white to-gray-50 text-center">
@@ -441,6 +468,70 @@
       </div>
     </section>
 
+    <!-- About Us / Our Story Section -->
+    <section class="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <!-- Decorative Elements -->
+      <div class="absolute top-20 right-10 floating-moon opacity-20">
+        <span class="text-6xl sm:text-8xl md:text-9xl">🌙</span>
+      </div>
+      <div class="absolute bottom-20 left-10 floating-moon opacity-10" style="animation-delay: 2s;">
+        <span class="text-7xl sm:text-9xl">✨</span>
+      </div>
+      
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          
+          <!-- Left Side - Image -->
+          <div class="about-image-container rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
+            <img src="images/Lunairestory.png" alt="LUNAIRE Story" class="about-image w-full h-96 sm:h-[500px] lg:h-[600px] object-cover">
+          </div>
+          
+          <!-- Right Side - Content -->
+          <div class="about-content order-1 lg:order-2 text-white">
+            <div class="inline-block mb-6">
+              <span class="text-5xl sm:text-6xl md:text-7xl floating-moon">🌙</span>
+            </div>
+            
+            <h2 class="font-lunaire text-4xl sm:text-5xl md:text-6xl font-bold mb-6 glow-text">
+              Our Story
+            </h2>
+            
+            <div class="space-y-6 text-gray-200 leading-relaxed">
+              <p class="text-base sm:text-lg md:text-xl">
+                At <span class="text-white font-semibold">LUNAIRE</span>, we draw inspiration from the moon — a timeless symbol of change, beauty, and grace. Each of our collections reflects the different "phases" of womanhood: elegance, strength, and serenity.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                Founded in 2025, our mission is to create designs that transcend trends and honor the art of simplicity. Like the moon that illuminates the night sky, we bring light to your wardrobe with pieces that captivate and inspire.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                Every piece in our collection tells a story—a story of craftsmanship, passion, and the pursuit of perfection. We believe fashion is not just about clothing; it's about expressing your inner radiance and embracing your unique journey.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                From the first sketch to the final stitch, our dedication to quality and artistry shines through. We source the finest fabrics, work with skilled artisans, and create designs that ensure you always feel extraordinary.
+              </p>
+              
+              <div class="pt-6">
+                <blockquote class="border-l-4 border-white pl-6 italic text-lg sm:text-xl text-gray-100">
+                  "Like the moon, fashion should be a constant source of light, beauty, and inspiration."
+                </blockquote>
+                <p class="mt-4 text-sm text-gray-300">— The LUNAIRE Philosophy</p>
+              </div>
+            </div>
+            
+            <div class="mt-10">
+              <a href="AfterShp.html" class="inline-block bg-white text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all hover:bg-gray-200 hover:scale-105 shadow-xl">
+                Explore Our Collection
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- FOOTER PLACEHOLDER -->
@@ -449,6 +540,38 @@
   <!-- Scripts -->
   <script src="universal-cart.js"></script>
   <script>
+    // Responsive video handler
+    function setHeroVideo() {
+      const video = document.getElementById('heroVideo');
+      const source = document.getElementById('videoSource');
+
+      if (window.innerWidth <= 768) {
+        // Mobile (portrait)
+        source.src = 'Homepage2.mp4';
+        video.style.objectFit = 'cover';
+        video.style.width = '100%';
+        video.style.height = '100%';
+      } else {
+        // Desktop / Laptop
+        source.src = 'homepage.mp4';
+        video.style.objectFit = 'cover';
+        video.style.width = '100%';
+        video.style.height = '100%';
+      }
+
+      video.load();
+      video.play().catch(() => {});
+    }
+
+    // Run on load
+    setHeroVideo();
+
+    // Update if resized
+    window.addEventListener('resize', () => {
+      setHeroVideo();
+    });
+
+    // Menu and navigation
     const menuToggle = document.getElementById("menuToggle");
     const dropdownMenu = document.getElementById("dropdownMenu");
     const overlay = document.getElementById("overlay");
@@ -523,7 +646,7 @@
     }, observerOptions);
     
     // Observe all animated elements
-    document.querySelectorAll('.product-card, .section-title').forEach(el => {
+    document.querySelectorAll('.product-card, .section-title, .about-content').forEach(el => {
       observer.observe(el);
     });
     
