@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUNAIRE - Luxury Fashion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .font-lunaire { font-family: 'Playfair Display', serif; font-weight: 500; }
+    .dropdown-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+    .dropdown-menu.open { transform: translateX(0); }
+    .overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+    .overlay.open { opacity: 1; visibility: visible; }
+    
+    /* Promo Bar Animation */
+    .promo-bar {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .promo-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: slideLeft 15s linear infinite;
+    }
+    
+    @keyframes slideLeft {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    
+    /* Premium Hero Animation */
+    @keyframes heroParallax {
+      0% { transform: scale(1.15) translateY(0); }
+      100% { transform: scale(1.15) translateY(-20px); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
+    .hero-image {
+      animation: heroParallax 25s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+    
+    .hero-content {
+      animation: fadeInUp 1.2s ease-out 0.3s both;
+    }
+    
+    .hero-title {
+      animation: fadeInUp 1s ease-out 0.5s both;
+    }
+    
+    .hero-subtitle {
+      animation: fadeInUp 1s ease-out 0.7s both;
+    }
+    
+    .hero-button {
+      animation: fadeInUp 1s ease-out 0.9s both;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .hero-button:hover::before {
+      left: 100%;
+    }
+    
+    /* Premium Product Card Animations */
+    .product-card {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+    }
+    
+    .product-card.animate {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+      opacity: 0;
+      transition: opacity 0.6s;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .product-card:hover::before {
+      opacity: 1;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    @media (max-width: 768px) {
+      .product-card:hover {
+        transform: translateY(-6px) scale(1.01);
+      }
+    }
+    
+    .product-image-wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image {
+      transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .product-card:hover .product-image {
+      transform: scale(1.1) rotate(1deg);
+    }
+    
+    .product-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    
+    .product-card:hover .product-overlay {
+      opacity: 1;
+    }
+    
+    .product-title {
+      transition: all 0.4s ease;
+    }
+    
+    .product-card:hover .product-title {
+      transform: translateY(-3px);
+      color: #000;
+    }
+    
+    /* Staggered animation delays */
+    .product-card:nth-child(1) { transition-delay: 0.1s; }
+    .product-card:nth-child(2) { transition-delay: 0.25s; }
+    .product-card:nth-child(3) { transition-delay: 0.4s; }
+    
+    /* Section Title Animation */
+    .section-title {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .section-title.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Premium Shine Effect */
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .shine-effect::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine 3s infinite;
+      animation-delay: 2s;
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+        line-height: 1.1;
+      }
+      
+      .hero-button {
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+      }
+      
+      .product-image-wrapper {
+        height: 280px;
+      }
+      
+      .product-image {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 1.875rem;
+      }
+    }
+
+    /* About Section Animations */
+    .about-image-container {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-image {
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .about-image-container:hover .about-image {
+      transform: scale(1.05);
+    }
+    
+    .about-content {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    .about-content.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .floating-moon {
+      animation: floatMoon 6s ease-in-out infinite;
+    }
+    
+    @keyframes floatMoon {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+    
+    .glow-text {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Hero Video */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    /* Prevent black bars on mobile Safari / Android */
+    @media (max-width: 768px) {
+      .hero-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+  <!-- Promo Bar -->
+  <div class="promo-bar bg-black text-white text-center py-2 px-4">
+    <p class="promo-text text-xs sm:text-sm md:text-base font-medium">
+      🌙 10% OFF ON YOUR FIRST ORDER 🌙 &nbsp;&nbsp;&nbsp; 🌙 10% OFF ON YOUR FIRST ORDER 🌙 &nbsp;&nbsp;&nbsp; 🌙 10% OFF ON YOUR FIRST ORDER 🌙
+    </p>
+  </div>
+
+  <!-- Header -->
+  <header class="relative bg-white border-b border-gray-200 z-50">
+    <div class="flex items-center px-4 md:px-6 py-3 md:py-4">
+      <!-- Menu Toggle -->
+      <button id="menuToggle" class="flex flex-col space-y-1.5 p-2 md:p-3 hover:bg-gray-100 rounded-md transition-colors mr-2 md:mr-6">
+        <span class="w-5 md:w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-5 md:w-7 h-0.5 bg-black transition-all"></span>
+        <span class="w-5 md:w-7 h-0.5 bg-black transition-all"></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="Homepage.html" class="flex-1">
+        <h1 class="font-lunaire text-xl sm:text-2xl md:text-3xl lg:text-4xl text-black tracking-wide cursor-pointer">LUNAIRE</h1>
+      </a>
+
+      <!-- Search Bar (Hidden by default, shows on click) -->
+      <div id="searchBar" class="hidden absolute left-0 right-0 top-full bg-white px-4 py-3 border-b border-gray-200 z-50">
+        <div class="relative w-full">
+          <input type="text" id="searchInput" placeholder="Search products..." class="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-black text-sm md:text-base">
+          <button id="clearSearch" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-black hidden">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Icons -->
+      <div class="flex items-center space-x-2 md:space-x-4">
+        <button id="searchToggle" class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-search text-black text-base sm:text-lg md:text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <i class="fas fa-user text-black text-base sm:text-lg md:text-xl"></i>
+        </button>
+        <button class="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
+          <i class="fas fa-shopping-bag text-black text-base sm:text-lg md:text-xl"></i>
+          <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center text-[10px] sm:text-xs">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+  <!-- Dropdown Menu -->
+  <nav id="dropdownMenu" class="dropdown-menu fixed left-0 top-0 h-full w-72 sm:w-80 bg-white shadow-2xl z-50 overflow-y-auto">
+    <div class="p-5 sm:p-6">
+      <div class="mb-6 sm:mb-8">
+        <h2 class="font-lunaire text-lg sm:text-xl text-black tracking-wide">LUNAIRE</h2>
+      </div>
+      <ul class="space-y-3 sm:space-y-4">
+        <li><a href="Homepage.html" class="block text-gray-700 hover:text-black font-medium transition-colors text-sm sm:text-base">Home</a></li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn text-sm sm:text-base">
+            Shop <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors text-sm">Collection Name</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn text-sm sm:text-base">
+            My Account <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="login.html" class="block text-gray-500 hover:text-black transition-colors text-sm">Login</a></li>
+            <li><a href="signup.html" class="block text-gray-500 hover:text-black transition-colors text-sm">Sign-up</a></li>
+            <li><a href="#" class="block text-gray-500 hover:text-black transition-colors text-sm">Orders</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn text-sm sm:text-base">
+            About Us <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="#" id="aboutLink" class="block text-gray-500 hover:text-black transition-colors text-sm">Our Story</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn text-sm sm:text-base">
+            Catalogue <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <li><a href="AfterShp.html" class="block text-gray-500 hover:text-black transition-colors text-sm">Collections</a></li>
+          </ul>
+        </li>
+        <li>
+          <button class="flex justify-between items-center w-full text-gray-700 hover:text-black font-medium transition-colors submenu-btn text-sm sm:text-base">
+            FAQs <span class="transform transition-transform">▾</span>
+          </button>
+          <ul class="ml-4 mt-2 space-y-2 hidden submenu">
+            <a href="faq.html" class="text-black underline hover:text-gray-700 text-sm">Visit FAQs</a>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="relative">
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+      <!-- Video container -->
+      <div class="absolute inset-0">
+        <video id="heroVideo" autoplay muted loop playsinline class="hero-video w-full h-full object-cover object-center">
+          <source id="videoSource" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
+      </div>
+
+      <!-- Hero Text & Button -->
+      <div class="relative z-10 text-center text-white px-4 sm:px-6 hero-content">
+        <h2 class="hero-title font-lunaire text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-normal mb-6 sm:mb-8 tracking-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+          Latest Collection
+        </h2>
+        <a href="AfterShp.html"
+           class="hero-button shine-effect font-lunaire bg-white text-black hover:bg-opacity-90 px-8 sm:px-12 md:px-14 py-3 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-lg md:text-xl transition-all inline-block shadow-2xl hover:shadow-white/20 hover:scale-105">
+          Shop Now
+        </a>
+      </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <!-- Separation line -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-20">
+  <hr class="border-t-2 border-gray-300 my-8">
+</div>
+
+<!-- Featured Products Grid -->
+<div id="featuredProducts" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10 max-w-7xl mx-auto">
+  <!-- Products from MongoDB will be injected here -->
+</div>
+
+<script>
+async function loadFeaturedProducts() {
+  try {
+    // Fetch products from your backend API
+    const res = await fetch('http://localhost:4000/api/products'); // your existing route
+    const products = await res.json();
+
+    const container = document.getElementById('featuredProducts');
+    container.innerHTML = ''; // clear existing content
+
+    products.forEach(product => {
+      const productHTML = `
+        <a href="productdetail.html?productId=${product._id}" class="product-card block overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div class="product-image-wrapper relative h-64 sm:h-72 md:h-80">
+            <img src="uploads/${product.image}" alt="${product.dressName}" class="product-image w-full h-full object-cover">
+            <div class="product-overlay"></div>
+          </div>
+          <div class="p-4 sm:p-5 md:p-6">
+            <h3 class="product-title text-lg sm:text-xl font-semibold mb-2">${product.dressName}</h3>
+            <p class="text-gray-600 text-xs sm:text-sm mb-4 leading-relaxed">${product.description}</p>
+          </div>
+        </a>
+      `;
+      container.insertAdjacentHTML('beforeend', productHTML);
+    });
+
+    // Re-observe products for animation
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -80px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('animate');
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.product-card').forEach(el => observer.observe(el));
+
+  } catch (err) {
+    console.error('Failed to load products:', err);
+  }
+}
+
+// Load products when page is ready
+document.addEventListener('DOMContentLoaded', loadFeaturedProducts);
+</script>
+
+
+
+    <!-- About Us / Our Story Section -->
+    <section class="relative py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-900">
+      <!-- Decorative Elements -->
+      <div class="absolute top-20 right-10 floating-moon opacity-20">
+        <span class="text-6xl sm:text-8xl md:text-9xl">🌙</span>
+      </div>
+      <div class="absolute bottom-20 left-10 floating-moon opacity-10" style="animation-delay: 2s;">
+        <span class="text-7xl sm:text-9xl">✨</span>
+      </div>
+      
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
+          
+          <!-- Left Side - Image -->
+          <div class="about-image-container rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
+            <img src="images/Lunairestory.png" alt="LUNAIRE Story" class="about-image w-full h-96 sm:h-[500px] lg:h-[600px] object-cover">
+          </div>
+          
+          <!-- Right Side - Content -->
+          <div class="about-content order-1 lg:order-2 text-white">
+            <div class="inline-block mb-6">
+              <span class="text-5xl sm:text-6xl md:text-7xl floating-moon">🌙</span>
+            </div>
+            
+            <h2 class="font-lunaire text-4xl sm:text-5xl md:text-6xl font-bold mb-6 glow-text">
+              Our Story
+            </h2>
+            
+            <div class="space-y-6 text-gray-200 leading-relaxed">
+              <p class="text-base sm:text-lg md:text-xl">
+                At <span class="text-white font-semibold">LUNAIRE</span>, we draw inspiration from the moon — a timeless symbol of change, beauty, and grace. Each of our collections reflects the different "phases" of womanhood: elegance, strength, and serenity.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                Founded in 2025, our mission is to create designs that transcend trends and honor the art of simplicity. Like the moon that illuminates the night sky, we bring light to your wardrobe with pieces that captivate and inspire.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                Every piece in our collection tells a story—a story of craftsmanship, passion, and the pursuit of perfection. We believe fashion is not just about clothing; it's about expressing your inner radiance and embracing your unique journey.
+              </p>
+              
+              <p class="text-base sm:text-lg">
+                From the first sketch to the final stitch, our dedication to quality and artistry shines through. We source the finest fabrics, work with skilled artisans, and create designs that ensure you always feel extraordinary.
+              </p>
+              
+              <div class="pt-6">
+                <blockquote class="border-l-4 border-white pl-6 italic text-lg sm:text-xl text-gray-100">
+                  "Like the moon, fashion should be a constant source of light, beauty, and inspiration."
+                </blockquote>
+                <p class="mt-4 text-sm text-gray-300">— The LUNAIRE Philosophy</p>
+              </div>
+            </div>
+            
+            <div class="mt-10">
+              <a href="AfterShp.html" class="inline-block bg-white text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg transition-all hover:bg-gray-200 hover:scale-105 shadow-xl">
+                Explore Our Collection
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER PLACEHOLDER -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="universal-cart.js"></script>
+  <script>
+    // Responsive video handler
+    function setHeroVideo() {
+      const video = document.getElementById('heroVideo');
+      const source = document.getElementById('videoSource');
+
+      if (window.innerWidth <= 768) {
+        // Mobile (portrait)
+        source.src = 'Homepage2.mp4';
+        video.style.objectFit = 'cover';
+        video.style.width = '100%';
+        video.style.height = '100%';
+      } else {
+        // Desktop / Laptop
+        source.src = 'homepage.mp4';
+        video.style.objectFit = 'cover';
+        video.style.width = '100%';
+        video.style.height = '100%';
+      }
+
+      video.load();
+      video.play().catch(() => {});
+    }
+
+    // Run on load
+    setHeroVideo();
+
+    // Update if resized
+    window.addEventListener('resize', () => {
+      setHeroVideo();
+    });
+
+    // Menu and navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+    const overlay = document.getElementById("overlay");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchBar = document.getElementById("searchBar");
+
+    // Menu toggle
+    if (menuToggle && dropdownMenu && overlay) {
+      menuToggle.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("open");
+        overlay.classList.toggle("open");
+      });
+
+      overlay.addEventListener("click", () => {
+        dropdownMenu.classList.remove("open");
+        overlay.classList.remove("open");
+        searchBar.classList.add("hidden");
+      });
+    }
+
+    // Submenu toggle
+    document.querySelectorAll(".submenu-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const submenu = btn.nextElementSibling;
+        submenu.classList.toggle("hidden");
+        btn.querySelector("span").classList.toggle("rotate-180");
+      });
+    });
+
+    // Search bar toggle
+    if (searchToggle && searchBar) {
+      searchToggle.addEventListener("click", () => {
+        searchBar.classList.toggle("hidden");
+        if (!searchBar.classList.contains("hidden")) {
+          setTimeout(() => searchInput.focus(), 100);
+        }
+      });
+    }
+    
+    // Clear search functionality
+    const searchInput = document.getElementById("searchInput");
+    const clearSearch = document.getElementById("clearSearch");
+    
+    if (searchInput && clearSearch) {
+      searchInput.addEventListener("input", () => {
+        if (searchInput.value.length > 0) {
+          clearSearch.classList.remove("hidden");
+        } else {
+          clearSearch.classList.add("hidden");
+        }
+      });
+      
+      clearSearch.addEventListener("click", () => {
+        searchInput.value = "";
+        clearSearch.classList.add("hidden");
+        searchInput.focus();
+      });
+    }
+    
+    // Premium scroll animations with Intersection Observer
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -80px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all animated elements
+    document.querySelectorAll('.product-card, .section-title, .about-content').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Parallax effect on scroll for hero
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrolled = window.pageYOffset;
+          const heroImage = document.querySelector('.hero-image');
+          if (heroImage && scrolled < window.innerHeight) {
+            heroImage.style.transform = `scale(1.15) translateY(${scrolled * 0.3}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    
+
+
+    
+    
+    // Load footer dynamically
+    fetch("footer.html")
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("footer").innerHTML = data;
+      })
+      .catch(err => console.error("Failed to load footer:", err));
+  </script>
+  <script src="./about.js"></script>
+
+</body>
+</html>
