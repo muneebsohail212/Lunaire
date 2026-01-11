@@ -215,8 +215,10 @@
             localStorage.setItem('adminToken', result.token);
             localStorage.setItem('adminEmail', result.admin.email);
           } else {
-            // Store customer name
+            // Store customer token and info
+            localStorage.setItem('customerToken', result.token);
             localStorage.setItem('userName', result.customer.name);
+            localStorage.setItem('customerId', result.customer.id);
           }
           
           window.location.href = redirectPage;
