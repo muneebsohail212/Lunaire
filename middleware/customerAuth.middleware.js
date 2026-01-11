@@ -1,25 +1,19 @@
-
-
+const jwt = require('jsonwebtoken');
 const Customer = require('../models/customer');
 
+/**
+ * Customer Authentication Middleware
+ * Verifies JWT tokens and attaches customer to request object
+ */
 const customerAuth = async (req, res, next) => {
   try {
-    // Step 1: Extract the token from the request
-    // Common methods: Authorization header, cookies, or query parameters
-    
-    // Method 1: From Authorization header (Bearer token)
+    // Step 1: Extract the token from the Authorization header
     const authHeader = req.headers.authorization;
     let token = null;
     
     if (authHeader && authHeader.startsWith('Bearer ')) {
       token = authHeader.substring(7); // Remove 'Bearer ' prefix
     }
-    
-    // Method 2: From cookies (alternative method)
-    // token = req.cookies?.authToken;
-    
-    // Method 3: From query parameter (less secure, for demo only)
-    // token = req.query.token;
     
     // Step 2: Check if token exists
     if (!token) {
@@ -30,29 +24,11 @@ const customerAuth = async (req, res, next) => {
       });
     }
     
-    // Step 3: Verify the token (DUMMY VERIFICATION)
-    // In a real application, you would:
-    // - Verify JWT signature using a secret key
-    // - Check token expiration
-    // - Decode the token to get customer ID
+    // Step 3: Verify and decode the JWT token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key-change-in-production');
     
-    // Dummy token validation (for demonstration only)
-    // Real implementation would use: jwt.verify(token, process.env.JWT_SECRET)
-    if (token === 'invalid-token' || token.length < 10) {
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid authentication token.',
-        error: 'Token validation failed'
-      });
-    }
-    
-    // Step 4: Extract customer ID from token (dummy - in real app, decode JWT)
-    // In real implementation: const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // const customerId = decoded.customerId;
-    
-    // For demonstration, we'll use a dummy customer ID
-    // In production, this would come from the decoded token
-    const customerId = token; // Dummy: using token as ID for demo
+    // Step 4: Extract customer ID from decoded token
+    const customerId = decoded.customerId;
     
     // Step 5: Verify customer exists in database
     const customer = await Customer.findById(customerId);
@@ -65,18 +41,42 @@ const customerAuth = async (req, res, next) => {
       });
     }
     
-    // Step 6: Attach customer information to request object
-    // This allows route handlers to access the authenticated customer
+    // Step 6: Check if customer account is active
+    if (!customer.isActive) {
+      return res.status(401).json({
+        success: false,
+        message: 'Account is inactive. Please contact support.',
+        error: 'Account inactive'
+      });
+    }
+    
+    // Step 7: Attach customer information to request object
     req.customer = customer;
     req.customerId = customer._id;
     
-    // Step 7: Call next() to continue to the next middleware or route handler
+    // Step 8: Call next() to continue to the next middleware or route handler
     next();
     
   } catch (error) {
-    // Handle any errors that occur during authentication
-    console.error('Authentication error:', error);
+    // Handle JWT errors
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid authentication token.',
+        error: 'Token validation failed'
+      });
+    }
     
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({
+        success: false,
+        message: 'Authentication token has expired. Please login again.',
+        error: 'Token expired'
+      });
+    }
+    
+    // Handle other errors
+    console.error('Authentication error:', error);
     return res.status(500).json({
       success: false,
       message: 'Authentication failed due to server error.',
@@ -87,7 +87,7 @@ const customerAuth = async (req, res, next) => {
 
 /**
  * Optional: Middleware to check if customer has admin/privileged access
- * This is a demonstration of role-based authentication
+ * This checks for admin or manager role
  */
 const customerAdminAuth = async (req, res, next) => {
   try {
@@ -95,7 +95,6 @@ const customerAdminAuth = async (req, res, next) => {
     await customerAuth(req, res, () => {});
     
     // Check if customer has admin privileges
-    // In a real app, this would check a role field in the customer model
     if (!req.customer) {
       return res.status(401).json({
         success: false,
@@ -103,8 +102,8 @@ const customerAdminAuth = async (req, res, next) => {
       });
     }
     
-    // Dummy admin check (in real app, check customer.role === 'admin')
-    if (req.customer.email && req.customer.email.includes('admin')) {
+    // Check if customer has admin or manager role
+    if (req.customer.role === 'admin' || req.customer.role === 'manager') {
       next();
     } else {
       return res.status(403).json({
