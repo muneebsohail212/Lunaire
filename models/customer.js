@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs'); // For password hashing (requires: npm install bcryptjs)
+const bcrypt = require('bcryptjs');
 
 /**
  * Customer Schema with Authentication Support
@@ -105,12 +105,9 @@ customerSchema.pre('save', async function(next) {
     return next();
   }
   
-  // In a real application, you would hash the password here:
-  // const salt = await bcrypt.genSalt(10);
-  // this.password = await bcrypt.hash(this.password, salt);
-  
-  // For dummy/demonstration purposes, we'll just pass through
-  // In production: this.password = await bcrypt.hash(this.password, 10);
+  // Hash the password with bcrypt
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
   
   next();
 });
@@ -122,12 +119,7 @@ customerSchema.pre('save', async function(next) {
  * Usage: const isMatch = await customer.comparePassword('userPassword123');
  */
 customerSchema.methods.comparePassword = async function(candidatePassword) {
-  // In a real application, you would use:
-  // return await bcrypt.compare(candidatePassword, this.password);
-  
-  // Dummy implementation for demonstration
-  // In production, this would compare the plain text password with the hashed password
-  return candidatePassword === this.password; // NOT SECURE - for demo only!
+  return await bcrypt.compare(candidatePassword, this.password);
 };
 
 /**
